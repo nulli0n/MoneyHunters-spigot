@@ -1,0 +1,59 @@
+# Menu Configuration Guide: http://77.222.60.131:8080/plugin/engine/config/menuConfig
+# You can use 'Job' and 'Objective' placeholders: http://77.222.60.131:8080/plugin/moneyhunters/other/placeholders
+
+Title: '&lJob Objectives'
+Size: 54
+
+Objectives:
+  Format:
+    Limits:
+    - '&7'
+    - '&d&lLimits:'
+    - '&d▸ &7You earned &d%user_limit_money_earned% &7of &d%objective_limit_money% &7today.'
+    - '&d▸ &7You earned &d%user_limit_exp_earned% exp &7of &d%objective_limit_exp% exp &7today.'
+    Locked:
+      Material: 'RED_STAINED_GLASS_PANE'
+      Name: '&c&lLocked &8&m%objective_name%'
+      Lore:
+      - '&7Reach &c&l%objective_unlock_level%&7 level in &c%job_name%&7 job'
+      - '&7to unlock this objective!'
+    Unlocked:
+      Material: 'LIME_STAINED_GLASS_PANE'
+      Name: '&e&l%objective_name%'
+      Lore:
+      - '&c%objective_chance%%&7 chance to obtain exp'
+      - '&7and money from this objective.'
+      - '&7'
+      - '&e&lExp & Money:'
+      - '&6▸ &eMoney: &f%objective_money_min% &7- &f%objective_money_max%'
+      - '&6▸ &eExp: &f%objective_exp_min% &7- &f%objective_exp_max%'
+      - '%limits%'
+  Slots: '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44'
+
+Content:
+  prev_page:
+    Display:
+      default:
+        Item:
+          Material: 'ARROW'
+          Name: '&e&lPrevious Page'
+    Type: PAGE_PREVIOUS
+    Slots: 45
+
+  next_page:
+    Display:
+      default:
+        Item:
+          Material: 'ARROW'
+          Name: '&e&lNext Page'
+    Type: PAGE_NEXT
+    Slots: 53
+
+  return:
+    Display:
+      default:
+        Item:
+          Material: 'IRON_DOOR'
+          Name: '&f&lReturn'
+    Type: RETURN
+    Slots: 49

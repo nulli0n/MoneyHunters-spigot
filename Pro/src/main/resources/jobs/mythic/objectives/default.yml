@@ -1,0 +1,14 @@
+SkeletalKnight:
+  Enabled: true
+  Money:
+    Min: 20.0
+    Max: 30.0
+  Chance: 100.0
+  Unlock:
+    Job_Min_Level: 0
+  Daily_Limits:
+    MONEY: -1.0
+    EXP: 500.0
+  Exp:
+    Min: 10
+    Max: 10

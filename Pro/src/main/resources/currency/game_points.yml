@@ -1,0 +1,52 @@
+# Currency display name.
+Name: 'Points'
+# This is the final display name for the money item.
+# You can use Currency placeholders: http://77.222.60.131:8080/plugin/moneyhunters/other/placeholders
+# For money amount, use %amount%.
+Format_Display: '%amount% %currency_name%'
+# This is the number format for money amount.
+Format_Amount: '#.##'
+# When enabled, no money item will be dropped and player will instantly receive it.
+Direct_To_Balance: false
+# When enabled, money amount will be converted to integer value from decimal.
+Integer_Only: true
+
+Visual_Effects:
+  Drop:
+    # Plays particle effect when money item is dropped.
+    # Set particle name to empty '' to disable.
+    # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Particle.html
+    Particle:
+      Name: 'VILLAGER_HAPPY'
+      Data: ''
+  Pickup:
+    # Plays specified sound when player pickups money item.
+    # Set this to emoty '' to disable.
+    # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+    Sound: 'BLOCK_NOTE_BLOCK_BELL'
+
+Death_Penalty:
+  # When enabled, player will lost and drop their money on death.
+  Enabled: false
+  # When enabled, no money item will be dropped, but player will still lose it from balance.
+  Do_Not_Drop_Item: false
+  # Chance that player will drop/lost money.
+  Chance: 100.0
+  # Min. and max. percent for money to drop of the current player's balance.
+  Percent_Of_Balance:
+    Minimal: 1.0
+    Maximal: 5.0
+
+# Here you can create different money items depends on the amount of money.
+# For all available item options see: http://77.222.60.131:8080/plugin/engine/config/formats
+Item_Style_By_Amount:
+  # This is the MINIMAL amount of money for the item to use this format.
+  # This item style will be used for all items with money 0+.
+  '0':
+    Material: SUNFLOWER
+    Name: '&6&l%money%'
+    Head_Texture: ''
+    Enchants:
+      fortune: 1
+    Item_Flags:
+      - '*'

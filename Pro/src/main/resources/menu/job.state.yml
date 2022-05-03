@@ -1,0 +1,95 @@
+# Menu Configuration Guide: http://77.222.60.131:8080/plugin/engine/config/menuConfig
+# You can use 'Job' and 'User' placeholders: http://77.222.60.131:8080/plugin/moneyhunters/other/placeholders
+# For 'State' items section, you can use 'PRIMARY', 'SECONDARY', 'INACTIVE' item types.
+
+Title: '&lJob State'
+Size: 27
+
+State:
+  primary:
+    Display:
+      '0':
+        Item:
+          Material: BARRIER
+          Name: '&c&lPRIMARY'
+          Lore:
+            - '&f%job_name%&7 job can not be &fPrimary&7.'
+      '1':
+        Item:
+          Material: LIME_DYE
+          Name: '&a&lPRIMARY'
+          Lore:
+            - '&7Set the &f%job_name%&7 job as &fPrimary&7 job.'
+            - '&7'
+            - '&7Primary jobs gains you 100% of money'
+            - '&7for objectives, and have the highest max. level.'
+            - '&7'
+            - '&7You have &f%user_jobs_amount_primary%&7 of &f%jobs_limit%&7 primary jobs.'
+    Type: PRIMARY
+    Slots: 11
+
+  secondary:
+    Display:
+      '0':
+        Item:
+          Material: BARRIER
+          Name: '&c&lSECONDARY'
+          Lore:
+            - '&f%job_name%&7 job can not be &fSecondary&7.'
+      '1':
+        Item:
+          Material: PINK_DYE
+          Name: '&d&lSECONDARY'
+          Lore:
+            - '&7Set the &f%job_name%&7 job as &fSecondary&7 job.'
+            - '&7'
+            - '&7Secondary jobs gains you less amount of money'
+            - '&7for objectives, and have a lowered max. level.'
+            - '&7'
+            - '&7You have &f%user_jobs_amount_secondary%&7 of &f%jobs_limit%&7 secondary jobs.'
+    Type: SECONDARY
+    Slots: 13
+
+  inactive:
+    Display:
+      '0':
+        Item:
+          Material: BARRIER
+          Name: '&c&lINACTIVE'
+          Lore:
+            - '&f%job_name%&7 job can not be &fInactive&7.'
+      '1':
+        Item:
+          Material: GRAY_DYE
+          Name: '&b&lINACTIVE'
+          Lore:
+            - '&7Set the &f%job_name%&7 job as &fInactive&7 job.'
+            - '&7'
+            - '&7Inactive jobs gains you no money and exp'
+            - '&7and does not affect anything.'
+    Type: INACTIVE
+    Slots: 15
+
+Content:
+  return:
+    Display:
+      default:
+        Item:
+          Material: ENDER_EYE
+          Name: '&d&lReturn'
+    Type: RETURN
+    Slots: 22
+
+  panel_blue:
+    Display:
+      default:
+        Item:
+          Material: 'CYAN_STAINED_GLASS_PANE'
+    Slots: '0,8,18,26'
+
+  panel_black:
+    Display:
+      default:
+        Item:
+          Material: 'BLACK_STAINED_GLASS_PANE'
+    Slots: '1,2,3,4,5,6,7,9,10,11,12,14,16,17,19,20,21,23,24,25'

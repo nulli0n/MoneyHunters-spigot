@@ -1,0 +1,42 @@
+# Enables/Disables job from loading.
+Enabled: true
+# Job display name. Used in GUIs, messages.
+Name: '&eFishing'
+# Job type. More details: http://77.222.60.131:8080/plugin/moneyhunters/guide/job/creation
+Type: FISHING
+# Currency that will be used to drop money.
+# Currency identifier is the same as currency config file name in the /currency/ folder.
+Currency: vault
+# When enabled, players without the job permission won't be able to use this job at all.
+Permission_Required: false
+# Job description. Used in GUIs, messages and on job icon.
+Description:
+  - '&7Earn money for fishing!'
+
+# Job icon item. This item will be displayed in GUIs.
+# You can use 'Job' placeholders: http://77.222.60.131:8080/plugin/moneyhunters/other/placeholders
+# All available item options: http://77.222.60.131:8080/plugin/engine/config/formats
+Icon:
+  Material: FISHING_ROD
+  Name: '%job_name%'
+  Lore:
+    - '%job_description%'
+  Item_Flags:
+    - '*'
+
+# Job leveling settings.
+Leveling:
+  # This is start amount of the exp that is needed to level up.
+  Start_Exp: 25
+  # This is exp formula that is used to calculate how many exp will be needed for each job level.
+  # It will use 'Start_Exp' setting for the first level, and then exp of previous level for all other levels.
+  Exp_Formula: '%exp% * 1.17'
+  # Max. possible job level for each job state.
+  # Please follow the priority to avoid issues: PRIMARY > SECONDARY > INACTIVE.
+  Max_Level:
+    PRIMARY: 100
+  # Money multiplier for each job state.
+  # Scalable. Level placeholder is %job_level%.
+  # http://77.222.60.131:8080/plugin/engine/config/formats
+  Money_Multiplier:
+    PRIMARY: '1.0 + %job_level% / 100.0'

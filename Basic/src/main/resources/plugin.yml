@@ -1,0 +1,78 @@
+name: MoneyHunters
+main: su.nightexpress.moneyhunters.basic.MoneyHunters
+version: '${project.version} Basic'
+description: Earn money for doing simple jobs!
+author: NightExpress
+depend: [NexEngine]
+softdepend: [MythicMobs, AdvancedMobArena, WorldGuard, Vault]
+api-version: 1.16
+
+permissions:
+  moneyhunters.admin:
+    description: Admin access
+    default: op
+    children:
+      moneyhunters.user: true
+      moneyhunters.bypass: true
+      moneyhunters.job.*: true
+      moneyhunters.command: true
+  
+  moneyhunters.user:
+    description: User access
+    default: true
+
+  # ----------- Commands ----------- #
+  moneyhunters.command:
+    description: Grants access to all the plugin commands.
+    default: op
+    children:
+      moneyhunters.command.booster: true
+      moneyhunters.command.exp: true
+      moneyhunters.command.info: true
+      moneyhunters.command.stats: true
+      moneyhunters.command.reset: true
+      moneyhunters.command.reset.others: true
+      moneyhunters.command.level: true
+
+  moneyhunters.command.booster:
+    description: Grants access to 'booster' sub-command.
+    default: op
+
+  moneyhunters.command.exp:
+    description: Grants access to 'exp' sub-command.
+    default: op
+
+  moneyhunters.command.info:
+    description: Grants access to 'info' sub-command.
+    default: true
+
+  moneyhunters.command.stats:
+    description: Grants access to 'stats' sub-command.
+    default: true
+
+  moneyhunters.command.reset:
+    description: Grants access to 'reset' sub-command.
+    default: true
+  moneyhunters.command.reset.others:
+    description: Grants access to 'reset' sub-command on other players.
+    default: op
+
+  moneyhunters.command.level:
+    description: Grants access to 'level' sub-command.
+    default: op
+
+  # ----------- End Commands ----------- #
+
+  moneyhunters.job.*:
+    description: Grants access to any job
+    default: op
+
+  moneyhunters.bypass:
+    description: Bypass all the plugin restrictions.
+    default: op
+    children:
+      moneyhunters.bypass.death_penalty: true
+
+  moneyhunters.bypass.death_penalty:
+    description: Bypass currency death penalty settings.
+    default: op

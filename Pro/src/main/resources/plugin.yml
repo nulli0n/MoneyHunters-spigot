@@ -1,0 +1,135 @@
+name: MoneyHunters
+main: su.nightexpress.moneyhunters.pro.MoneyHunters
+version: '${project.version} Pro'
+description: Earn money for doing simple jobs!
+author: NightExpress
+depend: [NexEngine]
+softdepend: [MythicMobs, AdvancedMobArena, WorldGuard, HolographicDisplays, DecentHolograms, PlaceholderAPI, GamePoints, Vault]
+api-version: 1.16
+
+permissions:
+  moneyhunters.admin:
+    description: Admin access
+    default: op
+    children:
+      moneyhunters.user: true
+      moneyhunters.bypass: true
+      moneyhunters.job.*: true
+      moneyhunters.command: true
+  
+  moneyhunters.user:
+    description: User access
+    default: true
+
+  # ----------- Commands ----------- #
+  moneyhunters.command:
+    description: Grants access to all the plugin commands.
+    default: op
+    children:
+      moneyhunters.command.booster: true
+      moneyhunters.command.drop: true
+      moneyhunters.command.exp: true
+      moneyhunters.command.info: true
+      moneyhunters.command.jobs: true
+      moneyhunters.command.objectives: true
+      moneyhunters.command.stats: true
+      moneyhunters.command.reset: true
+      moneyhunters.command.reset.others: true
+      moneyhunters.command.leaderboard.*: true
+      moneyhunters.command.level: true
+
+  moneyhunters.command.drop:
+    description: Grants access to 'drop' sub-command.
+    default: op
+
+  moneyhunters.command.booster:
+    description: Grants access to 'booster' sub-command.
+    default: op
+
+  moneyhunters.command.exp:
+    description: Grants access to 'exp' sub-command.
+    default: op
+
+  moneyhunters.command.info:
+    description: Grants access to 'info' sub-command.
+    default: true
+
+  moneyhunters.command.jobs:
+    description: Grants access to 'jobs' sub-command.
+    default: true
+
+  moneyhunters.command.objectives:
+    description: Grants access to 'objectives' sub-command.
+    default: true
+
+  moneyhunters.command.stats:
+    description: Grants access to 'stats' sub-command.
+    default: true
+
+  moneyhunters.command.reset:
+    description: Grants access to 'reset' sub-command.
+    default: true
+  moneyhunters.command.reset.others:
+    description: Grants access to 'reset' sub-command on other players.
+    default: op
+
+  moneyhunters.command.leaderboard:
+    description: Grants access to 'leaderboard' sub-command.
+    default: true
+  moneyhunters.command.leaderboard.*:
+    description: Grants access to 'leaderboard' sub-command and all its child sub-commands.
+    default: op
+    children:
+      moneyhunters.command.leaderboard.hologram: true
+      moneyhunters.command.leaderboard.list: true
+  moneyhunters.command.leaderboard.hologram:
+    description: Grants access to 'hologram' sub-command of 'leaderboard' command.
+    default: op
+  moneyhunters.command.leaderboard.list:
+    description: Grants access to 'list' sub-command of 'leaderboard' command.
+    default: true
+
+  moneyhunters.command.level:
+    description: Grants access to 'level' sub-command.
+    default: op
+
+  # ----------- End Commands ----------- #
+
+  moneyhunters.job.*:
+    description: Grants access to any job
+    default: op
+
+  moneyhunters.bypass:
+    description: Bypass all the plugin restrictions.
+    default: op
+    children:
+      moneyhunters.bypass.job: true
+      moneyhunters.bypass.death_penalty: true
+
+  moneyhunters.bypass.death_penalty:
+    description: Bypass currency death penalty settings.
+    default: op
+
+  moneyhunters.bypass.job:
+    description: Bypass all job restrictions.
+    default: op
+    children:
+      moneyhunters.bypass.job.objective: true
+
+  moneyhunters.bypass.job.objective:
+    description: Bypass all money objective restrictions.
+    default: op
+    children:
+      moneyhunters.bypass.job.objective.limit: true
+      moneyhunters.bypass.job.objective.level: true
+
+  moneyhunters.bypass.job.objective.level:
+    description: Bypass money objective unlock level.
+    default: op
+
+  moneyhunters.bypass.job.objective.limit:
+    description: Bypass money objective daily limits.
+    default: op
+    children:
+      moneyhunters.bypass.job.objective.limit.exp: true
+      moneyhunters.bypass.job.objective.limit.money: true

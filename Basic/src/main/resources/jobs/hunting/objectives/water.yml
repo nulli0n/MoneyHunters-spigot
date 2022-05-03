@@ -1,0 +1,77 @@
+# Objective name. It depends on the job type.
+# List of possible objective names for each job type: http://77.222.60.131:8080/plugin/moneyhunters/guide/job/creation
+AXOLOTL:
+  # Enables/Disables this objective.
+  Enabled: true
+  # Min. and max. money amount to drop for this objective.
+  # You can use negative values to take money from player's balance.
+  Money:
+    Min: 0.5
+    Max: 5.0
+  # Min. and max. exp amount to give for this objective.
+  # You can use negative values to take exp from player's job.
+  Exp:
+    Min: 1
+    Max: 3
+  # Chance that this objective will drop money and/or exp.
+  Chance: 30.0
+
+COD:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+GLOW_SQUID:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+PUFFERFISH:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SALMON:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SQUID:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+TROPICAL_FISH:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3

@@ -1,0 +1,117 @@
+# Objective name. It depends on the job type.
+# List of possible objective names for each job type: http://77.222.60.131:8080/plugin/moneyhunters/guide/job/creation
+CLAY:
+  # Enables/Disables this objective.
+  Enabled: true
+  # Min. and max. money amount to drop for this objective.
+  # You can use negative values to take money from player's balance.
+  Money:
+    Min: 0.5
+    Max: 5.0
+  # Min. and max. exp amount to give for this objective.
+  # You can use negative values to take exp from player's job.
+  Exp:
+    Min: 1
+    Max: 3
+  # Chance that this objective will drop money and/or exp.
+  Chance: 30.0
+COARSE_DIRT:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DIRT:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+GRASS_BLOCK:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+GRAVEL:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+MYCELIUM:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+PODZOL:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+RED_SAND:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SAND:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SNOW_BLOCK:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SOUL_SAND:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+

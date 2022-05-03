@@ -1,0 +1,150 @@
+# General plugin settings.
+Plugin:
+  # Custom plugin command names.
+  # This commands will be registered as main plugin commands. Split commands with a comma.
+  # Do not leave this empty.
+  Command_Aliases: 'moneyhunters,mh'
+  Language: en
+  Prefix: 'MoneyHunters'
+
+Database:
+  Auto_Save_Interval: 20
+  Instant_Save: false
+  Type: SQLITE
+  MySQL:
+    Username: root
+    Password: root
+    Host: localhost
+    Database: minecraft
+  Purge:
+    Enabled: false
+    For_Inactive_Days: 60
+
+Generic:
+  # Money abuse and exploit protection.
+  Glitches:
+    # Mobs, spawned by any of the reasons listed below, will drop no money and job exp.
+    # This option has effect on KILL_ENTITY and KILL_MYTHIC jobs.
+    # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html
+    Ignore_Spawn_Reasons:
+      - EGG
+      - DISPENSE_EGG
+      - SPAWNER
+      - SPAWNER_EGG
+      - SLIME_SPLIT
+    # Players, who are in one of the listed modes below, will gain no money and job exp.
+    # This option has effect on all jobs.
+    # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/GameMode.html
+    Ignore_Game_Modes:
+      - CREATIVE
+    # All blocks types listed below, that are generated/formed by world will drop no money and job exp.
+    # This option has effect on BLOCK_BREAK jobs.
+    # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+    Ignore_Block_Generators:
+      - STONE
+      - COBBLESTONE
+      - OBSIDIAN
+  # List of worlds, where players will gain no money and job exp at all.
+  Disabled_Worlds:
+    - example_world
+    - another_world
+  # Compatibility with other plugins.
+  Hooks:
+    # When enabled, no money and job exp will be dropped in the AdvancedMobArena arenas.
+    Disabled_In_AdvancedMobArena: false
+    # List of WorldGuard region names, where no money and job exp will be dropped.
+    Disabled_WorldGuard_Regions:
+      - some_region
+      - region123
+
+Money:
+  Owner_Protection:
+    # When enabled, dropped money items will be assigned to the player, who earned them.
+    # And only the money owner will be able to pickup these items.
+    Enabled: true
+  Merging:
+    # When enabled, nearby ground money items (with the same job, player and objective) will be merged into one item.
+    Enabled: true
+  Full_Inventory:
+    # When enabled, makes players to force pickup money items even if the inventory is full.
+    Enable_Bypass: true
+    # Force pickup task interval in ticks (20 ticks = 1 second).
+    # Setting this option to low value may cause TPS loss.
+    Task_Tick_Interval: 40
+
+Leveling:
+  # Enables/Disables job leveling feature.
+  # WARNING: If you disable this feature when there is players in the database, all their job levels will be reset!
+  Enabled: true
+  Level_Up:
+    # When enabled, a random, harmless, firework will launched at the player location on job level up.
+    Firework: true
+
+Boosters:
+  # Booster update task interval in seconds.
+  # This task will update 'Global' job boosters and update active/personal job boosters of all online players.
+  # Setting this option to low values may cause TPS loss.
+  Update_Interval: 60
+  Notify:
+    # When enabled, player will get a notification about all active global money/exp job boosters on join.
+    On_Join: true
+    # How often (in seconds) all online players will get a notification about all active global money/exp job boosters?
+    # Set this to 0 to disable.
+    Interval: 900
+  # Auto-activating global job boosters.
+  Global:
+    # This is your custom booster id. Must be unique!
+    boost-1:
+      Times:
+        # List of days, when this booster will be active.
+        # Split days with a comma. Day names must be in English.
+        Days: Saturday,Sunday
+        # List of day times, when this booster will be active.
+        # You can provide as many times per day as you want.
+        # Format (24 Hour): 'HH:MM-HH:MM', where first time is a start time, the second one is an end time.
+        # For default setting, booster will be active from 12 to 18 hours on Saturday and Sunday.
+        Times:
+          - '12:00-18:00'
+      # List of job ids, that are affected by this booster.
+      # Job id is the same as the job file/folder name.
+      # You can use '*' here to include all the jobs.
+      Jobs:
+        - mining
+        - fishing
+        - hunting
+      # Booster money/exp multiplier values.
+      # 1.25 = x1.25 = +25%
+      # 0.5 = x0.5 = -50%
+      Multiplier:
+        Exp: 1.25
+        Money: 1.5
+  # Rank boosters, that will be given to players with certain permission groups.
+  Rank:
+    # This is your custom booster name. Must be unique.
+    vip_boost:
+      # Booster priority.
+      # When player has access to multiple Rank boosters (because of permission groups he have, for example),
+      # a booster with the highest priority will be given.
+      Priority: 10
+      # This is permission group name from your permissions plugin.
+      # Players with this permission group will get this booster automatically.
+      Rank: vip
+      # List of job ids, that are affected by this booster.
+      # Job id is the same as the job file/folder name.
+      # You can use '*' here to include all the jobs.
+      Jobs:
+        - '*'
+      # Booster money/exp multiplier values.
+      # 1.25 = x1.25 = +25%
+      # 0.5 = x0.5 = -50%
+      Multiplier:
+        Exp: 1.25
+        Money: 1.25
+    premium_boost:
+      Priority: 20
+      Rank: premium
+      Jobs:
+      - '*'
+      Multiplier:
+        Exp: 1.5
+        Money: 1.5

@@ -1,0 +1,388 @@
+# Objective name. It depends on the job type.
+# List of possible objective names for each job type: http://77.222.60.131:8080/plugin/moneyhunters/guide/job/creation
+BLAZE:
+  # Enables/Disables this objective.
+  Enabled: true
+  # Min. and max. money amount to drop for this objective.
+  # You can use negative values to take money from player's balance.
+  Money:
+    Min: 0.5
+    Max: 5.0
+  # Min. and max. exp amount to give for this objective.
+  # You can use negative values to take exp from player's job.
+  Exp:
+    Min: 1
+    Max: 3
+  # Chance that this objective will drop money and/or exp.
+  Chance: 30.0
+
+CAVE_SPIDER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+CREEPER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DROWNED:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ELDER_GUARDIAN:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ENDERMAN:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ENDERMITE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ENDER_DRAGON:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+EVOKER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+GHAST:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+GIANT:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+GUARDIAN:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+HOGLIN:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+HUSK:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ILLUSIONER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+MAGMA_CUBE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+PHANTOM:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+PIGLIN_BRUTE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+PILLAGER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+RAVAGER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SHULKER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SILVERFISH:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SKELETON:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SKELETON_HORSE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SLIME:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+SPIDER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+STRAY:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+STRIDER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+VEX:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+VINDICATOR:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+WITCH:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+WITHER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+WITHER_SKELETON:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ZOGLIN:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ZOMBIE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ZOMBIE_HORSE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ZOMBIE_VILLAGER:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+ZOMBIFIED_PIGLIN:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+

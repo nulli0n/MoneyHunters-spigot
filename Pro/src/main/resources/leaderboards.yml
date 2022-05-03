@@ -1,0 +1,57 @@
+# For the sign and hologram formats you can use the following placeholders:
+# - %position% - Leaderboard position.
+# - %job% - Job name.
+# - %name% - Player name.
+# - %score% - Player score.
+# - %type% - Leaderboard type.
+
+Generic:
+  # How often (in minutes) leaderboard stats should be updated?
+  Update_Interval_Minutes: 30
+  # Player name to use for skulls for leaderboards when there is no player at the moment.
+  Missing_Stat_Name: MHF_Question
+  # Max. amount of leaderboard entries for the chat and hologram display at once.
+  Max_Board_Scores: 10
+
+Signs:
+  TOP_LEVEL:
+    Format:
+      - '&4&lTOP LEVEL'
+      - '&6&l#%position% %job%'
+      - '&e&l%name%'
+      - '&a&l&n%score%&2&l Level(s)'
+    Locations: []
+  DAILY_EXP:
+    Format:
+      - '&4&lTOP DAY EXP'
+      - '&6&l#%position% %job%'
+      - '&e&l%name%'
+      - '&a&l&n%score%&2&l Exp'
+    Locations: []
+  DAILY_MONEY:
+    Format:
+      - '&4&lTOP DAY MONEY'
+      - '&6&l#%position% %job%'
+      - '&e&l%name%'
+      - '&a&l&n$%score%&2&l Money'
+    Locations: []
+
+Holograms:
+  TOP_LEVEL:
+    Format:
+      - '&b&lJob Level Leaderboard&7 - &f&l%job%'
+      - '&7- &b* &7-'
+      - '&6#%position%. &e%name%: &a&l&n%score%&2&l Level(s)'
+    Locations: {}
+  DAILY_EXP:
+    Format:
+      - '&b&l&nJob Daily Exp Leaderboard&7 - &f&l%job%'
+      - '&7- &b* &7-'
+      - '&6#%position%. &e%name%: &a&l&n%score%&2&l Exp'
+    Locations: {}
+  DAILY_MONEY:
+    Format:
+      - '&b&l&nJob Daily Money Leaderboard&7 - &f&l%job%'
+      - '&7- &b* &7-'
+      - '&6#%position%. &e%name%: &a&l&n$%score%&2&l Money'
+    Locations: {}

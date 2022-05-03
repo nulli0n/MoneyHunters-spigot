@@ -1,0 +1,258 @@
+# Objective name. It depends on the job type.
+# List of possible objective names for each job type: http://77.222.60.131:8080/plugin/moneyhunters/guide/job/creation
+ANDESITE:
+  # Enables/Disables this objective.
+  Enabled: true
+  # Min. and max. money amount to drop for this objective.
+  # You can use negative values to take money from player's balance.
+  Money:
+    Min: 0.5
+    Max: 5.0
+  # Min. and max. exp amount to give for this objective.
+  # You can use negative values to take exp from player's job.
+  Exp:
+    Min: 1
+    Max: 3
+  # Chance that this objective will drop money and/or exp.
+  Chance: 30.0
+
+COAL_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+COBBLESTONE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+COPPER_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DEEPSLATE_COAL_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DEEPSLATE_COPPER_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DEEPSLATE_DIAMOND_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DEEPSLATE_EMERALD_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DEEPSLATE_GOLD_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DEEPSLATE_IRON_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DEEPSLATE_LAPIS_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DEEPSLATE_REDSTONE_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DIAMOND_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+DIORITE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+EMERALD_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+GOLD_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+GRANITE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+IRON_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+LAPIS_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+MOSSY_COBBLESTONE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+NETHERRACK:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+NETHER_GOLD_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+NETHER_QUARTZ_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+REDSTONE_ORE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+
+STONE:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+

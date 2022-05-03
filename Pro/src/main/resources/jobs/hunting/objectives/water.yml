@@ -1,0 +1,113 @@
+# Objective name. It depends on the job type.
+# List of possible objective names for each job type: http://77.222.60.131:8080/plugin/moneyhunters/guide/job/creation
+AXOLOTL:
+  # Enables/Disables this objective.
+  Enabled: true
+  # Min. and max. money amount to drop for this objective.
+  # You can use negative values to take money from player's balance.
+  Money:
+    Min: 0.5
+    Max: 5.0
+  # Min. and max. exp amount to give for this objective.
+  # You can use negative values to take exp from player's job.
+  Exp:
+    Min: 1
+    Max: 3
+  # Chance that this objective will drop money and/or exp.
+  Chance: 30.0
+  # Objective unlock settings.
+  Unlock:
+    # Min. player's job level to be able to gain money/exp from this objective.
+    Job_Min_Level: 0
+  # Objective daily limits for Exp and Money.
+  # When player exceed the limit, no money or exp from this objective will be given until the next day.
+  # Set to -1 for no limit(s).
+  # Scalable. Level placeholder is %job_level%.
+  # http://77.222.60.131:8080/plugin/engine/config/formats
+  Daily_Limits:
+    MONEY: -1.0
+    EXP: -1.0
+COD:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+  Unlock:
+    Job_Min_Level: 0
+  Daily_Limits:
+    MONEY: '-1'
+    EXP: '-1'
+GLOW_SQUID:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+  Unlock:
+    Job_Min_Level: 0
+  Daily_Limits:
+    MONEY: '-1'
+    EXP: '-1'
+PUFFERFISH:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+  Unlock:
+    Job_Min_Level: 0
+  Daily_Limits:
+    MONEY: '-1'
+    EXP: '-1'
+SALMON:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+  Unlock:
+    Job_Min_Level: 0
+  Daily_Limits:
+    MONEY: '-1'
+    EXP: '-1'
+SQUID:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+  Unlock:
+    Job_Min_Level: 0
+  Daily_Limits:
+    MONEY: '-1'
+    EXP: '-1'
+TROPICAL_FISH:
+  Enabled: true
+  Chance: 30.0
+  Money:
+    Min: 0.5
+    Max: 5.0
+  Exp:
+    Min: 1
+    Max: 3
+  Unlock:
+    Job_Min_Level: 0
+  Daily_Limits:
+    MONEY: '-1'
+    EXP: '-1'

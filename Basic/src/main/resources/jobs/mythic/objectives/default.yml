@@ -1,0 +1,9 @@
+SkeletalKnight:
+  Enabled: true
+  Money:
+    Min: 20.0
+    Max: 30.0
+  Chance: 100.0
+  Exp:
+    Min: 10
+    Max: 10

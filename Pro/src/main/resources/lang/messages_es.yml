@@ -1,0 +1,221 @@
+JobState:
+  PRIMARY: Principal
+  SECONDARY: Secundario
+  INACTIVE: Inactivo
+LeaderboardType:
+  TOP_LEVEL: Nivel Más Alto
+  DAILY_EXP: Experiencia Diaria
+  DAILY_MONEY: Dinero Diario
+ObjectiveLimitType:
+  EXP: Experiencia
+  MONEY: Dinero
+BoosterType:
+  RANK: Grupo
+  PERSONAL: Personal
+  GLOBAL: Global
+  AUTO: Automático
+  CUSTOM: Personalizado
+Command:
+  Stats:
+    Desc: 'Mostrar estadísticas sobre los trabajos.'
+    Usage: '[jugador]'
+    Display:
+    - '{message: ~prefix: false;}'
+    - '&6&m                  &6&l[ &eProgreso de los Trabajos &6&l]&6&m                  &6'
+    - '&7'
+    - '&8¡Coloca el puntero encima del trabajo para obtener más información!'
+    - '&7'
+    - '&6▸ {json: ~hint: %job_description%; ~chat-type: /mh info %job_id%;}%job_name%{end-json}    &bNivel: &3%job_level%,    &bExperiencia: &3%job_exp%&7/&3%job_exp_max%'
+    - '&6&m                                                        &6'
+  Info:
+    Desc: 'Mostrar información sobre una trabajo específico.'
+    Usage: '<trabajo>'
+    Display:
+    - '{message: ~prefix: false;}'
+    - '&6&m                    &6&l[ &eTrabajo &7de &e%job_name% &6&l]&6&m                    &6'
+    - '&7'
+    - '&6&lDescripción:'
+    - '&7%job_description%'
+    - '&7'
+    - '&a&lProgreso:'
+    - '&2▸ &aExperiencia: &6%job_exp%&7/&7%job_exp_max%'
+    - '&2▸ &aNivel: &6%job_level%&7/&7%job_level_max%'
+    - '&2▸ &aDinero: &6x%job_money_modifier%'
+    - '&7'
+    - '&e&lObjectivos:'
+    - '&6▸ &e{json: ~hint: &7¡Clic para ver todos los objetivos!; ~chat-type: /mh objectives %job_id%;}&e&l[Browse]{end-json}'
+    - '&7'
+    - '&d&lPotenciadores:'
+    - '&5▸ &d%booster_type%: &5Experiencia: &7+%booster_exp_modifier_percent%% &7| &5Dinero: &7+%booster_money_modifier_percent%% &7| &5Tiempo restante: &7%booster_time_left%&5.'
+    - '&6&m                                                        &6'
+  Booster:
+    Desc: 'Administrar potenciadores de Trabajo.'
+    Personal:
+      Desc: 'Administrar potenciadores personales.'
+      Give:
+        Desc: 'Añadir o actualizar el potenciador personal de un jugador.'
+        Usage: '<jugador> <nombre> <trabajos> <modificadorDinero> <modificadorExperiencia> <minutos>'
+        Done: 'Se ha añadido de forma personal &7x%booster_money_modifier% monedas&7, &7x%booster_exp_modifier% experiencia &7potenciado a &7%player%&7 durante &7%booster_time_left%&7. Trabajos potenciados: &7%booster_jobs%&7.'
+      Remove:
+        Desc: 'Eliminar el potenciador personal de un jugador.'
+        Usage: '<jugador> <id_potenciador>'
+        Error:
+          Nothing: '&c%player%&7 no tiene ningún potenciador con el identificador &c%booster_id%&7.'
+        Done: 'Se ha eliminado el potenciador personal &7%booster_id% &7de &7%player%&7.'
+    Global:
+      Desc: 'Administrar potenciadores de trabajo a nivel global.'
+      Create:
+        Desc: 'Añadir o actualizar el potenciador de trabajo a nivel global.'
+        Usage: '<nombre> <trabajos> <modificadorDinero> <modificadorExperiencia> <minutos>'
+        Done: 'Se ha creado de forma global &7x%booster_money_modifier% monedas&7, &7x%booster_exp_modifier% experiencia &7potenciado durante &7%booster_time_left%&7. Trabajos potenciados: &7%booster_jobs%&7.'
+      Remove:
+        Desc: 'Eliminar el potenciador de un trabajo a nivel global.'
+        Usage: '<idPotenciador>'
+        Error:
+          Nothing: 'No existe ningún potenciador a nivel global con el identificador &c%booster_id%&7.'
+        Done: 'Se ha eliminado el potenciador &7%booster_id% &7a nivel global.'
+  Exp:
+    Desc: 'Modificar la experiencia de trabajo de un jugador.'
+    Add:
+      Desc: 'Añadir experiencia de trabajo de un jugador.'
+      Usage: '<jugador> <trabajo> <cantidad> [potenciador]'
+      Done: '&7Se ha añadido &a%amount% &7de experiencia al trabajo de &a%job_name% &7de &a%player%&7.'
+    Take:
+      Desc: 'Retirar experiencia de trabajo de un jugador.'
+      Usage: '<jugador> <trabajo> <cantidad>'
+      Done: '&7Se ha retirado &c%amount% &7de experiencia al trabajo de &c%job_name% &7de &c%player%&7.'
+    Set:
+      Desc: 'Establecer la cantidad de experiencia del trabajo de un jugador.'
+      Usage: '<jugador> <trabajo> <cantidad>'
+      Done: '&7Se ha determinado en &e%amount% &7la experiencia del trabajo de &e%job_name% &7de &e%player%&7.'
+  Level:
+    Desc: 'Modificar los niveles de trabajo de un jugador.'
+    Add:
+      Desc: 'Añadir niveles de trabajo de un jugador.'
+      Usage: '<jugador> <trabajo> <cantidad>'
+      Done: '&7Se han añadido &a%amount% &7nivel(s) del trabajo &a%job_name% &7de &a%player%&7.'
+    Take:
+      Desc: 'Retirar niveles de trabajo de un jugador.'
+      Usage: '<jugador> <trabajo> <cantidad>'
+      Done: '&7Se ha retirado &c%amount% &7nivele(s) del trabajo &c%job_name% &7de &c%player%&7.'
+    Set:
+      Desc: 'Determinar los niveles de trabajo de un jugador.'
+      Usage: '<jugador> <trabajo> <cantidad>'
+      Done: '&7Se ha establecido en &e%amount% &7niveles el trabajo &e%job_name% &7de &e%player%&7.'
+  Reset:
+    Desc: 'Restablecer el progreso de trabajo (de un jugador).'
+    Usage: '<idTrabajo> [jugador]'
+    Done: '&7Se ha restablecido el progreso del trabajo &7%job_name% &7de &7%player%&7.'
+  Jobs:
+    Desc: 'Mostrar todos los trabajos.'
+  Objectives:
+    Usage: '<trabajo>'
+    Desc:' Ver los objetivos de trabajo.'
+  Drop:
+    Usage: '<moneda> (<cantidad> o <min>:<max>) <mundo> <x> <y> <z>'
+    Desc: 'Crear y soltar la moneda.'
+    Done: 'Se ha soltado &a%money% &7objeto de dinero en &f%x%&7, &f%y%&7, &f%z%&7 en el mundo &f%world%&7.'
+  Leaderboard:
+    Desc: 'Ver o administrar la tabla de clasificación.'
+    Hologram:
+      Desc: 'Administrar los hologramas de clasificación.'
+      Add:
+        Usage: '<tipoPanel> <idTrabajo>'
+        Desc: 'Crear un holograma de clasificación.'
+        Done: '¡Se ha añadido un holograma de clasificación!'
+      Remove:
+        Desc: 'Elimina el holograma de clasificación más cercano.'
+        Done: 'Se ha eliminado el holograma de clasificación más cercano (si existía).'
+    List:
+      Usage: '<tipoPanel> <idTrabajo>'
+      Desc: 'Ver la tabla de clasificación de un trabajo concreto.'
+      Format:
+      - '{message: ~prefix: false;}'
+      - '&6&m                  &6&l[ &e&l%job% &7- &e&l%type% &6&l]&6&m                  &6'
+      - '&7'
+      - '&6        ¡Clica sobre el nombre de un jugador para ver sus estadísticas!'
+      - '&7'
+      - '&6#%position% {json: ~showText: &7¡Clic para ver las estadísticas del jugador!; ~runCommand: /mh stats %name%;}&e%name%{end-json}    &6Puntuación: &e%score%'
+      - '&6&m                                                             &6'
+Booster:
+  Global:
+    Notify:
+    - '{message: ~prefix: false;}'
+    - '&6&m                    &6&l[ &e&lPotenciador de Trabajo &6&l]&6&m                    &6'
+    - '&7'
+    - '&e    Potenciadores de trabajo disponibles:'
+    - '&6        (Pasa por encima del nombre del potenciador para ver más detalles)'
+    - '&7'
+    - '&6  ▸ {json: ~hint: &7ID: &f%booster_id%|&7Trabajos: &f%booster_jobs%;}&e%booster_type% Potenciador{end-json} &7: &2Experiencia: &a+%booster_exp_modifier_percent%%&7, &2Dinero: &a+%booster_money_modifier_percent%%&7, &2Tiempo Restante: &a%booster_time_left%'
+    - '&7'
+    - '&6&m                                                                &6'
+  Personal:
+    Notify:
+    - '{message: ~prefix: false;}'
+    - '&6&m                    &6&l[ &e&lPotenciador de Trabajo &6&l]&6&m                    &6'
+    - '&7'
+    - '&a&l       ¡Has recibido un potenciador de trabajo de %booster_type%!'
+    - '&7'
+    - '&2▸ &aTrabajos potenciados: &7%booster_jobs%'
+    - '&2▸ &aExperiencia potenciada: &7+%booster_exp_modifier_percent%%'
+    - '&2▸ &aDinero potenciado: &7+%booster_money_modifier_percent%%'
+    - '&2▸ &aTiempo Restante: &7%booster_time_left%'
+    - '&7'
+    - '&6&m                                                                &6'
+Currency:
+  Error:
+    Invalid: '&c¡Economía no válida!'
+Jobs:
+  State:
+    Change:
+      Error:
+        Nothing: '{message: ~sound: ENTITY_VILLAGER_NO;}&c¡No se puede cambiar el estado de este trabajo!'
+        Limit:
+        - '{message: ~type: TITLES; ~fadeIn: 10; ~stay: 60; ~fadeOut: 20; ~sound: BLOCK_ANVIL_PLACE;}'
+        - '&c&l¡No se ha cambiado el estado!'
+        - '&7¡Ya tienes &c%jobs_have%&7/&c%jobs_limit% &f%job_state%&7 trabajos!'
+        Level:
+        - '{message: ~type: TITLES; ~fadeIn: 10; ~stay: 60; ~fadeOut: 20; ~sound: BLOCK_ANVIL_PLACE;}'
+        - '&c&l¡No se ha cambiado el estado!'
+        - '&f%job_level%&7 nivel sobrepasa el máximo. nivel de su &f%job_state%&7 estado!'
+      Success:
+      - '{message: ~type: TITLES; ~fadeIn: 10; ~stay: 60; ~fadeOut: 20; ~sound: UI_BUTTON_CLICK;}'
+      - '&a&l¡Se ha cambiado el estado!'
+      - '&7¡Ahora el trabajo de &f%job_name% &7es el &f%job_state%&7!'
+  Reset:
+    Success:
+    - '{message: ~type: TITLES; ~fadeIn: 10; ~stay: 60; ~fadeOut: 20; ~sound: ENTITY_ZOMBIE_BREAK_WOODEN_DOOR;}'
+    - '&e&l¡Se han Restablecido los Niveles de Trabajo!'
+    - '&7¡Se han restablecido todos los Niveles y el Progreso del trabajo &7%job_name%&7!'
+  Leveling:
+    Exp:
+      Gain: '{message: ~prefix: false; ~type: ACTION_BAR;}&8[&7%job_level%&8] &e%job_name%&e: &6+%exp% experiencia'
+      Lose: '&cHas perdido &4%exp% de experiencia &cdel trabajo de &4%job_name%&c.'
+    Level:
+      Up:
+      - '{message: ~prefix: false;}'
+      - '&6&m                      &6&l[ &e¡NIVEL ALCANZADO! &6&l]&6&m                      &6'
+      - '&6    ¡Has conseguido alcanzar el nivel &e&l%job_level% &6del trabajo de &e&l%job_name%&6!'
+      - '&6&m                                                               &6'
+      Down:
+      - '{message: ~prefix: false;}'
+      - '&4&m                        &4&l[ &c¡NIVEL PERDIDO! &4&l]&4&m                        &4'
+      - '&c    ¡Has perdido hasta el nivel &4&l%job_level% &cdel trabajo de &4&l%job_name%&c!'
+      - '&c        Ten cuidado con las acciones que realizas porque te cuestan experiencia de trabajo.'
+      - '&4&m                                                                       &4'
+Job:
+  Error:
+    InvalidJob: '&c¡Trabajo no válido!'
+  Objectives:
+    Limits:
+      Notify:
+      - '{message: ~prefix: false;}'
+      - '&4&m                    &4&l[ &c&lLímite de Trabajo diario &4&l]&4&m                    &6'
+      - '&7'
+      - '&c¡Has alcanzado el límite diario de &e%limit_type% &cdel &e%objective_name% &cen el trabajo de &e%job_name%&c!'
+      - '&cHas recibido &e%limit_type% &cdel &e%objective_name% &chasta el próximo día.'
+      - '&7'
+      - '&4&m                                                                &6'
+Money:
+  Pickup: '{message: ~type: ACTION_BAR;}&eHas recogido &6%money%'
+  Lost: '{message: ~type: ACTION_BAR;}&cHas perdido &4%money%'

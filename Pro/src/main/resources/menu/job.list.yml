@@ -1,0 +1,47 @@
+# Menu Configuration Guide: http://77.222.60.131:8080/plugin/engine/config/menuConfig
+# You can use 'Job' placeholders: http://77.222.60.131:8080/plugin/moneyhunters/other/placeholders
+
+Title: '&lJobs Menu'
+Size: 27
+
+Job_Slots: 10,11,12,13,14,15,16
+Format:
+  Available:
+    Name: '%job_icon_name%'
+    Lore:
+    - '&7%job_icon_lore%'
+    - '&7'
+    - '&a&lMy Stats:'
+    - '&2▸ &aState: &f%job_state%'
+    - '&2▸ &aExp: &f%job_exp%&7/&f%job_exp_max%'
+    - '&2▸ &aLevel: &f%job_level%&7/&f%job_level_max%'
+    - '&2▸ &aMoney Modifier: &fx%job_money_modifier%'
+    - '&7'
+    - '&d&lBoosters:'
+    - '&5▸ &dExp Boost: &f+%job_booster_exp%%'
+    - '&5▸ &dMoney Boost: &f+%job_booster_money%%'
+    - '&7'
+    - '&6&lManagement:'
+    - '&6▸ &7[&6Left-Click&7]: &fView Objectives'
+    - '&6▸ &7[&6Right-Click&7]: &fChange State'
+    - '&6▸ &7[&6Q&7]: &fReset Progress'
+  Locked_Permission:
+    Name: '&c&l[Locked]&r %job_icon_name%'
+    Lore:
+    - '&cYou don''t have access to this job!'
+
+Content:
+  panel_blue:
+    Display:
+      default:
+        Item:
+          Material: 'CYAN_STAINED_GLASS_PANE'
+          Name: ''
+    Slots: '0,8,18,26'
+  panel_black:
+    Display:
+      default:
+        Item:
+          Material: 'BLACK_STAINED_GLASS_PANE'
+          Name: ''
+    Slots: '1,2,3,4,5,6,7,9,17,19,20,21,22,23,24,25'

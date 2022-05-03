@@ -1,0 +1,48 @@
+# Menu Configuration Guide: http://77.222.60.131:8080/plugin/engine/config/menuConfig
+# You can use 'Job' placeholders: http://77.222.60.131:8080/plugin/moneyhunters/other/placeholders
+
+Title: '&lJob Reset Confirmation'
+Size: 9
+
+Content:
+  job_info:
+    Display:
+      default:
+        Item:
+          Material: MAP
+          Name: '&6&lJob Stats & Info'
+          Lore:
+            - '&7'
+            - '&e&lInfo:'
+            - '&6▸ &eJob Name: &f%job_name%'
+            - '&6▸ &eState: &f%job_state%'
+            - '&7'
+            - '&a&lMy Stats:'
+            - '&2▸ &aExp: &f%job_exp%&7/&f%job_exp_max%'
+            - '&2▸ &aLevel: &f%job_level%&7/&f%job_level_max%'
+            - '&2▸ &aMoney Modifier: &fx%job_money_modifier%'
+    Slots: 4
+
+  cancel:
+    Display:
+      default:
+        Item:
+          Material: 'RED_STAINED_GLASS_PANE'
+          Name: '&c&l[Cancel]'
+          Lore:
+            - '&7Cancel the operation and'
+            - '&7return to jobs menu.'
+    Slots: '0,1,2,3'
+    Type: CONFIRMATION_DECLINE
+
+  accpet:
+    Display:
+      default:
+        Item:
+          Material: 'LIME_STAINED_GLASS_PANE'
+          Name: '&a&l[Accept]'
+          Lore:
+            - '&7All job progress will be reset'
+            - '&7back to default/start values.'
+    Slots: '5,6,7,8'
+    Type: CONFIRMATION_ACCEPT
