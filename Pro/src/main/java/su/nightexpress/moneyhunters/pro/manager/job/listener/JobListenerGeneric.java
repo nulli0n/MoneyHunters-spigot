@@ -56,7 +56,7 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onJobTypeFishing(PlayerFishEvent e) {
         if (e.getState() != PlayerFishEvent.State.CAUGHT_FISH) return;
-        if (!e.getHook().isInOpenWater()) return;
+        //if (!e.getHook().isInOpenWater()) return;
 
         Entity caught = e.getCaught();
         if (caught == null) return;
