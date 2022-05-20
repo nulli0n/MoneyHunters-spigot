@@ -1,6 +1,5 @@
 package su.nightexpress.moneyhunters.pro.manager.money;
 
-import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,6 +21,7 @@ import su.nightexpress.moneyhunters.pro.api.job.IJob;
 import su.nightexpress.moneyhunters.pro.api.money.IMoneyObjective;
 import su.nightexpress.moneyhunters.pro.api.money.ObjectiveLimitType;
 import su.nightexpress.moneyhunters.pro.config.Config;
+import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.manager.money.listener.MoneyListenerGeneric;
 import su.nightexpress.moneyhunters.pro.manager.money.listener.MoneyListenerGlitch;
 import su.nightexpress.moneyhunters.pro.manager.money.task.InventoryCheckTask;
@@ -175,8 +175,10 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
         money = event.getAmount();
         currency.give(player, money);
 
-        Sound sound = currency.getPickupEffectSound();
-        if (sound != null) MessageUtil.sound(player, sound);
+        MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+        if (user.getSettings().isSoundPickupEnabled()) {
+            MessageUtil.sound(player, currency.getPickupEffectSound());
+        }
 
         plugin.lang().Money_Pickup
             .replace(Placeholders.GENERIC_MONEY, currency.format(money))

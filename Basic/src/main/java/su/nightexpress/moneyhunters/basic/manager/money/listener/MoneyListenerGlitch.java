@@ -10,7 +10,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.manager.AbstractListener;
-import su.nexmedia.engine.manager.player.PlayerBlockTracker;
+import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.config.Config;
 import su.nightexpress.moneyhunters.basic.manager.money.MoneyManager;
@@ -39,7 +39,7 @@ public class MoneyListenerGlitch extends AbstractListener<MoneyHunters> {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onGlitchBlockGeneration(BlockFormEvent e) {
         if (Config.GEN_GLITCH_IGNORE_BLOCK_GENERATORS.contains(e.getNewState().getType().name())) {
-            PlayerBlockTracker.addTrackedForce(e.getBlock());
+            PlayerBlockTracker.trackForce(e.getBlock());
         }
     }
 

@@ -11,6 +11,7 @@ import su.nightexpress.moneyhunters.pro.api.booster.IBooster;
 import su.nightexpress.moneyhunters.pro.config.Config;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
+import su.nightexpress.moneyhunters.pro.data.object.UserSettings;
 import su.nightexpress.moneyhunters.pro.data.serialize.JobDataSerializer;
 import su.nightexpress.moneyhunters.pro.data.serialize.PersonalBoosterSerializer;
 import su.nightexpress.moneyhunters.pro.manager.booster.object.PersonalBooster;
@@ -25,6 +26,10 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     private static MoneyDataHandler               instance;
     private final  Function<ResultSet, MoneyUser> userFunction;
 
+    private static final String COL_PROGRESS = "progress";
+    private static final String COL_BOOSTERS = "boosters";
+    private static final String COL_SETTINGS = "settings";
+
     protected MoneyDataHandler(@NotNull MoneyHunters plugin) throws SQLException {
         super(plugin);
 
@@ -36,14 +41,13 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
 
                 Map<String, UserJobData> jobData = new HashMap<>();
                 if (Config.LEVELING_ENABLED) {
-                    jobData = this.gson.fromJson(rs.getString("progress"), new TypeToken<Map<String, UserJobData>>() {
-                    }.getType());
+                    jobData = this.gson.fromJson(rs.getString(COL_PROGRESS), new TypeToken<Map<String, UserJobData>>() {}.getType());
                 }
 
-                Set<IBooster> boosters = this.gson.fromJson(rs.getString("boosters"), new TypeToken<Set<PersonalBooster>>() {
-                }.getType());
+                Set<IBooster> boosters = this.gson.fromJson(rs.getString(COL_BOOSTERS), new TypeToken<Set<PersonalBooster>>() {}.getType());
+                UserSettings settings = this.gson.fromJson(rs.getString(COL_SETTINGS), new TypeToken<UserSettings>(){}.getType());
 
-                return new MoneyUser(plugin, uuid, name, lastOnline, jobData, boosters);
+                return new MoneyUser(plugin, uuid, name, lastOnline, jobData, boosters, settings);
             }
             catch (SQLException ex) {
                 return null;
@@ -69,7 +73,8 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
 
     @Override
     protected void onTableCreate() {
-        this.addColumn(this.tableUsers, "boosters", DataTypes.STRING.build(this.dataType), "[]");
+        this.addColumn(this.tableUsers, COL_BOOSTERS, DataTypes.STRING.build(this.dataType), "[]");
+        this.addColumn(this.tableUsers, COL_SETTINGS, DataTypes.STRING.build(this.dataType), "{}");
 
         super.onTableCreate();
     }
@@ -78,8 +83,9 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     @NotNull
     protected LinkedHashMap<String, String> getColumnsToCreate() {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
-        map.put("progress", DataTypes.STRING.build(this.dataType));
-        map.put("boosters", DataTypes.STRING.build(this.dataType));
+        map.put(COL_PROGRESS, DataTypes.STRING.build(this.dataType));
+        map.put(COL_BOOSTERS, DataTypes.STRING.build(this.dataType));
+        map.put(COL_SETTINGS, DataTypes.STRING.build(this.dataType));
         return map;
     }
 
@@ -87,9 +93,10 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     @NotNull
     protected LinkedHashMap<String, String> getColumnsToSave(@NotNull MoneyUser user) {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
-        map.put("progress", this.gson.toJson(user.getJobData()));
-        map.put("boosters", this.gson.toJson(user.getBoosters().stream()
+        map.put(COL_PROGRESS, this.gson.toJson(user.getJobData()));
+        map.put(COL_BOOSTERS, this.gson.toJson(user.getBoosters().stream()
             .filter(booster -> booster.getType() == BoosterType.PERSONAL && !booster.isExpired()).toList()));
+        map.put(COL_SETTINGS, this.gson.toJson(user.getSettings()));
         return map;
     }
 

@@ -107,6 +107,9 @@ public class Lang extends CoreLang {
     public LangMessage Command_Drop_Desc  = new LangMessage(this, "Create and drop money item.");
     public LangMessage Command_Drop_Done  = new LangMessage(this, "Dropped &a%money% &7money item at &f%x%&7, &f%y%&7, &f%z%&7 in world &f%world%&7.");
 
+    public LangMessage Command_Sound_Desc  = new LangMessage(this, "Switch on/off money pickup sound.");
+    public LangMessage Command_Sound_Done  = new LangMessage(this, "{message: ~sound: UI_BUTTON_CLICK;}&7Money pickup sound: &e%state%&7.");
+
     public LangMessage Command_Leaderboard_Desc                 = new LangMessage(this, "View or manage leaderboards.");
     public LangMessage Command_Leaderboard_Hologram_Desc        = new LangMessage(this, "Manage holographic leaderboards.");
     public LangMessage Command_Leaderboard_Hologram_Add_Usage   = new LangMessage(this, "<boardType> <jobId>");

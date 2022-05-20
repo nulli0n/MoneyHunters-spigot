@@ -28,11 +28,13 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
 
     private final Map<String, UserJobData> jobData;
     private final Set<IBooster>            boosters;
+    private final UserSettings settings;
 
     public MoneyUser(@NotNull MoneyHunters plugin, @NotNull Player player) {
         this(plugin, player.getUniqueId(), player.getName(), System.currentTimeMillis(),
             new HashMap<>(), // Job Data
-            new HashSet<>() // Personal Boosters
+            new HashSet<>(), // Personal Boosters
+            new UserSettings()
         );
     }
 
@@ -42,11 +44,13 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
         @NotNull String name,
         long lastOnline,
         @NotNull Map<String, UserJobData> jobData,
-        @NotNull Set<IBooster> boosters
+        @NotNull Set<IBooster> boosters,
+        @NotNull UserSettings settings
     ) {
         super(plugin, uuid, name, lastOnline);
         this.jobData = jobData;
         this.boosters = boosters;
+        this.settings = settings;
 
         // Remove invalid job datas.
         this.jobData.values().removeIf(Objects::isNull);
@@ -65,6 +69,11 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
             .replace(Placeholders.USER_JOBS_AMOUNT_PRIMARY, String.valueOf(this.getJobsAmount(JobState.PRIMARY)))
             .replace(Placeholders.USER_JOBS_AMOUNT_SECONDARY, String.valueOf(this.getJobsAmount(JobState.SECONDARY)))
             ;
+    }
+
+    @NotNull
+    public UserSettings getSettings() {
+        return settings;
     }
 
     @NotNull

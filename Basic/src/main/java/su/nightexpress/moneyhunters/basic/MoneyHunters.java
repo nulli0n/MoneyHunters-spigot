@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.NexPlugin;
 import su.nexmedia.engine.api.command.GeneralCommand;
 import su.nexmedia.engine.api.data.UserDataHolder;
-import su.nexmedia.engine.manager.player.PlayerBlockTracker;
+import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
 import su.nightexpress.moneyhunters.basic.command.base.*;
 import su.nightexpress.moneyhunters.basic.command.booster.BoosterCommand;
 import su.nightexpress.moneyhunters.basic.config.Config;

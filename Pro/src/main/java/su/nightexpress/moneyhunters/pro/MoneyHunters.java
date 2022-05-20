@@ -6,7 +6,7 @@ import su.nexmedia.engine.NexPlugin;
 import su.nexmedia.engine.api.command.GeneralCommand;
 import su.nexmedia.engine.api.data.UserDataHolder;
 import su.nexmedia.engine.hooks.Hooks;
-import su.nexmedia.engine.manager.player.PlayerBlockTracker;
+import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
 import su.nightexpress.moneyhunters.pro.command.base.*;
 import su.nightexpress.moneyhunters.pro.command.booster.BoosterCommand;
 import su.nightexpress.moneyhunters.pro.config.Config;
@@ -154,6 +154,7 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
         mainCommand.addChildren(new DropCommand(this));
         mainCommand.addChildren(new BoosterCommand(this));
         mainCommand.addChildren(new ObjectivesCommand(this));
+        mainCommand.addChildren(new SoundCommand(this));
         mainCommand.removeChildren("about");
     }
 

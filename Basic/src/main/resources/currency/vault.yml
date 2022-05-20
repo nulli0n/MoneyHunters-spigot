@@ -21,7 +21,7 @@ Visual_Effects:
       Data: ''
   Pickup:
     # Plays specified sound when player pickups money item.
-    # Set this to emoty '' to disable.
+    # Set this to empty '' to disable.
     # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
     Sound: 'BLOCK_NOTE_BLOCK_BELL'
 

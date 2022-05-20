@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.manager.AbstractListener;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.hooks.external.MythicMobsHook;
-import su.nexmedia.engine.manager.player.PlayerBlockTracker;
+import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
 import su.nexmedia.engine.utils.PDCUtil;
 import su.nightexpress.moneyhunters.pro.Keys;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
@@ -53,7 +53,7 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
         });
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onJobTypeFishing(PlayerFishEvent e) {
         if (e.getState() != PlayerFishEvent.State.CAUGHT_FISH) return;
         //if (!e.getHook().isInOpenWater()) return;
@@ -72,12 +72,12 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
         });
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onJobTypeBlockBreak(BlockBreakEvent e) {
         Block block = e.getBlock();
         BlockData blockData = block.getBlockData();
         Material blockType = block.getType();
-        boolean isTall = PlayerBlockTracker.isHighPlant(blockType);
+        boolean isTall = blockType == Material.BAMBOO || blockType == Material.SUGAR_CANE;
 
         // Do not give money for ungrowth plants.
         if (!isTall && blockData instanceof Ageable age) {
@@ -94,7 +94,7 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
             }
 
             if (PlayerBlockTracker.isTracked(block)) {
-                PlayerBlockTracker.BLOCK_LIST.remove(block);
+                PlayerBlockTracker.unTrack(block);
                 continue;
             }
 
