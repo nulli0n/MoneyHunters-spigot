@@ -6,6 +6,7 @@ import su.nexmedia.engine.api.command.GeneralCommand;
 import su.nexmedia.engine.command.list.HelpSubCommand;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 
 public class BoosterCommand extends GeneralCommand<MoneyHunters> {
 
@@ -25,7 +26,7 @@ public class BoosterCommand extends GeneralCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Booster_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_BOOSTER_DESC).getLocalized();
     }
 
     @Override

@@ -88,7 +88,7 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     protected LinkedHashMap<String, String> getColumnsToSave(@NotNull MoneyUser user) {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         map.put("progress", this.gson.toJson(user.getJobData()));
-        map.put("boosters", this.gson.toJson(user.getBoosters().stream()
+        map.put("boosters", this.gson.toJson(new HashSet<>(user.getBoosters()).stream()
             .filter(booster -> booster.getType() == BoosterType.PERSONAL && !booster.isExpired()).toList()));
         return map;
     }

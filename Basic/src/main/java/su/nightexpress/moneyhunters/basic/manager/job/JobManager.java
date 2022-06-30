@@ -15,6 +15,7 @@ import su.nightexpress.moneyhunters.basic.api.job.JobState;
 import su.nightexpress.moneyhunters.basic.api.job.JobType;
 import su.nightexpress.moneyhunters.basic.api.money.IMoneyObjective;
 import su.nightexpress.moneyhunters.basic.api.money.ObjectiveLimitType;
+import su.nightexpress.moneyhunters.basic.config.Lang;
 import su.nightexpress.moneyhunters.basic.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.basic.data.object.UserJobData;
 import su.nightexpress.moneyhunters.basic.data.object.UserObjectiveLimit;
@@ -155,10 +156,10 @@ public class JobManager extends AbstractManager<MoneyHunters> {
         limit.setCount(limitType, limit.getCount(limitType) + amount);
 
         if (jobData.isObjectWasted(objective, limitType) && !limit.isNotified(limitType)) {
-            plugin.lang().Job_Objectives_Limits_Notify
+            plugin.getMessage(Lang.JOB_OBJECTIVES_LIMITS_NOTIFY)
                 .replace(jobData.replacePlaceholders())
                 .replace(objective.replacePlaceholders(job.getCurrency(), jobData.getJobLevel()))
-                .replace("%limit_type%", plugin.lang().getEnum(limitType))
+                .replace("%limit_type%", plugin.getLangManager().getEnum(limitType))
                 .send(player);
             limit.setNotified(limitType, true);
         }

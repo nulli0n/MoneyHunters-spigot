@@ -2,6 +2,7 @@ package su.nightexpress.moneyhunters.pro.command.base;
 
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,13 +22,13 @@ public class StatsCommand extends AbstractCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getUsage() {
-        return plugin.lang().Command_Stats_Usage.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_STATS_USAGE).getLocalized();
     }
 
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Stats_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_STATS_DESC).getLocalized();
     }
 
     @Override
@@ -66,7 +67,7 @@ public class StatsCommand extends AbstractCommand<MoneyHunters> {
         }
 
         MoneyUser finalUser = user;
-        plugin.lang().Command_Stats_Display.asList().forEach(line -> {
+        plugin.getMessage(Lang.COMMAND_STATS_DISPLAY).asList().forEach(line -> {
             if (line.contains("job_")) {
                 finalUser.getJobData().values().forEach(progress -> {
                     String line2 = progress.replacePlaceholders().apply(line);

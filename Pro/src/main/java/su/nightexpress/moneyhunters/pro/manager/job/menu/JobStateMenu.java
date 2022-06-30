@@ -9,11 +9,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.nexmedia.engine.api.config.JYML;
 import su.nexmedia.engine.api.menu.*;
+import su.nexmedia.engine.lang.EngineLang;
 import su.nexmedia.engine.utils.ItemUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Placeholders;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
 import su.nightexpress.moneyhunters.pro.api.job.JobState;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
 import su.nightexpress.moneyhunters.pro.manager.job.JobManager;
@@ -51,10 +53,10 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
                 int jobsMax = JobManager.getJobsAmountMax(player, state);
                 int jobsHave = JobManager.getJobsAmount(player, state);
                 if (jobsMax >= 0 && jobsHave >= jobsMax) {
-                    plugin.lang().Jobs_State_Change_Error_Limit
+                    plugin.getMessage(Lang.JOBS_STATE_CHANGE_ERROR_LIMIT)
                         .replace("%jobs_have%", jobsHave)
                         .replace(Placeholders.GENERIC_JOBS_LIMIT, jobsMax)
-                        .replace(Placeholders.JOB_STATE, plugin.lang().getEnum(state))
+                        .replace(Placeholders.JOB_STATE, plugin.getLangManager().getEnum(state))
                         .send(player);
                     player.closeInventory();
                     return;
@@ -62,9 +64,9 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
 
                 if (state != JobState.INACTIVE) {
                     if (data.getJobLevel() > job.getLevelMax(state)) {
-                        plugin.lang().Jobs_State_Change_Error_Level
+                        plugin.getMessage(Lang.JOBS_STATE_CHANGE_ERROR_LEVEL)
                             .replace(Placeholders.JOB_NAME, job.getName())
-                            .replace(Placeholders.JOB_STATE, plugin.lang().getEnum(state))
+                            .replace(Placeholders.JOB_STATE, plugin.getLangManager().getEnum(state))
                             .send(player);
                         player.closeInventory();
                         return;
@@ -74,9 +76,9 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
                 data.setState(state);
                 data.update();
 
-                plugin.lang().Jobs_State_Change_Success
+                plugin.getMessage(Lang.JOBS_STATE_CHANGE_SUCCESS)
                     .replace(Placeholders.JOB_NAME, job.getName())
-                    .replace(Placeholders.JOB_STATE, plugin.lang().getEnum(state))
+                    .replace(Placeholders.JOB_STATE, plugin.getLangManager().getEnum(state))
                     .send(player);
                 player.closeInventory();
             }
@@ -127,7 +129,7 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
 
         int jobsMax = JobManager.getJobsAmountMax(player, data.getState());
         if (menuItem.getType() instanceof JobState state) {
-            ItemUtil.replace(item, str -> str.replace(Placeholders.GENERIC_JOBS_LIMIT, jobsMax >= 0 ? String.valueOf(jobsMax) : plugin.lang().Other_Infinity.getLocalized()));
+            ItemUtil.replace(item, str -> str.replace(Placeholders.GENERIC_JOBS_LIMIT, jobsMax >= 0 ? String.valueOf(jobsMax) : plugin.getMessage(EngineLang.OTHER_INFINITY).getLocalized()));
         }
         ItemUtil.replace(item, user.replacePlaceholders());
         ItemUtil.replace(item, data.replacePlaceholders());

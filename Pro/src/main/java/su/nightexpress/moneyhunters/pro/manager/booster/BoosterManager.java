@@ -8,6 +8,7 @@ import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.api.booster.IBooster;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
 import su.nightexpress.moneyhunters.pro.config.Config;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.manager.booster.listener.BoosterListenerGeneric;
 import su.nightexpress.moneyhunters.pro.manager.booster.task.BoosterTask;
@@ -105,7 +106,7 @@ public class BoosterManager extends AbstractManager<MoneyHunters> {
         boosters.addAll(this.getBoostersGlobal());
         if (boosters.isEmpty()) return;
 
-        List<String> message = plugin.lang().Booster_Global_Notify.asList();
+        List<String> message = plugin.getMessage(Lang.BOOSTER_GLOBAL_NOTIFY).asList();
 
         for (Player player : players) {
             for (String line : message) {

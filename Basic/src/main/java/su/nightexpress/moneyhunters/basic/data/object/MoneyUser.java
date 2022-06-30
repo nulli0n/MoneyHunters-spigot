@@ -19,6 +19,7 @@ import su.nightexpress.moneyhunters.basic.api.job.JobState;
 import su.nightexpress.moneyhunters.basic.api.money.IMoneyObjective;
 import su.nightexpress.moneyhunters.basic.api.money.ObjectiveLimitType;
 import su.nightexpress.moneyhunters.basic.config.Config;
+import su.nightexpress.moneyhunters.basic.config.Lang;
 import su.nightexpress.moneyhunters.basic.manager.booster.BoosterManager;
 
 import java.util.*;
@@ -182,7 +183,7 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
 
         if (player != null) {
             // Send exp gain/lose message.
-            (isLose ? plugin.lang().Jobs_Leveling_Exp_Lose : plugin.lang().Jobs_Leveling_Exp_Gain)
+            (isLose ? plugin.getMessage(Lang.JOBS_LEVELING_EXP_LOSE) : plugin.getMessage(Lang.JOBS_LEVELING_EXP_GAIN))
                 .replace(jobData.replacePlaceholders())
                 .replace(Placeholders.GENERIC_EXP, expAdd)
                 .send(player);
@@ -198,13 +199,13 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
                 PlayerJobLevelDownEvent levelDownEvent = new PlayerJobLevelDownEvent(player, this, jobData);
                 plugin.getPluginManager().callEvent(levelDownEvent);
 
-                plugin.lang().Jobs_Leveling_Level_Down.replace(jobData.replacePlaceholders()).send(player);
+                plugin.getMessage(Lang.JOBS_LEVELING_LEVEL_DOWN).replace(jobData.replacePlaceholders()).send(player);
             }
             else if (levelHas < jobData.getJobLevel()) {
                 PlayerJobLevelUpEvent levelUpEvent = new PlayerJobLevelUpEvent(player, this, jobData);
                 plugin.getPluginManager().callEvent(levelUpEvent);
 
-                plugin.lang().Jobs_Leveling_Level_Up.replace(jobData.replacePlaceholders()).send(player);
+                plugin.getMessage(Lang.JOBS_LEVELING_LEVEL_UP).replace(jobData.replacePlaceholders()).send(player);
                 if (Config.LEVELING_LEVEUP_FIREWORK) {
                     Firework firework = EntityUtil.spawnRandomFirework(player.getLocation());
                     PDCUtil.setData(firework, Keys.JOB_FIREWORK, true);

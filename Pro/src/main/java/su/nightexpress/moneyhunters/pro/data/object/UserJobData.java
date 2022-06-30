@@ -71,7 +71,7 @@ public class UserJobData {
     public UnaryOperator<String> replacePlaceholders() {
         IJob<?> job = this.getJob();
         return str -> job.replacePlaceholders().apply(str
-            .replace(Placeholders.JOB_STATE, job.plugin().lang().getEnum(this.getState()))
+            .replace(Placeholders.JOB_STATE, job.plugin().getLangManager().getEnum(this.getState()))
             .replace(Placeholders.JOB_EXP, NumberUtil.format(this.getJobExp()))
             .replace(Placeholders.JOB_EXP_MAX, NumberUtil.format(this.getJobExpMax()))
             .replace(Placeholders.JOB_LEVEL, NumberUtil.format(this.getJobLevel()))

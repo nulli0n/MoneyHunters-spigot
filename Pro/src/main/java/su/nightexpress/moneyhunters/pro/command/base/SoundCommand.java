@@ -4,7 +4,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
+import su.nexmedia.engine.lang.LangManager;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 
 public class SoundCommand extends AbstractCommand<MoneyHunters> {
@@ -22,7 +24,7 @@ public class SoundCommand extends AbstractCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Sound_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_SOUND_DESC).getLocalized();
     }
 
     @Override
@@ -36,8 +38,8 @@ public class SoundCommand extends AbstractCommand<MoneyHunters> {
         MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
 
         user.getSettings().setSoundPickupEnabled(!user.getSettings().isSoundPickupEnabled());
-        plugin.lang().Command_Sound_Done
-            .replace("%state%", plugin.lang().getBoolean(user.getSettings().isSoundPickupEnabled()))
+        plugin.getMessage(Lang.COMMAND_SOUND_DONE)
+            .replace("%state%", LangManager.getBoolean(user.getSettings().isSoundPickupEnabled()))
             .send(player);
     }
 }

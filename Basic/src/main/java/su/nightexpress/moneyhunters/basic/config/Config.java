@@ -3,7 +3,7 @@ package su.nightexpress.moneyhunters.basic.config;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.nexmedia.engine.api.config.ConfigTemplate;
+import su.nexmedia.engine.api.config.JYML;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.hooks.external.VaultHook;
 import su.nexmedia.engine.hooks.external.WorldGuardHook;
@@ -17,11 +17,7 @@ import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Config extends ConfigTemplate {
-
-    public Config(@NotNull MoneyHunters plugin) {
-        super(plugin);
-    }
+public class Config {
 
     public static Set<String> GEN_GLITCH_IGNORE_SPAWN_REASONS;
     public static Set<String> GEN_GLITCH_IGNORE_GAME_MODES;
@@ -43,8 +39,9 @@ public class Config extends ConfigTemplate {
     public static boolean MONEY_MERGING_ENABLED;
     public static long    MONEY_FULL_INVENTORY_TASK_INTERVAL = 0;
 
-    @Override
-    public void load() {
+    public static void load(@NotNull MoneyHunters plugin) {
+        JYML cfg = plugin.getConfig();
+
         String path = "Generic.Glitches.";
         cfg.addMissing(path + "Ignore_Block_Generators", Arrays.asList("STONE", "COBBLESTONE", "OBSIDIAN"));
 

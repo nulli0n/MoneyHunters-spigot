@@ -72,7 +72,7 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
         });
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onJobTypeBlockBreak(BlockBreakEvent e) {
         Block block = e.getBlock();
         BlockData blockData = block.getBlockData();

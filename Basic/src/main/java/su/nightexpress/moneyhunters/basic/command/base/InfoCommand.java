@@ -8,6 +8,7 @@ import su.nexmedia.engine.utils.MessageUtil;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.api.booster.IBooster;
 import su.nightexpress.moneyhunters.basic.api.job.IJob;
+import su.nightexpress.moneyhunters.basic.config.Lang;
 import su.nightexpress.moneyhunters.basic.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.basic.data.object.UserJobData;
 
@@ -22,13 +23,13 @@ public class InfoCommand extends AbstractCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getUsage() {
-        return plugin.lang().Command_Info_Usage.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_INFO_USAGE).getLocalized();
     }
 
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Info_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_INFO_DESC).getLocalized();
     }
 
     @Override
@@ -53,7 +54,7 @@ public class InfoCommand extends AbstractCommand<MoneyHunters> {
 
         IJob<?> job = plugin.getJobManager().getJobById(args[1]);
         if (job == null) {
-            plugin.lang().Job_Error_InvalidJob.send(sender);
+            plugin.getMessage(Lang.JOB_ERROR_INVALID_JOB).send(sender);
             return;
         }
 
@@ -61,7 +62,7 @@ public class InfoCommand extends AbstractCommand<MoneyHunters> {
         MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
         UserJobData progress = user.getJobData(job);
 
-        plugin.lang().Command_Info_Display.asList().forEach(line -> {
+        plugin.getMessage(Lang.COMMAND_INFO_DISPLAY).asList().forEach(line -> {
             line = progress.replacePlaceholders().apply(line);
 
             if (line.contains("%booster_")) {

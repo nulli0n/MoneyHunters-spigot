@@ -5,13 +5,14 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
 import su.nexmedia.engine.api.command.GeneralCommand;
-import su.nexmedia.engine.api.config.LangMessage;
+import su.nexmedia.engine.api.lang.LangMessage;
 import su.nexmedia.engine.command.list.HelpSubCommand;
 import su.nexmedia.engine.utils.PlayerUtil;
 import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.Perms;
 import su.nightexpress.moneyhunters.basic.api.job.IJob;
+import su.nightexpress.moneyhunters.basic.config.Lang;
 import su.nightexpress.moneyhunters.basic.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.basic.data.object.UserJobData;
 
@@ -38,7 +39,7 @@ public class ExpCommand extends GeneralCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Exp_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_EXP_DESC).getLocalized();
     }
 
     @Override
@@ -68,9 +69,9 @@ public class ExpCommand extends GeneralCommand<MoneyHunters> {
         @NotNull
         public String getUsage() {
             return switch (this.mode) {
-                case ADD -> plugin.lang().Command_Exp_Add_Usage.getLocalized();
-                case TAKE -> plugin.lang().Command_Exp_Take_Usage.getLocalized();
-                case SET -> plugin.lang().Command_Exp_Set_Usage.getLocalized();
+                case ADD -> plugin.getMessage(Lang.COMMAND_EXP_ADD_USAGE).getLocalized();
+                case TAKE -> plugin.getMessage(Lang.COMMAND_EXP_TAKE_USAGE).getLocalized();
+                case SET -> plugin.getMessage(Lang.COMMAND_EXP_SET_USAGE).getLocalized();
             };
         }
 
@@ -78,9 +79,9 @@ public class ExpCommand extends GeneralCommand<MoneyHunters> {
         @NotNull
         public String getDescription() {
             return switch (this.mode) {
-                case ADD -> plugin.lang().Command_Exp_Add_Desc.getLocalized();
-                case TAKE -> plugin.lang().Command_Exp_Take_Desc.getLocalized();
-                case SET -> plugin.lang().Command_Exp_Set_Desc.getLocalized();
+                case ADD -> plugin.getMessage(Lang.COMMAND_EXP_ADD_DESC).getLocalized();
+                case TAKE -> plugin.getMessage(Lang.COMMAND_EXP_TAKE_DESC).getLocalized();
+                case SET -> plugin.getMessage(Lang.COMMAND_EXP_SET_DESC).getLocalized();
             };
         }
 
@@ -116,7 +117,7 @@ public class ExpCommand extends GeneralCommand<MoneyHunters> {
 
             IJob<?> job = plugin.getJobManager().getJobById(args[3]);
             if (job == null) {
-                plugin.lang().Job_Error_InvalidJob.send(sender);
+                plugin.getMessage(Lang.JOB_ERROR_INVALID_JOB).send(sender);
                 return;
             }
 
@@ -138,15 +139,15 @@ public class ExpCommand extends GeneralCommand<MoneyHunters> {
             LangMessage message = switch (this.mode) {
                 case ADD -> {
                     user.addJobExp(job, exp, allowBooster);
-                    yield plugin.lang().Command_Exp_Add_Done;
+                    yield plugin.getMessage(Lang.COMMAND_EXP_ADD_DONE);
                 }
                 case TAKE -> {
                     user.addJobExp(job, -exp, false);
-                    yield plugin.lang().Command_Exp_Take_Done;
+                    yield plugin.getMessage(Lang.COMMAND_EXP_TAKE_DONE);
                 }
                 case SET -> {
                     jobData.setJobExp(exp);
-                    yield plugin.lang().Command_Exp_Set_Done;
+                    yield plugin.getMessage(Lang.COMMAND_EXP_SET_DONE);
                 }
             };
             jobData.update();

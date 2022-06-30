@@ -5,14 +5,14 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
 import su.nexmedia.engine.api.command.GeneralCommand;
-import su.nexmedia.engine.api.config.LangMessage;
+import su.nexmedia.engine.api.lang.LangMessage;
 import su.nexmedia.engine.command.list.HelpSubCommand;
-import su.nexmedia.engine.utils.Constants;
 import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
 import su.nightexpress.moneyhunters.pro.Placeholders;
 import su.nightexpress.moneyhunters.pro.api.booster.IBooster;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.manager.booster.object.GlobalBooster;
 
 import java.util.*;
@@ -37,7 +37,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Booster_Global_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_DESC).getLocalized();
     }
 
     @Override
@@ -59,13 +59,13 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
         @Override
         @NotNull
         public String getUsage() {
-            return plugin.lang().Command_Booster_Global_Create_Usage.getLocalized();
+            return plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_CREATE_USAGE).getLocalized();
         }
 
         @Override
         @NotNull
         public String getDescription() {
-            return plugin.lang().Command_Booster_Global_Create_Desc.getLocalized();
+            return plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_CREATE_DESC).getLocalized();
         }
 
         @Override
@@ -86,7 +86,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
                 List<String> list = new ArrayList<>();
                 list.add("<jobId>");
                 list.add("<job1,job2>");
-                list.add(Constants.MASK_ANY);
+                list.add(Placeholders.MASK_ANY);
                 list.addAll(plugin.getJobManager().getJobIds());
                 return list;
             }
@@ -113,7 +113,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
             String jobsRaw = args[4];
 
             Set<String> jobIds;
-            if (jobsRaw.equalsIgnoreCase(Constants.MASK_ANY)) {
+            if (jobsRaw.equalsIgnoreCase(Placeholders.MASK_ANY)) {
                 jobIds = new HashSet<>(plugin.getJobManager().getJobIds());
             }
             else {
@@ -121,7 +121,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
                     .filter(jobId -> plugin.getJobManager().getJobById(jobId) != null).collect(Collectors.toSet());
             }
             if (jobIds.isEmpty()) {
-                plugin.lang().Job_Error_InvalidJob.send(sender);
+                plugin.getMessage(Lang.JOB_ERROR_INVALID_JOB).send(sender);
                 return;
             }
 
@@ -144,7 +144,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
             plugin.getBoosterManager().updateBoosters();
             plugin.getBoosterManager().notifyBooster();
 
-            plugin.lang().Command_Booster_Global_Create_Done
+            plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_CREATE_DONE)
                 .replace(booster.replacePlaceholders())
                 .send(sender);
         }
@@ -159,13 +159,13 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
         @Override
         @NotNull
         public String getUsage() {
-            return plugin.lang().Command_Booster_Global_Remove_Usage.getLocalized();
+            return plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_REMOVE_USAGE).getLocalized();
         }
 
         @Override
         @NotNull
         public String getDescription() {
-            return plugin.lang().Command_Booster_Global_Remove_Desc.getLocalized();
+            return plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_REMOVE_DESC).getLocalized();
         }
 
         @Override
@@ -178,7 +178,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
         public List<String> getTab(@NotNull Player player, int arg, @NotNull String[] args) {
             if (arg == 3) {
                 List<String> list = new ArrayList<>();
-                list.add(Constants.MASK_ANY);
+                list.add(Placeholders.MASK_ANY);
                 list.addAll(plugin.getBoosterManager().getBoostersGlobal().stream().map(IBooster::getId).toList());
                 return list;
             }
@@ -194,8 +194,8 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
 
             String id = args[3];
 
-            boolean removed = plugin.getBoosterManager().getBoostersGlobal().removeIf(boosterHas -> boosterHas.getId().equalsIgnoreCase(id) || id.equalsIgnoreCase(Constants.MASK_ANY));
-            LangMessage msgNotify = removed ? plugin.lang().Command_Booster_Global_Remove_Done : plugin.lang().Command_Booster_Global_Remove_Error_Nothing;
+            boolean removed = plugin.getBoosterManager().getBoostersGlobal().removeIf(boosterHas -> boosterHas.getId().equalsIgnoreCase(id) || id.equalsIgnoreCase(Placeholders.MASK_ANY));
+            LangMessage msgNotify = removed ? plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_REMOVE_DONE) : plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_REMOVE_ERROR_NOTHING);
             msgNotify.replace(Placeholders.BOOSTER_ID, id).send(sender);
 
             plugin.getBoosterManager().updateBoosters();

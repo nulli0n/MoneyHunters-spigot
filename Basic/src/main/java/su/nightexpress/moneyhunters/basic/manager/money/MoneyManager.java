@@ -22,6 +22,7 @@ import su.nightexpress.moneyhunters.basic.api.job.IJob;
 import su.nightexpress.moneyhunters.basic.api.money.IMoneyObjective;
 import su.nightexpress.moneyhunters.basic.api.money.ObjectiveLimitType;
 import su.nightexpress.moneyhunters.basic.config.Config;
+import su.nightexpress.moneyhunters.basic.config.Lang;
 import su.nightexpress.moneyhunters.basic.manager.money.listener.MoneyListenerGeneric;
 import su.nightexpress.moneyhunters.basic.manager.money.listener.MoneyListenerGlitch;
 import su.nightexpress.moneyhunters.basic.manager.money.task.InventoryCheckTask;
@@ -150,7 +151,7 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
         money = event.getAmount();
         currency.take(player, money);
 
-        plugin.lang().Money_Lost
+        plugin.getMessage(Lang.MONEY_LOST)
             .replace(Placeholders.GENERIC_MONEY, currency.format(money))
             .replace(Placeholders.GENERIC_BALANCE, currency.format(currency.getBalance(player)))
             .send(player);
@@ -178,7 +179,7 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
         Sound sound = currency.getPickupEffectSound();
         if (sound != null) MessageUtil.sound(player, sound);
 
-        plugin.lang().Money_Pickup
+        plugin.getMessage(Lang.MONEY_PICKUP)
             .replace(Placeholders.GENERIC_MONEY, currency.format(money))
             .replace(Placeholders.GENERIC_BALANCE, currency.format(currency.getBalance(player)))
             .send(player);

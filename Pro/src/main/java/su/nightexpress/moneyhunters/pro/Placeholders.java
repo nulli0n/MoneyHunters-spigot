@@ -1,6 +1,6 @@
 package su.nightexpress.moneyhunters.pro;
 
-public class Placeholders {
+public class Placeholders extends su.nexmedia.engine.utils.Placeholders {
 
     public static final String GENERIC_AMOUNT     = "%amount%";
     public static final String GENERIC_BALANCE    = "%balance%";

@@ -9,10 +9,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.config.JYML;
 import su.nexmedia.engine.api.menu.*;
+import su.nexmedia.engine.lang.EngineLang;
 import su.nexmedia.engine.utils.ItemUtil;
 import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
 
@@ -87,7 +89,7 @@ public class JobListMenu extends AbstractMenuAuto<MoneyHunters, UserJobData> {
         return (player1, type, e) -> {
             IJob<?> job = data.getJob();
             if (!job.hasPermission(player1)) {
-                plugin.lang().Error_Permission_Deny.send(player1);
+                plugin.getMessage(EngineLang.ERROR_PERMISSION_DENY).send(player1);
                 return;
             }
             if (e.getClick() == ClickType.DROP) {
@@ -96,7 +98,7 @@ public class JobListMenu extends AbstractMenuAuto<MoneyHunters, UserJobData> {
             }
             if (e.isRightClick()) {
                 if (job.getStateAllowed().isEmpty()) {
-                    plugin.lang().Jobs_State_Change_Error_Nothing.send(player1);
+                    plugin.getMessage(Lang.JOBS_STATE_CHANGE_ERROR_NOTHING).send(player1);
                     return;
                 }
                 plugin.getJobManager().getJobStateMenu().open(player1, data);

@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
-import su.nexmedia.engine.core.config.CoreConfig;
+import su.nexmedia.engine.lang.EngineLang;
 import su.nexmedia.engine.utils.LocationUtil;
 import su.nexmedia.engine.utils.NumberUtil;
 import su.nexmedia.engine.utils.StringUtil;
@@ -16,6 +16,7 @@ import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
 import su.nightexpress.moneyhunters.pro.Placeholders;
 import su.nightexpress.moneyhunters.pro.api.currency.ICurrency;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,13 +30,13 @@ public class DropCommand extends AbstractCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getUsage() {
-        return plugin.lang().Command_Drop_Usage.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_DROP_USAGE).getLocalized();
     }
 
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Drop_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_DROP_DESC).getLocalized();
     }
 
     @Override
@@ -76,13 +77,13 @@ public class DropCommand extends AbstractCommand<MoneyHunters> {
 
         ICurrency currency = plugin.getCurrencyManager().getCurrency(args[1]);
         if (currency == null) {
-            plugin.lang().Currency_Error_Invalid.send(sender);
+            plugin.getMessage(Lang.CURRENCY_ERROR_INVALID).send(sender);
             return;
         }
 
         World world = plugin.getServer().getWorld(args[3]);
         if (world == null) {
-            plugin.lang().Error_World_Invalid.send(sender);
+            plugin.getMessage(EngineLang.ERROR_WORLD_INVALID).send(sender);
             return;
         }
 
@@ -102,12 +103,12 @@ public class DropCommand extends AbstractCommand<MoneyHunters> {
         Location loc = new Location(world, x, y, z);
         world.dropItem(loc, item);
 
-        plugin.lang().Command_Drop_Done
+        plugin.getMessage(Lang.COMMAND_DROP_DONE)
             .replace(Placeholders.GENERIC_MONEY, currency.format(amount))
             .replace("%x%", NumberUtil.format(x))
             .replace("%y%", NumberUtil.format(y))
             .replace("%z%", NumberUtil.format(z))
-            .replace("%world%", CoreConfig.getWorldName(world.getName()))
+            .replace("%world%", LocationUtil.getWorldName(world))
             .send(sender);
     }
 }

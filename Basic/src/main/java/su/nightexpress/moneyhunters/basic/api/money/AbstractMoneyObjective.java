@@ -87,7 +87,7 @@ public abstract class AbstractMoneyObjective implements IMoneyObjective {
 
         Material material = Material.getMaterial(typeRaw);
         if (material != null) {
-            return NexEngine.get().lang().getEnum(material);
+            return NexEngine.get().getLangManager().getEnum(material);
         }
 
         if (Hooks.hasMythicMobs() && MythicMobsHook.getMobConfig(typeRaw) != null) {
@@ -96,7 +96,7 @@ public abstract class AbstractMoneyObjective implements IMoneyObjective {
 
         EntityType entityType = CollectionsUtil.getEnum(typeRaw, EntityType.class);
         if (entityType != null) {
-            return NexEngine.get().lang().getEnum(entityType);
+            return NexEngine.get().getLangManager().getEnum(entityType);
         }
 
         return this.getType();

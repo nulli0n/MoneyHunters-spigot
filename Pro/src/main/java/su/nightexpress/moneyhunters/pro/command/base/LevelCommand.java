@@ -5,13 +5,14 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
 import su.nexmedia.engine.api.command.GeneralCommand;
-import su.nexmedia.engine.api.config.LangMessage;
+import su.nexmedia.engine.api.lang.LangMessage;
 import su.nexmedia.engine.command.list.HelpSubCommand;
 import su.nexmedia.engine.utils.PlayerUtil;
 import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
 
@@ -37,7 +38,7 @@ public class LevelCommand extends GeneralCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Level_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_LEVEL_DESC).getLocalized();
     }
 
     @Override
@@ -67,9 +68,9 @@ public class LevelCommand extends GeneralCommand<MoneyHunters> {
         @NotNull
         public String getUsage() {
             return switch (this.mode) {
-                case ADD -> plugin.lang().Command_Level_Add_Usage.getLocalized();
-                case TAKE -> plugin.lang().Command_Level_Take_Usage.getLocalized();
-                case SET -> plugin.lang().Command_Level_Set_Usage.getLocalized();
+                case ADD -> plugin.getMessage(Lang.COMMAND_LEVEL_ADD_USAGE).getLocalized();
+                case TAKE -> plugin.getMessage(Lang.COMMAND_LEVEL_TAKE_USAGE).getLocalized();
+                case SET -> plugin.getMessage(Lang.COMMAND_LEVEL_SET_USAGE).getLocalized();
             };
         }
 
@@ -77,9 +78,9 @@ public class LevelCommand extends GeneralCommand<MoneyHunters> {
         @NotNull
         public String getDescription() {
             return switch (this.mode) {
-                case ADD -> plugin.lang().Command_Level_Add_Desc.getLocalized();
-                case TAKE -> plugin.lang().Command_Level_Take_Desc.getLocalized();
-                case SET -> plugin.lang().Command_Level_Set_Desc.getLocalized();
+                case ADD -> plugin.getMessage(Lang.COMMAND_LEVEL_ADD_DESC).getLocalized();
+                case TAKE -> plugin.getMessage(Lang.COMMAND_LEVEL_TAKE_DESC).getLocalized();
+                case SET -> plugin.getMessage(Lang.COMMAND_LEVEL_SET_DESC).getLocalized();
             };
         }
 
@@ -112,7 +113,7 @@ public class LevelCommand extends GeneralCommand<MoneyHunters> {
 
             IJob<?> job = plugin.getJobManager().getJobById(args[3]);
             if (job == null) {
-                plugin.lang().Job_Error_InvalidJob.send(sender);
+                plugin.getMessage(Lang.JOB_ERROR_INVALID_JOB).send(sender);
                 return;
             }
 
@@ -132,15 +133,15 @@ public class LevelCommand extends GeneralCommand<MoneyHunters> {
             LangMessage message = switch (this.mode) {
                 case ADD -> {
                     user.addJobLevel(job, level);
-                    yield plugin.lang().Command_Level_Add_Done;
+                    yield plugin.getMessage(Lang.COMMAND_LEVEL_ADD_DONE);
                 }
                 case TAKE -> {
                     user.addJobLevel(job, -level);
-                    yield plugin.lang().Command_Level_Take_Done;
+                    yield plugin.getMessage(Lang.COMMAND_LEVEL_TAKE_DONE);
                 }
                 case SET -> {
                     jobData.setJobLevel(level);
-                    yield plugin.lang().Command_Level_Set_Done;
+                    yield plugin.getMessage(Lang.COMMAND_LEVEL_SET_DONE);
                 }
             };
             jobData.update();

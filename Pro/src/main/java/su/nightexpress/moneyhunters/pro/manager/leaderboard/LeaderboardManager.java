@@ -112,7 +112,7 @@ public class LeaderboardManager extends AbstractManager<MoneyHunters> {
         List<LeaderboardScore> scores = this.getScores(type, job.getId());
 
         orig.forEach(line -> {
-            line = line.replace(PLACEHOLDER_JOB, job.getName()).replace(PLACEHOLDER_TYPE, plugin.lang().getEnum(type));
+            line = line.replace(PLACEHOLDER_JOB, job.getName()).replace(PLACEHOLDER_TYPE, plugin.getLangManager().getEnum(type));
 
             if (line.contains(PLACEHOLDER_NAME)) {
                 for (int pos = 0; pos < LeaderboardConfig.maxBoardScores; pos++) {

@@ -8,6 +8,7 @@ import su.nexmedia.engine.utils.PlayerUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
 
@@ -22,13 +23,13 @@ public class ResetCommand extends AbstractCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getUsage() {
-        return plugin.lang().Command_Reset_Usage.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_RESET_USAGE).getLocalized();
     }
 
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Reset_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_RESET_DESC).getLocalized();
     }
 
     @Override
@@ -61,7 +62,7 @@ public class ResetCommand extends AbstractCommand<MoneyHunters> {
 
         IJob<?> job = plugin.getJobManager().getJobById(args[1]);
         if (job == null) {
-            plugin.lang().Job_Error_InvalidJob.send(sender);
+            plugin.getMessage(Lang.JOB_ERROR_INVALID_JOB).send(sender);
             return;
         }
 
@@ -76,7 +77,7 @@ public class ResetCommand extends AbstractCommand<MoneyHunters> {
         data.reset();
 
         if (!sender.getName().equalsIgnoreCase(user.getName())) {
-            plugin.lang().Command_Reset_Done
+            plugin.getMessage(Lang.COMMAND_RESET_DONE)
                 .replace(data.replacePlaceholders())
                 .replace("%player%", user.getName())
                 .send(sender);
@@ -84,7 +85,7 @@ public class ResetCommand extends AbstractCommand<MoneyHunters> {
 
         Player target = user.getPlayer();
         if (target != null) {
-            plugin.lang().Jobs_Reset_Success.replace(data.replacePlaceholders()).send(target);
+            plugin.getMessage(Lang.JOBS_RESET_SUCCESS).replace(data.replacePlaceholders()).send(target);
         }
     }
 }

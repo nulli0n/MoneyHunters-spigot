@@ -10,6 +10,7 @@ import su.nexmedia.engine.utils.CollectionsUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardManager;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardType;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.hologram.LeaderboardHologramHandler;
@@ -37,7 +38,7 @@ public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Leaderboard_Hologram_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_LEADERBOARD_HOLOGRAM_DESC).getLocalized();
     }
 
     @Override
@@ -59,13 +60,13 @@ public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
         @Override
         @NotNull
         public String getUsage() {
-            return plugin.lang().Command_Leaderboard_Hologram_Add_Usage.getLocalized();
+            return plugin.getMessage(Lang.COMMAND_LEADERBOARD_HOLOGRAM_ADD_USAGE).getLocalized();
         }
 
         @Override
         @NotNull
         public String getDescription() {
-            return plugin.lang().Command_Leaderboard_Hologram_Add_Desc.getLocalized();
+            return plugin.getMessage(Lang.COMMAND_LEADERBOARD_HOLOGRAM_ADD_DESC).getLocalized();
         }
 
         @Override
@@ -100,14 +101,14 @@ public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
 
             IJob<?> job = plugin.getJobManager().getJobById(args[4]);
             if (job == null) {
-                plugin.lang().Job_Error_InvalidJob.send(sender);
+                plugin.getMessage(Lang.JOB_ERROR_INVALID_JOB).send(sender);
                 return;
             }
 
             Player player = (Player) sender;
             hologramHandler.createHologram(boardType, job.getId(), player.getLocation());
 
-            plugin.lang().Command_Leaderboard_Hologram_Add_Done
+            plugin.getMessage(Lang.COMMAND_LEADERBOARD_HOLOGRAM_ADD_DONE)
                 .replace(LeaderboardManager.PLACEHOLDER_TYPE, boardType.name())
                 .replace(LeaderboardManager.PLACEHOLDER_JOB, job.getName())
                 .send(player);
@@ -129,7 +130,7 @@ public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
         @Override
         @NotNull
         public String getDescription() {
-            return plugin.lang().Command_Leaderboard_Hologram_Remove_Desc.getLocalized();
+            return plugin.getMessage(Lang.COMMAND_LEADERBOARD_HOLOGRAM_REMOVE_DESC).getLocalized();
         }
 
         @Override
@@ -141,7 +142,7 @@ public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
         protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
             Player player = (Player) sender;
             hologramHandler.removeHologram(player.getLocation());
-            plugin.lang().Command_Leaderboard_Hologram_Remove_Done.send(sender);
+            plugin.getMessage(Lang.COMMAND_LEADERBOARD_HOLOGRAM_REMOVE_DONE).send(sender);
         }
     }
 }

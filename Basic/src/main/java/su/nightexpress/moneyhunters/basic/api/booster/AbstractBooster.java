@@ -1,7 +1,7 @@
 package su.nightexpress.moneyhunters.basic.api.booster;
 
 import org.jetbrains.annotations.NotNull;
-import su.nexmedia.engine.utils.Constants;
+import su.nexmedia.engine.lang.EngineLang;
 import su.nexmedia.engine.utils.NumberUtil;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.MoneyHuntersAPI;
@@ -33,21 +33,21 @@ public abstract class AbstractBooster implements IBooster {
     @NotNull
     public UnaryOperator<String> replacePlaceholders() {
         Collection<String> jobs = this.getJobs();
-        if (jobs.contains(Constants.MASK_ANY)) {
+        if (jobs.contains(su.nexmedia.engine.utils.Placeholders.MASK_ANY)) {
             jobs.clear();
             jobs.addAll(MoneyHuntersAPI.getJobManager().getJobIds());
         }
 
         return str -> str
             .replace(Placeholders.BOOSTER_ID, this.getId())
-            .replace(Placeholders.BOOSTER_TYPE, plugin.lang().getEnum(this.getType()))
+            .replace(Placeholders.BOOSTER_TYPE, plugin.getLangManager().getEnum(this.getType()))
             .replace(Placeholders.BOOSTER_EXP_MODIFIER, NumberUtil.format(this.getExpModifier()))
             .replace(Placeholders.BOOSTER_EXP_MODIFIER_PERCENT, NumberUtil.format(this.getExpPercent()))
             .replace(Placeholders.BOOSTER_MONEY_MODIFIER, NumberUtil.format(this.getMoneyModifier()))
             .replace(Placeholders.BOOSTER_MONEY_MODIFIER_PERCENT, NumberUtil.format(this.getMoneyPercent()))
             .replace(Placeholders.BOOSTER_JOBS, jobs.stream().map(MoneyHuntersAPI::getJobById)
                 .filter(Objects::nonNull).map(IJob::getName).collect(Collectors.joining(", ")))
-            .replace(Placeholders.BOOSTER_TIME_LEFT, plugin.lang().Other_Infinity.getLocalized())
+            .replace(Placeholders.BOOSTER_TIME_LEFT, plugin.getMessage(EngineLang.OTHER_INFINITY).getLocalized())
             ;
     }
 

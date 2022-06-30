@@ -2,7 +2,7 @@ package su.nightexpress.moneyhunters.basic.api.booster;
 
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.manager.IPlaceholder;
-import su.nexmedia.engine.utils.Constants;
+import su.nexmedia.engine.utils.Placeholders;
 import su.nightexpress.moneyhunters.basic.api.job.IJob;
 
 import java.util.Set;
@@ -14,7 +14,7 @@ public interface IBooster extends IPlaceholder {
     @NotNull Set<String> getJobs();
 
     default boolean isApplicable(@NotNull IJob<?> job) {
-        return this.getJobs().contains(job.getId()) || this.getJobs().contains(Constants.MASK_ANY);
+        return this.getJobs().contains(job.getId()) || this.getJobs().contains(Placeholders.MASK_ANY);
     }
 
     double getMoneyModifier();

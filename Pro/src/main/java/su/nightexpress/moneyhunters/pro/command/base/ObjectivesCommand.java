@@ -7,6 +7,7 @@ import su.nexmedia.engine.api.command.AbstractCommand;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 
 import java.util.List;
 
@@ -19,13 +20,13 @@ public class ObjectivesCommand extends AbstractCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getUsage() {
-        return plugin.lang().Command_Objectives_Usage.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_OBJECTIVES_USAGE).getLocalized();
     }
 
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Objectives_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_OBJECTIVES_DESC).getLocalized();
     }
 
     @Override
@@ -51,7 +52,7 @@ public class ObjectivesCommand extends AbstractCommand<MoneyHunters> {
 
         IJob<?> job = plugin.getJobManager().getJobById(args[1]);
         if (job == null) {
-            plugin.lang().Job_Error_InvalidJob.send(sender);
+            plugin.getMessage(Lang.JOB_ERROR_INVALID_JOB).send(sender);
             return;
         }
 

@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 
 public class JobsCommand extends AbstractCommand<MoneyHunters> {
 
@@ -22,7 +23,7 @@ public class JobsCommand extends AbstractCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Jobs_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_JOBS_DESC).getLocalized();
     }
 
     @Override

@@ -13,6 +13,7 @@ import su.nexmedia.engine.api.menu.IMenuItem;
 import su.nexmedia.engine.api.menu.MenuItemType;
 import su.nexmedia.engine.utils.ItemUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
 
 import java.util.Map;
@@ -33,7 +34,7 @@ public class JobResetConfirmMenu extends AbstractMenu<MoneyHunters> {
                     if (data == null) return;
 
                     data.reset();
-                    plugin.lang().Jobs_Reset_Success.replace(data.replacePlaceholders()).send(player);
+                    plugin.getMessage(Lang.JOBS_RESET_SUCCESS).replace(data.replacePlaceholders()).send(player);
                     player.closeInventory();
                 }
                 else if (type2 == MenuItemType.CONFIRMATION_DECLINE || type2 == MenuItemType.RETURN) {

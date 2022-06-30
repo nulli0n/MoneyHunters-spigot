@@ -7,6 +7,9 @@ import su.nexmedia.engine.api.command.GeneralCommand;
 import su.nexmedia.engine.api.data.UserDataHolder;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
+import su.nightexpress.moneyhunters.pro.api.job.JobState;
+import su.nightexpress.moneyhunters.pro.api.job.JobType;
+import su.nightexpress.moneyhunters.pro.api.money.ObjectiveLimitType;
 import su.nightexpress.moneyhunters.pro.command.base.*;
 import su.nightexpress.moneyhunters.pro.command.booster.BoosterCommand;
 import su.nightexpress.moneyhunters.pro.config.Config;
@@ -19,14 +22,12 @@ import su.nightexpress.moneyhunters.pro.manager.booster.BoosterManager;
 import su.nightexpress.moneyhunters.pro.manager.currency.CurrencyManager;
 import su.nightexpress.moneyhunters.pro.manager.job.JobManager;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardManager;
+import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardType;
 import su.nightexpress.moneyhunters.pro.manager.money.MoneyManager;
 
 import java.sql.SQLException;
 
 public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHolder<MoneyHunters, MoneyUser> {
-
-    private Config config;
-    private Lang   lang;
 
     private MoneyDataHandler dataHandler;
     private MoneyUserManager userManager;
@@ -36,6 +37,12 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
     private JobManager         jobManager;
     private MoneyManager       moneyManager;
     private LeaderboardManager leaderboardManager;
+
+    @Override
+    @NotNull
+    protected MoneyHunters getSelf() {
+        return this;
+    }
 
     @Override
     public void enable() {
@@ -91,12 +98,18 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
     }
 
     @Override
-    public void setConfig() {
-        this.config = new Config(this);
-        this.config.setup();
+    public void loadConfig() {
+        Config.load(this);
+    }
 
-        this.lang = new Lang(this);
-        this.lang.setup();
+    @Override
+    public void loadLang() {
+        this.getLangManager().loadMissing(Lang.class);
+        this.getLangManager().setupEnum(JobState.class);
+        this.getLangManager().setupEnum(JobType.class);
+        this.getLangManager().setupEnum(LeaderboardType.class);
+        this.getLangManager().setupEnum(ObjectiveLimitType.class);
+        this.getLang().saveChanges();
     }
 
     @Override
@@ -115,18 +128,6 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
         this.userManager.setup();
 
         return true;
-    }
-
-    @Override
-    @NotNull
-    public Config cfg() {
-        return this.config;
-    }
-
-    @Override
-    @NotNull
-    public Lang lang() {
-        return this.lang;
     }
 
     @Override

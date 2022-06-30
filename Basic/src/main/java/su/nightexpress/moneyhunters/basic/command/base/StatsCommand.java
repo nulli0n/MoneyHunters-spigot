@@ -8,6 +8,7 @@ import su.nexmedia.engine.utils.MessageUtil;
 import su.nexmedia.engine.utils.PlayerUtil;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.Perms;
+import su.nightexpress.moneyhunters.basic.config.Lang;
 import su.nightexpress.moneyhunters.basic.data.object.MoneyUser;
 
 import java.util.List;
@@ -21,13 +22,13 @@ public class StatsCommand extends AbstractCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getUsage() {
-        return plugin.lang().Command_Stats_Usage.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_STATS_USAGE).getLocalized();
     }
 
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Stats_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_STATS_DESC).getLocalized();
     }
 
     @Override
@@ -66,7 +67,7 @@ public class StatsCommand extends AbstractCommand<MoneyHunters> {
         }
 
         MoneyUser finalUser = user;
-        plugin.lang().Command_Stats_Display.asList().forEach(line -> {
+        plugin.getMessage(Lang.COMMAND_STATS_DISPLAY).asList().forEach(line -> {
             if (line.contains("job_")) {
                 finalUser.getJobData().values().forEach(progress -> {
                     String line2 = progress.replacePlaceholders().apply(line);

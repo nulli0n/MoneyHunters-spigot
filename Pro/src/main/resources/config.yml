@@ -5,7 +5,8 @@ Plugin:
   # Do not leave this empty.
   Command_Aliases: 'moneyhunters,mh'
   Language: en
-  Prefix: 'MoneyHunters'
+  Name: 'MoneyHunters'
+  Prefix: '&e%plugin_name% &8» &7'
 
 Database:
   Auto_Save_Interval: 20

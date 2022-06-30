@@ -11,6 +11,7 @@ import su.nexmedia.engine.utils.MessageUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
+import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardManager;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardType;
 
@@ -40,7 +41,7 @@ public class LeaderboardCommand extends GeneralCommand<MoneyHunters> {
     @Override
     @NotNull
     public String getDescription() {
-        return plugin.lang().Command_Leaderboard_Desc.getLocalized();
+        return plugin.getMessage(Lang.COMMAND_LEADERBOARD_DESC).getLocalized();
     }
 
     @Override
@@ -62,13 +63,13 @@ public class LeaderboardCommand extends GeneralCommand<MoneyHunters> {
         @Override
         @NotNull
         public String getUsage() {
-            return plugin.lang().Command_Leaderboard_List_Usage.getLocalized();
+            return plugin.getMessage(Lang.COMMAND_LEADERBOARD_LIST_USAGE).getLocalized();
         }
 
         @Override
         @NotNull
         public String getDescription() {
-            return plugin.lang().Command_Leaderboard_List_Desc.getLocalized();
+            return plugin.getMessage(Lang.COMMAND_LEADERBOARD_LIST_DESC).getLocalized();
         }
 
         @Override
@@ -103,12 +104,12 @@ public class LeaderboardCommand extends GeneralCommand<MoneyHunters> {
 
             IJob<?> job = plugin.getJobManager().getJobById(args[3]);
             if (job == null) {
-                plugin.lang().Job_Error_InvalidJob.send(sender);
+                plugin.getMessage(Lang.JOB_ERROR_INVALID_JOB).send(sender);
                 return;
             }
 
             leaderboardManager.formatLeaderList(
-                plugin.lang().Command_Leaderboard_List_Format.asList(), boardType, job)
+                plugin.getMessage(Lang.COMMAND_LEADERBOARD_LIST_FORMAT).asList(), boardType, job)
                 .forEach(line -> MessageUtil.sendWithJSON(sender, job.replacePlaceholders().apply(line)));
         }
     }
