@@ -67,7 +67,7 @@ public class ResetCommand extends AbstractCommand<MoneyHunters> {
         }
 
         String pName = args.length >= 3 ? args[2] : sender.getName();
-        MoneyUser user = plugin.getUserManager().getOrLoadUser(pName, false);
+        MoneyUser user = plugin.getUserManager().getUserData(pName);
         if (user == null) {
             this.errorPlayer(sender);
             return;

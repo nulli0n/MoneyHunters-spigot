@@ -35,7 +35,7 @@ public class SoundCommand extends AbstractCommand<MoneyHunters> {
     @Override
     protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;
-        MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+        MoneyUser user = plugin.getUserManager().getUserData(player);
 
         user.getSettings().setSoundPickupEnabled(!user.getSettings().isSoundPickupEnabled());
         plugin.getMessage(Lang.COMMAND_SOUND_DONE)

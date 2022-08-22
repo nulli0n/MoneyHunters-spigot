@@ -75,7 +75,7 @@ public class JobObjectivesMenu extends AbstractMenuAuto<MoneyHunters, IMoneyObje
     @Override
     @NotNull
     protected ItemStack getObjectStack(@NotNull Player player, @NotNull IMoneyObjective objective) {
-        MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+        MoneyUser user = plugin.getUserManager().getUserData(player);
         UserJobData jobData = user.getJobData(this.job);
         ICurrency currency = jobData.getJob().getCurrency();
 

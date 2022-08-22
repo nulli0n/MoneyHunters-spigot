@@ -21,19 +21,19 @@ public class GamePointsCurrency extends AbstractCurrency {
 
     @Override
     public double getBalance(@NotNull Player player) {
-        PointUser user = gamePoints.getUserManager().getOrLoadUser(player);
+        PointUser user = gamePoints.getUserManager().getUserData(player);
         return user.getBalance();
     }
 
     @Override
     public void give(@NotNull Player player, double amount) {
-        PointUser user = gamePoints.getUserManager().getOrLoadUser(player);
+        PointUser user = gamePoints.getUserManager().getUserData(player);
         user.addPoints((int) amount);
     }
 
     @Override
     public void take(@NotNull Player player, double amount) {
-        PointUser user = gamePoints.getUserManager().getOrLoadUser(player);
+        PointUser user = gamePoints.getUserManager().getUserData(player);
         user.takePoints((int) amount);
     }
 }

@@ -57,7 +57,7 @@ public class JobListMenu extends AbstractMenuAuto<MoneyHunters, UserJobData> {
     @Override
     @NotNull
     protected List<UserJobData> getObjects(@NotNull Player player) {
-        return new ArrayList<>(plugin.getUserManager().getOrLoadUser(player).getJobData().values());
+        return new ArrayList<>(plugin.getUserManager().getUserData(player).getJobData().values());
     }
 
     @Override
@@ -78,7 +78,7 @@ public class JobListMenu extends AbstractMenuAuto<MoneyHunters, UserJobData> {
         }
         item.setItemMeta(meta);
 
-        MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+        MoneyUser user = plugin.getUserManager().getUserData(player);
         ItemUtil.replace(item, data.replacePlaceholders(user));
 
         return item;

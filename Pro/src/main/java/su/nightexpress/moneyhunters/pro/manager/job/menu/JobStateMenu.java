@@ -125,7 +125,7 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
         UserJobData data = this.cache.get(player);
         if (data == null) return;
 
-        MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+        MoneyUser user = plugin.getUserManager().getUserData(player);
 
         int jobsMax = JobManager.getJobsAmountMax(player, data.getState());
         if (menuItem.getType() instanceof JobState state) {

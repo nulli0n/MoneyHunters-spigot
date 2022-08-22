@@ -23,6 +23,7 @@ import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.manager.booster.BoosterManager;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.UnaryOperator;
 
 public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholder {
@@ -31,10 +32,10 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
     private final Set<IBooster>            boosters;
     private final UserSettings settings;
 
-    public MoneyUser(@NotNull MoneyHunters plugin, @NotNull Player player) {
-        this(plugin, player.getUniqueId(), player.getName(), System.currentTimeMillis(),
+    public MoneyUser(@NotNull MoneyHunters plugin, @NotNull UUID uuid, @NotNull String name) {
+        this(plugin, uuid, name, System.currentTimeMillis(), System.currentTimeMillis(),
             new HashMap<>(), // Job Data
-            new HashSet<>(), // Personal Boosters
+            ConcurrentHashMap.newKeySet(), // Personal Boosters
             new UserSettings()
         );
     }
@@ -44,13 +45,15 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
         @NotNull UUID uuid,
         @NotNull String name,
         long lastOnline,
+        long dateCreated,
         @NotNull Map<String, UserJobData> jobData,
         @NotNull Set<IBooster> boosters,
         @NotNull UserSettings settings
     ) {
-        super(plugin, uuid, name, lastOnline);
+        super(plugin, uuid, name, dateCreated, lastOnline);
         this.jobData = jobData;
-        this.boosters = boosters;
+        this.boosters = ConcurrentHashMap.newKeySet();
+        this.boosters.addAll(boosters);
         this.settings = settings;
 
         // Remove invalid job datas.

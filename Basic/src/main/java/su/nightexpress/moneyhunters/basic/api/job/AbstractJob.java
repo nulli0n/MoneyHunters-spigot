@@ -167,7 +167,7 @@ public abstract class AbstractJob<E extends Event> extends AbstractLoadableItem<
         IMoneyObjective moneyObjective = this.getObjective(object);
         if (moneyObjective == null) return;
 
-        MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+        MoneyUser user = plugin.getUserManager().getUserData(player);
         UserJobData jobData = user.getJobData(this);
         //if (jobData.getState() == JobState.INACTIVE) return;
         if (!this.hasObjectiveUnlockLevelBypass(player) && moneyObjective.getUnlockLevel() > jobData.getJobLevel()) return;

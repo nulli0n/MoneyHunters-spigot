@@ -28,22 +28,23 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     protected MoneyDataHandler(@NotNull MoneyHunters plugin) throws SQLException {
         super(plugin);
 
-        this.userFunction = (rs) -> {
+        this.userFunction = (resultSet) -> {
             try {
-                UUID uuid = UUID.fromString(rs.getString(AbstractUserDataHandler.COL_USER_UUID));
-                String name = rs.getString(AbstractUserDataHandler.COL_USER_NAME);
-                long lastOnline = rs.getLong(AbstractUserDataHandler.COL_USER_LAST_ONLINE);
+                UUID uuid = UUID.fromString(resultSet.getString(COL_USER_UUID));
+                String name = resultSet.getString(COL_USER_NAME);
+                long dateCreated = resultSet.getLong(COL_USER_DATE_CREATED);
+                long lastOnline = resultSet.getLong(COL_USER_LAST_ONLINE);
 
                 Map<String, UserJobData> jobData = new HashMap<>();
                 if (Config.LEVELING_ENABLED) {
-                    jobData = this.gson.fromJson(rs.getString("progress"), new TypeToken<Map<String, UserJobData>>() {
+                    jobData = this.gson.fromJson(resultSet.getString("progress"), new TypeToken<Map<String, UserJobData>>() {
                     }.getType());
                 }
 
-                Set<IBooster> boosters = this.gson.fromJson(rs.getString("boosters"), new TypeToken<Set<PersonalBooster>>() {
+                Set<IBooster> boosters = this.gson.fromJson(resultSet.getString("boosters"), new TypeToken<Set<PersonalBooster>>() {
                 }.getType());
 
-                return new MoneyUser(plugin, uuid, name, lastOnline, jobData, boosters);
+                return new MoneyUser(plugin, uuid, name, dateCreated, lastOnline, jobData, boosters);
             }
             catch (SQLException ex) {
                 return null;
@@ -88,7 +89,7 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     protected LinkedHashMap<String, String> getColumnsToSave(@NotNull MoneyUser user) {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         map.put("progress", this.gson.toJson(user.getJobData()));
-        map.put("boosters", this.gson.toJson(new HashSet<>(user.getBoosters()).stream()
+        map.put("boosters", this.gson.toJson(user.getBoosters().stream()
             .filter(booster -> booster.getType() == BoosterType.PERSONAL && !booster.isExpired()).toList()));
         return map;
     }

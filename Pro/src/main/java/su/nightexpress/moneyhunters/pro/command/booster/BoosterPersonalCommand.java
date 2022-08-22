@@ -58,11 +58,11 @@ public class BoosterPersonalCommand extends GeneralCommand<MoneyHunters> {
         Set<MoneyUser> users = new HashSet<>();
         if (userName.equalsIgnoreCase(Placeholders.MASK_ANY)) {
             users.addAll(plugin.getServer().getOnlinePlayers().stream()
-                .map(player -> plugin.getUserManager().getOrLoadUser(player))
+                .map(player -> plugin.getUserManager().getUserData(player))
                 .collect(Collectors.toSet()));
         }
         else {
-            MoneyUser user = plugin.getUserManager().getOrLoadUser(userName, false);
+            MoneyUser user = plugin.getUserManager().getUserData(userName);
             if (user != null) {
                 users.add(user);
             }
@@ -104,7 +104,7 @@ public class BoosterPersonalCommand extends GeneralCommand<MoneyHunters> {
             }
             if (arg == 4) {
                 List<String> list = new ArrayList<>();
-                MoneyUser user = plugin.getUserManager().getOrLoadUser(args[3], false);
+                MoneyUser user = plugin.getUserManager().getUserData(args[3]);
                 if (user != null) {
                     list.addAll(user.getBoosters().stream()
                         .filter(booster -> booster.getType() == BoosterType.PERSONAL)
@@ -235,7 +235,7 @@ public class BoosterPersonalCommand extends GeneralCommand<MoneyHunters> {
                 list.add("<booster_id>");
                 list.add(Placeholders.MASK_ANY);
 
-                MoneyUser user = plugin.getUserManager().getOrLoadUser(args[3], false);
+                MoneyUser user = plugin.getUserManager().getUserData(args[3]);
                 if (user != null) {
                     list.addAll(user.getBoosters().stream()
                         .filter(booster -> booster.getType() == BoosterType.PERSONAL)

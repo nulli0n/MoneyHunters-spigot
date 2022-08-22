@@ -176,7 +176,7 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
         money = event.getAmount();
         currency.give(player, money);
 
-        MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+        MoneyUser user = plugin.getUserManager().getUserData(player);
         if (user.getSettings().isSoundPickupEnabled()) {
             MessageUtil.sound(player, currency.getPickupEffectSound());
         }

@@ -1,10 +1,11 @@
 package su.nightexpress.moneyhunters.basic.data;
 
-import su.nightexpress.moneyhunters.basic.MoneyHunters;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.data.AbstractUserManager;
+import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.data.object.MoneyUser;
+
+import java.util.UUID;
 
 public class MoneyUserManager extends AbstractUserManager<MoneyHunters, MoneyUser> {
 
@@ -13,8 +14,12 @@ public class MoneyUserManager extends AbstractUserManager<MoneyHunters, MoneyUse
     }
 
     @Override
-    @NotNull
-    protected MoneyUser createData(@NotNull Player player) {
-        return new MoneyUser(plugin, player);
+    protected @NotNull MoneyUser createData(@NotNull UUID uuid, @NotNull String name) {
+        return new MoneyUser(plugin, uuid, name);
+    }
+
+    @Override
+    protected void onSynchronize() {
+        // TODO
     }
 }

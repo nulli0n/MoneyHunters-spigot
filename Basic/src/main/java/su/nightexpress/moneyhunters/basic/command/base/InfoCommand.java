@@ -59,7 +59,7 @@ public class InfoCommand extends AbstractCommand<MoneyHunters> {
         }
 
         Player player = (Player) sender;
-        MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+        MoneyUser user = plugin.getUserManager().getUserData(player);
         UserJobData progress = user.getJobData(job);
 
         plugin.getMessage(Lang.COMMAND_INFO_DISPLAY).asList().forEach(line -> {

@@ -127,7 +127,7 @@ public class ExpCommand extends GeneralCommand<MoneyHunters> {
                 return;
             }
 
-            MoneyUser user = plugin.getUserManager().getOrLoadUser(args[2], false);
+            MoneyUser user = plugin.getUserManager().getUserData(args[2]);
             if (user == null) {
                 this.errorPlayer(sender);
                 return;

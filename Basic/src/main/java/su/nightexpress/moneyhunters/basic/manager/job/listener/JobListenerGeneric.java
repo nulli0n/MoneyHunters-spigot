@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerHarvestBlockEvent;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.manager.AbstractListener;
 import su.nexmedia.engine.hooks.Hooks;
@@ -69,6 +70,22 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
         String objectiveName = type;
         this.plugin.getJobManager().getJobFactory().getJobsFishing().forEach(jobFishing -> {
             jobFishing.onJobEvent(e, e.getPlayer(), objectiveName);
+        });
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onJobTypeBlockHarvest(PlayerHarvestBlockEvent e) {
+        Block block = e.getHarvestedBlock();
+        if (PlayerBlockTracker.isTracked(block)) {
+            return;
+        }
+
+        Player player = e.getPlayer();
+        String type = block.getType().name();
+
+        BlockBreakEvent event = new BlockBreakEvent(block, player);
+        this.plugin.getJobManager().getJobFactory().getJobsBlockBreak().forEach(job -> {
+            job.onJobEvent(event, player, type);
         });
     }
 

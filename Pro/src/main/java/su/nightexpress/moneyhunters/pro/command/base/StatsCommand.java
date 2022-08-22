@@ -54,11 +54,11 @@ public class StatsCommand extends AbstractCommand<MoneyHunters> {
                 this.printUsage(sender);
                 return;
             }
-            user = plugin.getUserManager().getOrLoadUser(player);
+            user = plugin.getUserManager().getUserData(player);
         }
         else if (args.length == 2) {
             String pName = args[1];
-            user = plugin.getUserManager().getOrLoadUser(pName, false);
+            user = plugin.getUserManager().getUserData(pName);
         }
 
         if (user == null) {

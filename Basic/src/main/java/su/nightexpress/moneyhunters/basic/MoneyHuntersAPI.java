@@ -17,7 +17,7 @@ public class MoneyHuntersAPI {
 
     @NotNull
     public static MoneyUser getPlayerData(@NotNull Player player) {
-        return PLUGIN.getUserManager().getOrLoadUser(player);
+        return PLUGIN.getUserManager().getUserData(player);
     }
 
     @Nullable

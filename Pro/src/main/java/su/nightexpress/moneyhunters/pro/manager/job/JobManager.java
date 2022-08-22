@@ -193,7 +193,7 @@ public class JobManager extends AbstractManager<MoneyHunters> {
                                @NotNull IJob<?> job, @NotNull IMoneyObjective objective, @NotNull ObjectiveLimitType limitType) {
         if (job.hasObjectiveLimitBypass(player, limitType)) return;
 
-        MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+        MoneyUser user = plugin.getUserManager().getUserData(player);
         UserJobData jobData = user.getJobData(job);
         boolean isLose = amount < 0D;
 

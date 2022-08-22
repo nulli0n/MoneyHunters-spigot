@@ -89,9 +89,9 @@ public class BoosterManager extends AbstractManager<MoneyHunters> {
         this.getBoostersAuto().addAll(Config.getBoosters().stream().filter(IBooster::isActive).toList());
 
         for (Player player : plugin.getServer().getOnlinePlayers()) {
-            if (!plugin.getUserManager().isLoaded(player)) continue;
+            if (!plugin.getUserManager().isUserLoaded(player)) continue;
 
-            MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+            MoneyUser user = plugin.getUserManager().getUserData(player);
             user.updateBoosters();
         }
     }

@@ -87,7 +87,7 @@ public class MoneyListenerGeneric extends AbstractListener<MoneyHunters> {
             if (amountPercent <= 0) return;
 
             double balance = currency.getBalance(player);
-            double amountLost = balance * amountPercent / 100D;
+            double amountLost = currency.round(balance * amountPercent / 100D);
             if (amountLost <= 0D) return;
 
             if (this.moneyManager.loseMoney(player, currency, amountLost)) {

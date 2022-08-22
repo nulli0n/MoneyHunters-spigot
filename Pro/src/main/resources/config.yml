@@ -10,6 +10,7 @@ Plugin:
 
 Database:
   Auto_Save_Interval: 20
+  Sync_Interval: 60
   Instant_Save: false
   Type: SQLITE
   MySQL:
