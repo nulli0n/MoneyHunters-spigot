@@ -29,6 +29,7 @@ import su.nightexpress.moneyhunters.pro.manager.leaderboard.listener.Leaderboard
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.task.LeaderboardUpdateTask;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class LeaderboardManager extends AbstractManager<MoneyHunters> {
 
@@ -50,13 +51,14 @@ public class LeaderboardManager extends AbstractManager<MoneyHunters> {
 
     @Override
     public void onLoad() {
-        if (this.stats == null) this.stats = new HashMap<>();
+        this.stats = new HashMap<>();
         this.signs = new HashMap<>();
 
         LeaderboardConfig.load(JYML.loadOrExtract(plugin, "leaderboards.yml"));
-        for (LeaderboardType type : LeaderboardType.values()) {
-            this.getSigns(type).addAll(LeaderboardConfig.loadSigns(type));
-        }
+        this.plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+            Stream.of(LeaderboardType.values()).forEach(type -> this.getSigns(type).addAll(LeaderboardConfig.loadSigns(type)));
+            this.updateSigns();
+        }, 20L);
 
         if (Hooks.hasPlugin(HookId.HOLOGRAPHIC_DISPLAYS)) {
             this.hologramHandler = new LeaderboardHologramDisplays(this);
@@ -82,6 +84,8 @@ public class LeaderboardManager extends AbstractManager<MoneyHunters> {
 
     @Override
     public void onShutdown() {
+        LeaderboardConfig.cfg.reload();
+
         if (this.updateTask != null) {
             this.updateTask.stop();
             this.updateTask = null;
@@ -133,10 +137,12 @@ public class LeaderboardManager extends AbstractManager<MoneyHunters> {
         return list;
     }
 
-    @Nullable
+    @NotNull
     public LeaderboardScore getScore(@NotNull LeaderboardType type, @NotNull IJob<?> job, int pos) {
+        pos = Math.max(0, pos - 1);
+
         List<LeaderboardScore> scores = this.getScores(type, job.getId());
-        return scores.size() > pos ? scores.get(pos) : null;
+        return scores.size() > pos ? scores.get(pos) : LeaderboardScore.EMPTY;
     }
 
     @NotNull
@@ -243,17 +249,13 @@ public class LeaderboardManager extends AbstractManager<MoneyHunters> {
 
         LeaderboardScore score = this.getScore(boardType, job, pos);
 
-        String userName = score != null ? score.name() : "-";
-        double scoreAmount = score != null ? score.score() : 0D;
-        String skullOwner = userName.isEmpty() ? LeaderboardConfig.genericMissingStatName : userName;
-
         String[] lines = LeaderboardConfig.signsFormat.get(boardType);
         if (lines == null) return;
 
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i]
                 .replace(PLACEHOLDER_JOB, job.getName()).replace(PLACEHOLDER_POSITION, String.valueOf(pos))
-                .replace(PLACEHOLDER_NAME, userName).replace(PLACEHOLDER_SCORE, NumberUtil.format(scoreAmount));
+                .replace(PLACEHOLDER_NAME, score.name()).replace(PLACEHOLDER_SCORE, NumberUtil.format(score.score()));
             sign.setLine(i, line);
         }
         sign.update(true);
@@ -269,7 +271,7 @@ public class LeaderboardManager extends AbstractManager<MoneyHunters> {
             // Skull skin on the block that holds Sign
             for (Block skullBlock : skulls) {
                 if (skullBlock.getState() instanceof Skull skull) {
-                    skull.setOwner(skullOwner);
+                    skull.setOwner(score.getSkullOwner());
                     skull.update(true);
                 }
             }
