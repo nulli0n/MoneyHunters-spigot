@@ -263,7 +263,7 @@ public abstract class AbstractJob<E extends Event> extends AbstractLoadableItem<
         // Give or take job exp for the objective no matter if there is a money item or not.
         user.addJobExp(this, moneyObjective.getType(), expRoll, false);
 
-        if (moneyRoll == 0D) return;
+        if (moneyRoll == 0D || (moneyRoll < 1D && moneyRoll > 0D && currency.isIntegerOnly())) return;
 
         ItemStack moneyItem = currency.createMoney(moneyRoll, player, this, moneyObjective);
         if (moneyRoll <= 0D || currency.isDirectToBalance()) {
