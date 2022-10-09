@@ -18,9 +18,4 @@ public class MoneyUserManager extends AbstractUserManager<MoneyHunters, MoneyUse
     protected MoneyUser createData(@NotNull UUID uuid, @NotNull String name) {
         return new MoneyUser(plugin, uuid, name);
     }
-
-    @Override
-    protected void onSynchronize() {
-        // TODO
-    }
 }

@@ -66,7 +66,7 @@ public class PlaceholderHook extends AbstractHook<MoneyHunters> {
         public String onPlaceholderRequest(Player player, @NotNull String params) {
             if (player == null) return null;
 
-            MoneyUser user = plugin.getUserManager().getOrLoadUser(player);
+            MoneyUser user = plugin.getUserManager().getUserData(player);
             String[] split = params.split("_");
             if (split.length < 2) return null;
 

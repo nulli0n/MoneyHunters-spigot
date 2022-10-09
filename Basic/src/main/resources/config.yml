@@ -10,17 +10,19 @@ Plugin:
 
 Database:
   Auto_Save_Interval: 20
-  Sync_Interval: 60
-  Instant_Save: false
+  Sync_Interval: -1
   Type: SQLITE
+  Table_Prefix: 'moneyhunters'
   MySQL:
     Username: root
     Password: root
     Host: localhost
     Database: minecraft
+  SQLite:
+    FileName: data.db
   Purge:
     Enabled: false
-    For_Inactive_Days: 60
+    For_Period: 60
 
 Generic:
   # Money abuse and exploit protection.

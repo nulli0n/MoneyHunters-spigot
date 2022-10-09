@@ -12,7 +12,7 @@ import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 public class SoundCommand extends AbstractCommand<MoneyHunters> {
 
     public SoundCommand(@NotNull MoneyHunters plugin) {
-        super(plugin, new String[]{"sound"}, null);
+        super(plugin, new String[]{"sound"}, (String) null);
     }
 
     @Override

@@ -17,7 +17,7 @@ import java.util.List;
 public class InfoCommand extends AbstractCommand<MoneyHunters> {
 
     public InfoCommand(@NotNull MoneyHunters plugin) {
-        super(plugin, new String[]{"info"}, null);
+        super(plugin, new String[]{"info"}, (String) null);
     }
 
     @Override

@@ -25,8 +25,8 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     private static MoneyDataHandler               instance;
     private final  Function<ResultSet, MoneyUser> userFunction;
 
-    protected MoneyDataHandler(@NotNull MoneyHunters plugin) throws SQLException {
-        super(plugin);
+    protected MoneyDataHandler(@NotNull MoneyHunters plugin) {
+        super(plugin, plugin);
 
         this.userFunction = (resultSet) -> {
             try {
@@ -60,6 +60,17 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     }
 
     @Override
+    protected void onShutdown() {
+        super.onShutdown();
+        instance = null;
+    }
+
+    @Override
+    public void onSynchronize() {
+        // TODO
+    }
+
+    @Override
     @NotNull
     protected GsonBuilder registerAdapters(@NotNull GsonBuilder builder) {
         return super.registerAdapters(builder
@@ -70,7 +81,7 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
 
     @Override
     protected void onTableCreate() {
-        this.addColumn(this.tableUsers, "boosters", DataTypes.STRING.build(this.dataType), "[]");
+        this.addColumn(this.tableUsers, "boosters", DataTypes.STRING.build(this.getDataType()), "[]");
 
         super.onTableCreate();
     }
@@ -79,8 +90,8 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     @NotNull
     protected LinkedHashMap<String, String> getColumnsToCreate() {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
-        map.put("progress", DataTypes.STRING.build(this.dataType));
-        map.put("boosters", DataTypes.STRING.build(this.dataType));
+        map.put("progress", DataTypes.STRING.build(this.getDataType()));
+        map.put("boosters", DataTypes.STRING.build(this.getDataType()));
         return map;
     }
 

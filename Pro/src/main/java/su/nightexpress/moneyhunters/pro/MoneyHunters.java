@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import su.nexmedia.engine.NexPlugin;
 import su.nexmedia.engine.api.command.GeneralCommand;
 import su.nexmedia.engine.api.data.UserDataHolder;
+import su.nexmedia.engine.command.list.ReloadSubCommand;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
 import su.nightexpress.moneyhunters.pro.api.job.JobState;
@@ -151,12 +152,18 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
         else {
             mainCommand.addChildren(new JobsCommand(this));
         }
+        mainCommand.addChildren(new ReloadSubCommand<>(this, "moneyhunters.admin"));
         mainCommand.addChildren(new InfoCommand(this));
         mainCommand.addChildren(new DropCommand(this));
         mainCommand.addChildren(new BoosterCommand(this));
         mainCommand.addChildren(new ObjectivesCommand(this));
         mainCommand.addChildren(new SoundCommand(this));
         mainCommand.removeChildren("about");
+    }
+
+    @Override
+    public void registerPermissions() {
+        // TODO
     }
 
     @Override
