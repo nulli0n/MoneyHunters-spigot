@@ -13,6 +13,7 @@ import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResetCommand extends AbstractCommand<MoneyHunters> {
 
@@ -50,7 +51,7 @@ public class ResetCommand extends AbstractCommand<MoneyHunters> {
     }
 
     @Override
-    public void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    public void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
         if (args.length < 2) {
             this.printUsage(sender);
             return;

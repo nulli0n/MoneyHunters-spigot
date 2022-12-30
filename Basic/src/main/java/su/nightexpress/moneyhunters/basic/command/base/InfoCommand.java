@@ -13,6 +13,7 @@ import su.nightexpress.moneyhunters.basic.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.basic.data.object.UserJobData;
 
 import java.util.List;
+import java.util.Map;
 
 public class InfoCommand extends AbstractCommand<MoneyHunters> {
 
@@ -46,7 +47,7 @@ public class InfoCommand extends AbstractCommand<MoneyHunters> {
     }
 
     @Override
-    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
         if (args.length < 2) {
             this.printUsage(sender);
             return;

@@ -20,6 +20,7 @@ import su.nightexpress.moneyhunters.pro.config.Lang;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class DropCommand extends AbstractCommand<MoneyHunters> {
 
@@ -69,7 +70,7 @@ public class DropCommand extends AbstractCommand<MoneyHunters> {
     }
 
     @Override
-    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
         if (args.length != 7) {
             this.printUsage(sender);
             return;

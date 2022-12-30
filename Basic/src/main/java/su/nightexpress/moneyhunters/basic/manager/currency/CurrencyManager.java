@@ -24,7 +24,7 @@ public class CurrencyManager extends AbstractManager<MoneyHunters> {
 
     @Override
     public void onLoad() {
-        this.plugin.getConfigManager().extract(DIR_CURRENCIES);
+        this.plugin.getConfigManager().extractResources(DIR_CURRENCIES);
         this.currencyMap = new HashMap<>();
         this.setupDefaults();
     }

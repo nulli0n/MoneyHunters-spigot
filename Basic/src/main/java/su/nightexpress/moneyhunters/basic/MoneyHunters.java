@@ -5,7 +5,7 @@ import su.nexmedia.engine.NexPlugin;
 import su.nexmedia.engine.api.command.GeneralCommand;
 import su.nexmedia.engine.api.data.UserDataHolder;
 import su.nexmedia.engine.command.list.ReloadSubCommand;
-import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
+import su.nexmedia.playerblocktracker.PlayerBlockTracker;
 import su.nightexpress.moneyhunters.basic.api.booster.BoosterType;
 import su.nightexpress.moneyhunters.basic.api.job.JobState;
 import su.nightexpress.moneyhunters.basic.api.job.JobType;
@@ -53,7 +53,7 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
         this.boosterManager = new BoosterManager(this);
         this.boosterManager.setup();
 
-        PlayerBlockTracker.initialize();
+        PlayerBlockTracker.initialize(this);
 
         this.jobManager = new JobManager(this);
         this.jobManager.setup();

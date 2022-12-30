@@ -46,7 +46,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
     }
 
     @Override
-    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
 
     }
 
@@ -103,7 +103,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
         }
 
         @Override
-        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
             if (args.length != 8) {
                 this.printUsage(sender);
                 return;
@@ -186,7 +186,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
         }
 
         @Override
-        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
             if (args.length != 4) {
                 this.printUsage(sender);
                 return;

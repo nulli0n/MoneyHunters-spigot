@@ -16,6 +16,7 @@ import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardType;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.hologram.LeaderboardHologramHandler;
 
 import java.util.List;
+import java.util.Map;
 
 public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
 
@@ -47,7 +48,7 @@ public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
     }
 
     @Override
-    protected void onExecute(@NotNull CommandSender commandSender, @NotNull String s, @NotNull String[] strings) {
+    protected void onExecute(@NotNull CommandSender commandSender, @NotNull String s, @NotNull String[] strings, @NotNull Map<String, String> flags) {
 
     }
 
@@ -87,7 +88,7 @@ public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
         }
 
         @Override
-        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
             if (args.length != 5) {
                 this.printUsage(sender);
                 return;
@@ -139,7 +140,7 @@ public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
         }
 
         @Override
-        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
             Player player = (Player) sender;
             hologramHandler.removeHologram(player.getLocation());
             plugin.getMessage(Lang.COMMAND_LEADERBOARD_HOLOGRAM_REMOVE_DONE).send(sender);

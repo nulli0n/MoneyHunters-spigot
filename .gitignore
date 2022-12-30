@@ -4,3 +4,5 @@
 /Pro/target/
 /Pro/pom.xml.versionsBackup
 /pom.xml.versionsBackup
+/Basic/dependency-reduced-pom.xml
+/Pro/dependency-reduced-pom.xml

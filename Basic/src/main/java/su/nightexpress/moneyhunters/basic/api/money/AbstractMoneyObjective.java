@@ -6,9 +6,9 @@ import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.NexEngine;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.hooks.external.MythicMobsHook;
-import su.nexmedia.engine.manager.leveling.Scaler;
 import su.nexmedia.engine.utils.CollectionsUtil;
 import su.nexmedia.engine.utils.NumberUtil;
+import su.nexmedia.engine.utils.Scaler;
 import su.nightexpress.moneyhunters.basic.Placeholders;
 import su.nightexpress.moneyhunters.basic.api.currency.ICurrency;
 

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>MoneyHunters</artifactId>
         <groupId>su.nightexpress.moneyhuntersrevamp</groupId>
-        <version>7.0.6.4</version>
+        <version>7.0.6.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -24,6 +24,47 @@
             </resource>
         </resources>
         <finalName>MoneyHunters-Pro-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <!-- Java 16 Fix -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm</artifactId>
+                        <version>9.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm-commons</artifactId>
+                        <version>9.2</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>su.nexmedia.playerblocktracker:*</include>
+                                </includes>
+                            </artifactSet>
+                            <relocations>
+                                <relocation>
+                                    <pattern>su.nexmedia.playerblocktracker.</pattern>
+                                    <shadedPattern>su.nightexpress.moneyhunters.playerblocktracker.</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

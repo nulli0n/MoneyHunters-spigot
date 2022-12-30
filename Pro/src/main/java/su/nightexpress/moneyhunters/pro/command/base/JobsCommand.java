@@ -1,12 +1,14 @@
 package su.nightexpress.moneyhunters.pro.command.base;
 
-import su.nightexpress.moneyhunters.pro.MoneyHunters;
-import su.nightexpress.moneyhunters.pro.Perms;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
+import su.nightexpress.moneyhunters.pro.MoneyHunters;
+import su.nightexpress.moneyhunters.pro.Perms;
 import su.nightexpress.moneyhunters.pro.config.Lang;
+
+import java.util.Map;
 
 public class JobsCommand extends AbstractCommand<MoneyHunters> {
 
@@ -32,7 +34,7 @@ public class JobsCommand extends AbstractCommand<MoneyHunters> {
     }
 
     @Override
-    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
         Player player = (Player) sender;
         plugin.getJobManager().getJobListMenu().open(player, 1);
     }

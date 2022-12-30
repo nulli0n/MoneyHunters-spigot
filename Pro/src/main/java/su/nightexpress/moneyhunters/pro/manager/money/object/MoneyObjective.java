@@ -1,7 +1,7 @@
 package su.nightexpress.moneyhunters.pro.manager.money.object;
 
 import org.jetbrains.annotations.NotNull;
-import su.nexmedia.engine.manager.leveling.Scaler;
+import su.nexmedia.engine.utils.Scaler;
 import su.nightexpress.moneyhunters.pro.api.money.AbstractMoneyObjective;
 import su.nightexpress.moneyhunters.pro.api.money.ObjectiveLimitType;
 

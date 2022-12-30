@@ -19,6 +19,7 @@ import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class ExpCommand extends GeneralCommand<MoneyHunters> {
 
@@ -48,7 +49,7 @@ public class ExpCommand extends GeneralCommand<MoneyHunters> {
     }
 
     @Override
-    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
 
     }
 
@@ -109,7 +110,7 @@ public class ExpCommand extends GeneralCommand<MoneyHunters> {
         }
 
         @Override
-        public void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+        public void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
             if (args.length < 5) {
                 this.printUsage(sender);
                 return;

@@ -3,11 +3,11 @@ package su.nightexpress.moneyhunters.pro.hooks.external;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import su.nexmedia.engine.api.hook.AbstractHook;
 import su.nexmedia.engine.utils.CollectionsUtil;
 import su.nexmedia.engine.utils.NumberUtil;
 import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
+import su.nightexpress.moneyhunters.pro.MoneyHuntersAPI;
 import su.nightexpress.moneyhunters.pro.api.booster.IBooster;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
@@ -18,36 +18,30 @@ import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardType;
 
 import java.util.Collection;
 
-public class PlaceholderHook extends AbstractHook<MoneyHunters> {
+public class PlaceholderHook {
 
-    private MoneyExpansion moneyExpansion;
+    private static MoneyExpansion moneyExpansion;
 
-    public PlaceholderHook(@NotNull MoneyHunters plugin, @NotNull String pluginName) {
-        super(plugin, pluginName);
-    }
-
-    @Override
-    public boolean setup() {
-        this.moneyExpansion = new MoneyExpansion();
-        this.moneyExpansion.register();
-
-        return true;
-    }
-
-    @Override
-    public void shutdown() {
-        if (this.moneyExpansion != null) {
-            this.moneyExpansion.unregister();
-            this.moneyExpansion = null;
+    public static void setup() {
+        if (moneyExpansion == null) {
+            moneyExpansion = new MoneyExpansion();
+            moneyExpansion.register();
         }
     }
 
-    class MoneyExpansion extends PlaceholderExpansion {
+    public static void shutdown() {
+        if (moneyExpansion != null) {
+            moneyExpansion.unregister();
+            moneyExpansion = null;
+        }
+    }
+
+    static class MoneyExpansion extends PlaceholderExpansion {
 
         @Override
         @NotNull
         public String getAuthor() {
-            return plugin.getAuthor();
+            return MoneyHuntersAPI.PLUGIN.getDescription().getAuthors().get(0);
         }
 
         @Override
@@ -59,13 +53,14 @@ public class PlaceholderHook extends AbstractHook<MoneyHunters> {
         @Override
         @NotNull
         public String getVersion() {
-            return plugin.getDescription().getVersion();
+            return MoneyHuntersAPI.PLUGIN.getDescription().getVersion();
         }
 
         @Override
         public String onPlaceholderRequest(Player player, @NotNull String params) {
             if (player == null) return null;
 
+            MoneyHunters plugin = MoneyHuntersAPI.PLUGIN;
             MoneyUser user = plugin.getUserManager().getUserData(player);
             String[] split = params.split("_");
             if (split.length < 2) return null;

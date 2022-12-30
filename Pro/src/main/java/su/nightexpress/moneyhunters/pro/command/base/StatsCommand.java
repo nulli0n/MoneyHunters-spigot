@@ -1,17 +1,18 @@
 package su.nightexpress.moneyhunters.pro.command.base;
 
-import su.nightexpress.moneyhunters.pro.MoneyHunters;
-import su.nightexpress.moneyhunters.pro.Perms;
-import su.nightexpress.moneyhunters.pro.config.Lang;
-import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
 import su.nexmedia.engine.utils.MessageUtil;
 import su.nexmedia.engine.utils.PlayerUtil;
+import su.nightexpress.moneyhunters.pro.MoneyHunters;
+import su.nightexpress.moneyhunters.pro.Perms;
+import su.nightexpress.moneyhunters.pro.config.Lang;
+import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 
 import java.util.List;
+import java.util.Map;
 
 public class StatsCommand extends AbstractCommand<MoneyHunters> {
 
@@ -46,7 +47,7 @@ public class StatsCommand extends AbstractCommand<MoneyHunters> {
     }
 
     @Override
-    public void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    public void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
         MoneyUser user = null;
 
         if (args.length == 1) {

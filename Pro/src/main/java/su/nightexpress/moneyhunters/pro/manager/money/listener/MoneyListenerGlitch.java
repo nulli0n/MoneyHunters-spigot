@@ -10,7 +10,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.manager.AbstractListener;
-import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
+import su.nexmedia.playerblocktracker.PlayerBlockTracker;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.config.Config;
 import su.nightexpress.moneyhunters.pro.manager.money.MoneyManager;

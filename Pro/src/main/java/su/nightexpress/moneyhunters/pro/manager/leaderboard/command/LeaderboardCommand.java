@@ -16,6 +16,7 @@ import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardManager;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardType;
 
 import java.util.List;
+import java.util.Map;
 
 public class LeaderboardCommand extends GeneralCommand<MoneyHunters> {
 
@@ -50,7 +51,7 @@ public class LeaderboardCommand extends GeneralCommand<MoneyHunters> {
     }
 
     @Override
-    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
 
     }
 
@@ -90,7 +91,7 @@ public class LeaderboardCommand extends GeneralCommand<MoneyHunters> {
         }
 
         @Override
-        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+        protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
             if (args.length != 4) {
                 this.printUsage(sender);
                 return;

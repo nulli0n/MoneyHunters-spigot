@@ -8,6 +8,8 @@ import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
 import su.nightexpress.moneyhunters.pro.config.Lang;
 
+import java.util.Map;
+
 public class BoosterCommand extends GeneralCommand<MoneyHunters> {
 
     public BoosterCommand(@NotNull MoneyHunters plugin) {
@@ -35,7 +37,7 @@ public class BoosterCommand extends GeneralCommand<MoneyHunters> {
     }
 
     @Override
-    protected void onExecute(@NotNull CommandSender commandSender, @NotNull String s, @NotNull String[] strings) {
+    protected void onExecute(@NotNull CommandSender commandSender, @NotNull String s, @NotNull String[] strings, @NotNull Map<String, String> flags) {
 
     }
 }

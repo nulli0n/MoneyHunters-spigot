@@ -9,7 +9,7 @@ import su.nexmedia.engine.api.manager.AbstractManager;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.utils.MessageUtil;
 import su.nexmedia.engine.utils.PDCUtil;
-import su.nightexpress.ama.api.ArenaAPI;
+import su.nightexpress.ama.arena.ArenaPlayer;
 import su.nightexpress.moneyhunters.pro.Keys;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.MoneyHuntersAPI;
@@ -68,7 +68,7 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
         if (Config.GEN_DISABLED_WORLDS.contains(player.getWorld().getName())) return false;
         if (Config.GEN_GLITCH_IGNORE_GAME_MODES.contains(player.getGameMode().name())) return false;
         if (Config.isDisabledRegion(player)) return false;
-        if (Config.GEN_HOOKS_DISABLED_ON_MOB_ARENA && ArenaAPI.getArenaManager().isPlaying(player)) return false;
+        if (Config.GEN_HOOKS_DISABLED_ON_MOB_ARENA && ArenaPlayer.isPlaying(player)) return false;
 
         return true;
     }

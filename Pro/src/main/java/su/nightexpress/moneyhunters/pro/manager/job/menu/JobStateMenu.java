@@ -3,12 +3,13 @@ package su.nightexpress.moneyhunters.pro.manager.job.menu;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import su.nexmedia.engine.api.config.JYML;
-import su.nexmedia.engine.api.menu.*;
+import su.nexmedia.engine.api.menu.AbstractMenu;
+import su.nexmedia.engine.api.menu.MenuClick;
+import su.nexmedia.engine.api.menu.MenuItem;
+import su.nexmedia.engine.api.menu.MenuItemType;
 import su.nexmedia.engine.lang.EngineLang;
 import su.nexmedia.engine.utils.ItemUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
@@ -31,7 +32,7 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
         super(plugin, JYML.loadOrExtract(plugin, "/menu/job.state.yml"), "");
         this.cache = new WeakHashMap<>();
 
-        IMenuClick click = (player, type, e) -> {
+        MenuClick click = (player, type, e) -> {
             if (type instanceof MenuItemType type2) {
                 if (type2 == MenuItemType.RETURN) {
                     plugin.getJobManager().getJobListMenu().open(player, 1);
@@ -85,19 +86,19 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
         };
 
         for (String sId : cfg.getSection("Content")) {
-            IMenuItem menuItem = cfg.getMenuItem("Content." + sId, MenuItemType.class);
+            MenuItem menuItem = cfg.getMenuItem("Content." + sId, MenuItemType.class);
 
             if (menuItem.getType() != null) {
-                menuItem.setClick(click);
+                menuItem.setClickHandler(click);
             }
             this.addItem(menuItem);
         }
 
         for (String sId : cfg.getSection("State")) {
-            IMenuItem menuItem = cfg.getMenuItem("State." + sId, JobState.class);
+            MenuItem menuItem = cfg.getMenuItem("State." + sId, JobState.class);
 
             if (menuItem.getType() != null) {
-                menuItem.setClick(click);
+                menuItem.setClickHandler(click);
             }
             this.addItem(menuItem);
         }
@@ -109,17 +110,7 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
     }
 
     @Override
-    public void onPrepare(@NotNull Player player, @NotNull Inventory inventory) {
-
-    }
-
-    @Override
-    public void onReady(@NotNull Player player, @NotNull Inventory inventory) {
-
-    }
-
-    @Override
-    public void onItemPrepare(@NotNull Player player, @NotNull IMenuItem menuItem, @NotNull ItemStack item) {
+    public void onItemPrepare(@NotNull Player player, @NotNull MenuItem menuItem, @NotNull ItemStack item) {
         super.onItemPrepare(player, menuItem, item);
 
         UserJobData data = this.cache.get(player);
@@ -141,7 +132,7 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
         this.cache.remove(player);
     }
 
-    @Override
+    /*@Override
     @Nullable
     public MenuItemDisplay onItemDisplayPrepare(@NotNull Player player, @NotNull IMenuItem menuItem) {
         UserJobData data = this.cache.get(player);
@@ -149,7 +140,7 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
             return menuItem.getDisplay(String.valueOf(data.getJob().isStateAllowed(state) ? 1 : 0));
         }
         return super.onItemDisplayPrepare(player, menuItem);
-    }
+    }*/
 
     @Override
     public boolean cancelClick(@NotNull InventoryClickEvent e, @NotNull SlotType slotType) {

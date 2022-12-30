@@ -8,10 +8,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.nexmedia.engine.api.config.JYML;
 import su.nexmedia.engine.api.manager.AbstractLoadableItem;
-import su.nexmedia.engine.manager.leveling.Scaler;
+import su.nexmedia.engine.utils.Evaluator;
 import su.nexmedia.engine.utils.ItemUtil;
+import su.nexmedia.engine.utils.Scaler;
 import su.nexmedia.engine.utils.StringUtil;
-import su.nexmedia.engine.utils.evaluation.Evaluator;
 import su.nexmedia.engine.utils.random.Rnd;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.Perms;
@@ -102,7 +102,7 @@ public abstract class AbstractJob<E extends Event> extends AbstractLoadableItem<
                 int expPrev = this.levelExpMap.getOrDefault(level - 1, this.getLevelExpStart());
                 String toCalc = expFormula.replace("%exp%", String.valueOf(expPrev));
 
-                int expToLevel = level == this.getLevelStart() ? expPrev : (int) Evaluator.eval(toCalc, 1);
+                int expToLevel = level == this.getLevelStart() ? expPrev : (int) Evaluator.evaluate(toCalc);
                 this.levelExpMap.put(level, expToLevel);
             }
 

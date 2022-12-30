@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.nexmedia.engine.api.config.JYML;
 import su.nexmedia.engine.api.manager.AbstractManager;
-import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
 import su.nexmedia.engine.utils.FileUtil;
+import su.nexmedia.playerblocktracker.PlayerBlockTracker;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.MoneyHuntersAPI;
 import su.nightexpress.moneyhunters.basic.api.job.IJob;
@@ -41,7 +41,7 @@ public class JobManager extends AbstractManager<MoneyHunters> {
 
     @Override
     public void onLoad() {
-        this.plugin.getConfigManager().extract(DIR_JOBS);
+        this.plugin.getConfigManager().extractResources(DIR_JOBS);
         this.jobs = new HashMap<>();
 
         this.jobFactory = new JobFactory(this.plugin);

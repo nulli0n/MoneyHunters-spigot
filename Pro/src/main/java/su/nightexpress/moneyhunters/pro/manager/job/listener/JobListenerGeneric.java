@@ -17,8 +17,8 @@ import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.manager.AbstractListener;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.hooks.external.MythicMobsHook;
-import su.nexmedia.engine.manager.player.blocktracker.PlayerBlockTracker;
 import su.nexmedia.engine.utils.PDCUtil;
+import su.nexmedia.playerblocktracker.PlayerBlockTracker;
 import su.nightexpress.moneyhunters.pro.Keys;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.manager.job.JobManager;
@@ -76,7 +76,9 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onJobTypeBlockHarvest(PlayerHarvestBlockEvent e) {
         Block block = e.getHarvestedBlock();
+        System.out.println("harvest");
         if (PlayerBlockTracker.isTracked(block)) {
+            System.out.println("harvest tracker");
             return;
         }
 
@@ -111,7 +113,7 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
             }
 
             if (PlayerBlockTracker.isTracked(block)) {
-                PlayerBlockTracker.unTrack(block);
+                //PlayerBlockTracker.unTrack(block);
                 continue;
             }
 

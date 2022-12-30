@@ -2,7 +2,7 @@ package su.nightexpress.moneyhunters.pro.api.money;
 
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.manager.IPlaceholder;
-import su.nexmedia.engine.manager.leveling.Scaler;
+import su.nexmedia.engine.utils.Scaler;
 import su.nexmedia.engine.utils.random.Rnd;
 import su.nightexpress.moneyhunters.pro.api.currency.ICurrency;
 

@@ -2,7 +2,7 @@ package su.nightexpress.moneyhunters.pro.api.job;
 
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.config.JYML;
-import su.nexmedia.engine.manager.leveling.Scaler;
+import su.nexmedia.engine.utils.Scaler;
 import su.nightexpress.moneyhunters.pro.Placeholders;
 
 public class JobScaler extends Scaler {

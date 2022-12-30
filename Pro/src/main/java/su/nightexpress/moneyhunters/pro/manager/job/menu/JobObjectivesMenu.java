@@ -5,11 +5,13 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.config.JYML;
-import su.nexmedia.engine.api.menu.*;
+import su.nexmedia.engine.api.menu.AbstractMenuAuto;
+import su.nexmedia.engine.api.menu.MenuClick;
+import su.nexmedia.engine.api.menu.MenuItem;
+import su.nexmedia.engine.api.menu.MenuItemType;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.hooks.external.MythicMobsHook;
 import su.nexmedia.engine.utils.CollectionsUtil;
@@ -47,7 +49,7 @@ public class JobObjectivesMenu extends AbstractMenuAuto<MoneyHunters, IMoneyObje
         this.objUnlocked = cfg.getItem("Objectives.Format.Unlocked");
         this.objSlots = cfg.getIntArray("Objectives.Slots");
 
-        IMenuClick click = (p, type, e) -> {
+        MenuClick click = (p, type, e) -> {
             if (!(type instanceof MenuItemType type2)) return;
 
             if (type2 == MenuItemType.RETURN) {
@@ -57,10 +59,10 @@ public class JobObjectivesMenu extends AbstractMenuAuto<MoneyHunters, IMoneyObje
         };
 
         for (String sId : cfg.getSection("Content")) {
-            IMenuItem menuItem = cfg.getMenuItem("Content." + sId, MenuItemType.class);
+            MenuItem menuItem = cfg.getMenuItem("Content." + sId, MenuItemType.class);
 
             if (menuItem.getType() != null) {
-                menuItem.setClick(click);
+                menuItem.setClickHandler(click);
             }
             this.addItem(menuItem);
         }
@@ -107,7 +109,7 @@ public class JobObjectivesMenu extends AbstractMenuAuto<MoneyHunters, IMoneyObje
 
     @Override
     @NotNull
-    protected IMenuClick getObjectClick(@NotNull Player player, @NotNull IMoneyObjective objective) {
+    protected MenuClick getObjectClick(@NotNull Player player, @NotNull IMoneyObjective objective) {
         return (player1, type, e) -> {
 
         };
@@ -116,11 +118,6 @@ public class JobObjectivesMenu extends AbstractMenuAuto<MoneyHunters, IMoneyObje
     @Override
     protected int[] getObjectSlots() {
         return this.objSlots;
-    }
-
-    @Override
-    public void onReady(@NotNull Player player, @NotNull Inventory inventory) {
-
     }
 
     private boolean setMaterial(@NotNull ItemStack item, @NotNull IMoneyObjective object) {

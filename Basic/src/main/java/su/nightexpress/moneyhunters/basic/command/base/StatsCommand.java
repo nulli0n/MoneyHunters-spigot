@@ -12,6 +12,7 @@ import su.nightexpress.moneyhunters.basic.config.Lang;
 import su.nightexpress.moneyhunters.basic.data.object.MoneyUser;
 
 import java.util.List;
+import java.util.Map;
 
 public class StatsCommand extends AbstractCommand<MoneyHunters> {
 
@@ -46,7 +47,7 @@ public class StatsCommand extends AbstractCommand<MoneyHunters> {
     }
 
     @Override
-    public void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    public void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
         MoneyUser user = null;
 
         if (args.length == 1) {

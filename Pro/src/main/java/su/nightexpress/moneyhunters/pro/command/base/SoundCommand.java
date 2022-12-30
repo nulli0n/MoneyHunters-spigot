@@ -9,6 +9,8 @@ import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 
+import java.util.Map;
+
 public class SoundCommand extends AbstractCommand<MoneyHunters> {
 
     public SoundCommand(@NotNull MoneyHunters plugin) {
@@ -33,7 +35,7 @@ public class SoundCommand extends AbstractCommand<MoneyHunters> {
     }
 
     @Override
-    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+    protected void onExecute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args, @NotNull Map<String, String> flags) {
         Player player = (Player) sender;
         MoneyUser user = plugin.getUserManager().getUserData(player);
 
