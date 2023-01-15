@@ -76,12 +76,7 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onJobTypeBlockHarvest(PlayerHarvestBlockEvent e) {
         Block block = e.getHarvestedBlock();
-        System.out.println("harvest");
-        if (PlayerBlockTracker.isTracked(block)) {
-            System.out.println("harvest tracker");
-            return;
-        }
-
+        
         Player player = e.getPlayer();
         String type = block.getType().name();
 
