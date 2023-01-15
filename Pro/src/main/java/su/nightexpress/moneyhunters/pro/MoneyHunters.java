@@ -8,6 +8,7 @@ import su.nexmedia.engine.api.data.UserDataHolder;
 import su.nexmedia.engine.command.list.ReloadSubCommand;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.playerblocktracker.PlayerBlockTracker;
+import su.nightexpress.moneyhunters.pro.api.booster.BoosterType;
 import su.nightexpress.moneyhunters.pro.api.job.JobState;
 import su.nightexpress.moneyhunters.pro.api.job.JobType;
 import su.nightexpress.moneyhunters.pro.api.money.ObjectiveLimitType;
@@ -106,6 +107,7 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
     @Override
     public void loadLang() {
         this.getLangManager().loadMissing(Lang.class);
+        this.getLangManager().setupEnum(BoosterType.class);
         this.getLangManager().setupEnum(JobState.class);
         this.getLangManager().setupEnum(JobType.class);
         this.getLangManager().setupEnum(LeaderboardType.class);

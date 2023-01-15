@@ -39,7 +39,9 @@ public class MoneyListenerGlitch extends AbstractListener<MoneyHunters> {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onGlitchBlockGeneration(BlockFormEvent e) {
         if (Config.GEN_GLITCH_IGNORE_BLOCK_GENERATORS.contains(e.getNewState().getType().name())) {
-            PlayerBlockTracker.trackForce(e.getBlock());
+            plugin.getServer().getScheduler().runTask(plugin, () -> {
+                PlayerBlockTracker.trackForce(e.getBlock());
+            });
         }
     }
 
