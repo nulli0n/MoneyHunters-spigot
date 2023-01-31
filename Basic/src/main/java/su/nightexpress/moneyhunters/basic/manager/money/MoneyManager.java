@@ -144,11 +144,12 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
 
     public boolean loseMoney(@NotNull Player player, @NotNull ICurrency currency, double money,
                              @Nullable IJob<?> job, @Nullable IMoneyObjective objective) {
-        PlayerMoneyLoseEvent event = new PlayerMoneyLoseEvent(player, money, job, objective);
+        PlayerMoneyLoseEvent event = new PlayerMoneyLoseEvent(player, currency, money, job, objective);
         plugin.getPluginManager().callEvent(event);
         if (event.isCancelled()) return false;
 
         money = event.getAmount();
+        currency = event.getCurrency();
         currency.take(player, money);
 
         plugin.getMessage(Lang.MONEY_LOST)
