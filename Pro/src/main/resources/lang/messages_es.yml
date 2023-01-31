@@ -110,7 +110,7 @@ Command:
     Desc: 'Mostrar todos los trabajos.'
   Objectives:
     Usage: '<trabajo>'
-    Desc:' Ver los objetivos de trabajo.'
+    Desc: 'Ver los objetivos de trabajo.'
   Drop:
     Usage: '<moneda> (<cantidad> o <min>:<max>) <mundo> <x> <y> <z>'
     Desc: 'Crear y soltar la moneda.'
