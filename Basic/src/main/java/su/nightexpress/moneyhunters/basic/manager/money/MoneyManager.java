@@ -138,6 +138,18 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
         }
     }
 
+    public boolean pickupMoney(@NotNull Player player, @NotNull IJob<?> job, @NotNull IMoneyObjective objective,
+                               @NotNull ICurrency currency, double money) {
+        boolean isLose = money < 0D;
+
+        if (isLose) {
+            return this.loseMoney(player, currency, money, job, objective);
+        }
+        else {
+            return this.gainMoney(player, currency, money, job, objective);
+        }
+    }
+
     public boolean loseMoney(@NotNull Player player, @NotNull ICurrency currency, double money) {
         return this.loseMoney(player, currency, money, null, null);
     }

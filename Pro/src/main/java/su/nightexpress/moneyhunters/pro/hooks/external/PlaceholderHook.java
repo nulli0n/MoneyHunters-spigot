@@ -10,6 +10,7 @@ import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.MoneyHuntersAPI;
 import su.nightexpress.moneyhunters.pro.api.booster.IBooster;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
+import su.nightexpress.moneyhunters.pro.api.job.JobState;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardManager;
@@ -17,6 +18,7 @@ import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardScore;
 import su.nightexpress.moneyhunters.pro.manager.leaderboard.LeaderboardType;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class PlaceholderHook {
 
@@ -67,6 +69,17 @@ public class PlaceholderHook {
 
             String jobId = split[0];
             String key = split[1];
+
+            JobState state = CollectionsUtil.getEnum(jobId, JobState.class);
+            if (state != null) {
+                if (key.equalsIgnoreCase("name")) {
+                    return user.getJobs(state).stream().map(data -> data.getJob().getName()).collect(Collectors.joining(", "));
+                }
+                else if (key.equalsIgnoreCase("amount")) {
+                    return String.valueOf(user.getJobsAmount(state));
+                }
+                else return null;
+            }
 
             IJob<?> job = plugin.getJobManager().getJobById(jobId);
             if (job != null) {

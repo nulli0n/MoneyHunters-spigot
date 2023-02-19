@@ -25,6 +25,7 @@ import su.nightexpress.moneyhunters.basic.manager.booster.BoosterManager;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholder {
 
@@ -78,8 +79,13 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
         return this.jobData.computeIfAbsent(job.getId(), job2 -> new UserJobData(job));
     }
 
+    @NotNull
+    public Collection<UserJobData> getJobs(@NotNull JobState state) {
+        return this.getJobData().values().stream().filter(data -> data.getState() == state).collect(Collectors.toSet());
+    }
+
     public int getJobsAmount(@NotNull JobState state) {
-        return (int) this.getJobData().values().stream().filter(data -> data.getState() == state).count();
+        return this.getJobs(state).size();
     }
 
     /**

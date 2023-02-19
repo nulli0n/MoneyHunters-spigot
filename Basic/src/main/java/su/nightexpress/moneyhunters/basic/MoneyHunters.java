@@ -64,6 +64,7 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
 
     @Override
     public void disable() {
+        PlayerBlockTracker.shutdown();
         if (this.boosterManager != null) {
             this.boosterManager.shutdown();
             this.boosterManager = null;

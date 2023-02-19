@@ -11,7 +11,9 @@ import su.nexmedia.engine.api.menu.MenuClick;
 import su.nexmedia.engine.api.menu.MenuItem;
 import su.nexmedia.engine.api.menu.MenuItemType;
 import su.nexmedia.engine.lang.EngineLang;
+import su.nexmedia.engine.lang.LangManager;
 import su.nexmedia.engine.utils.ItemUtil;
+import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Placeholders;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
@@ -21,15 +23,22 @@ import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
 import su.nightexpress.moneyhunters.pro.manager.job.JobManager;
 
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
 public class JobStateMenu extends AbstractMenu<MoneyHunters> {
 
+    private static final String PLACEHOLDER_AVAILABLE = "%available%";
+
+    private final List<String> formatAvailable;
+    private final List<String> formatUnavailable;
     private final Map<Player, UserJobData> cache;
 
     public JobStateMenu(@NotNull MoneyHunters plugin) {
         super(plugin, JYML.loadOrExtract(plugin, "/menu/job.state.yml"), "");
+        this.formatAvailable = StringUtil.color(cfg.getStringList("Format.Available"));
+        this.formatUnavailable = StringUtil.color(cfg.getStringList("Format.Unavailable"));
         this.cache = new WeakHashMap<>();
 
         MenuClick click = (player, type, e) -> {
@@ -120,7 +129,8 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
 
         int jobsMax = JobManager.getJobsAmountMax(player, data.getState());
         if (menuItem.getType() instanceof JobState state) {
-            ItemUtil.replace(item, str -> str.replace(Placeholders.GENERIC_JOBS_LIMIT, jobsMax >= 0 ? String.valueOf(jobsMax) : plugin.getMessage(EngineLang.OTHER_INFINITY).getLocalized()));
+            ItemUtil.replaceLore(item, PLACEHOLDER_AVAILABLE, data.getJob().isStateAllowed(state) ? this.formatAvailable : this.formatUnavailable);
+            ItemUtil.replace(item, str -> str.replace(Placeholders.GENERIC_JOBS_LIMIT, jobsMax >= 0 ? String.valueOf(jobsMax) : LangManager.getPlain(EngineLang.OTHER_INFINITY)));
         }
         ItemUtil.replace(item, user.replacePlaceholders());
         ItemUtil.replace(item, data.replacePlaceholders());
@@ -131,16 +141,6 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
         super.onClose(player, e);
         this.cache.remove(player);
     }
-
-    /*@Override
-    @Nullable
-    public MenuItemDisplay onItemDisplayPrepare(@NotNull Player player, @NotNull IMenuItem menuItem) {
-        UserJobData data = this.cache.get(player);
-        if (data != null && menuItem.getType() instanceof JobState state) {
-            return menuItem.getDisplay(String.valueOf(data.getJob().isStateAllowed(state) ? 1 : 0));
-        }
-        return super.onItemDisplayPrepare(player, menuItem);
-    }*/
 
     @Override
     public boolean cancelClick(@NotNull InventoryClickEvent e, @NotNull SlotType slotType) {

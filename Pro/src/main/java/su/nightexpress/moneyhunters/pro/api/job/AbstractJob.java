@@ -261,12 +261,12 @@ public abstract class AbstractJob<E extends Event> extends AbstractLoadableItem<
 
         if (moneyRoll == 0D || (moneyRoll < 1D && moneyRoll > 0D && currency.isIntegerOnly())) return;
 
-        ItemStack moneyItem = currency.createMoney(moneyRoll, player, this, moneyObjective);
         if (moneyRoll <= 0D || currency.isDirectToBalance()) {
-            this.plugin.getMoneyManager().pickupMoney(player, moneyItem);
+            this.plugin.getMoneyManager().pickupMoney(player, currency, moneyRoll, this, moneyObjective);
             return;
         }
 
+        ItemStack moneyItem = currency.createMoney(moneyRoll, player, this, moneyObjective);
         this.handleEvent(event, player, moneyObjective, moneyItem);
     }
 

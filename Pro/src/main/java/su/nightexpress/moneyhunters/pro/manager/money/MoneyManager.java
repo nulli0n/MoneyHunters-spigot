@@ -125,10 +125,15 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
         if (currency == null) return false;
 
         double money = MoneyManager.getMoneyAmount(item);
-        boolean isLose = money < 0D;
-
         IJob<?> job = MoneyManager.getMoneyJob(item);
         IMoneyObjective objective = MoneyManager.getMoneyObjective(item);
+
+        return this.pickupMoney(player, currency, money, job, objective);
+    }
+
+    public boolean pickupMoney(@NotNull Player player, @NotNull ICurrency currency, double money,
+                               @Nullable IJob<?> job, @Nullable IMoneyObjective objective) {
+        boolean isLose = money < 0D;
 
         if (isLose) {
             return this.loseMoney(player, currency, money, job, objective);

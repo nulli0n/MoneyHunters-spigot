@@ -1,5 +1,6 @@
 package su.nightexpress.moneyhunters.basic.manager.job;
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -56,7 +57,11 @@ public class JobManager extends AbstractManager<MoneyHunters> {
         }
 
         PlayerBlockTracker.BLOCK_FILTERS.add(this.jobBlockTracker = (block) -> {
-            IJob<?> job = this.getJobByType(JobType.BLOCK_BREAK, block.getType().name());
+            // сраный бамбук из саженца можно превратить в палку поставив сверху еще один. и ни одного ивента на это нет
+            Material type = block.getType();
+            if (type == Material.BAMBOO_SAPLING) type = Material.BAMBOO;
+
+            IJob<?> job = this.getJobByType(JobType.BLOCK_BREAK, type.name());
             return job != null;
         });
     }
