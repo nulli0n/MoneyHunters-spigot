@@ -8,10 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.nexmedia.engine.api.config.JYML;
 import su.nexmedia.engine.api.manager.AbstractLoadableItem;
-import su.nexmedia.engine.utils.Evaluator;
-import su.nexmedia.engine.utils.ItemUtil;
-import su.nexmedia.engine.utils.Scaler;
-import su.nexmedia.engine.utils.StringUtil;
+import su.nexmedia.engine.utils.*;
 import su.nexmedia.engine.utils.random.Rnd;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.Perms;
@@ -73,14 +70,14 @@ public abstract class AbstractJob<E extends Event> extends AbstractLoadableItem<
         // ----------------- END UPDATE CONFIGURATION ----------------- //
 
         this.type = jobType;
-        this.name = StringUtil.color(cfg.getString("Name", this.getId()));
+        this.name = Colorizer.apply(cfg.getString("Name", this.getId()));
         this.currency = plugin.getCurrencyManager().getCurrency(cfg.getString("Currency", CurrencyId.VAULT));
         if (this.currency == null) {
             throw new IllegalArgumentException("Invalid currency provided!");
         }
 
         this.isPermissionRequired = cfg.getBoolean("Permission_Required");
-        this.description = StringUtil.color(cfg.getStringList("Description"));
+        this.description = Colorizer.apply(cfg.getStringList("Description"));
         this.icon = cfg.getItem("Icon");
         ItemUtil.replace(this.icon, this.replacePlaceholders());
 

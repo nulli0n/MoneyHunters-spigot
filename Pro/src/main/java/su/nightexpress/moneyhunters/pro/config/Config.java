@@ -1,8 +1,10 @@
 package su.nightexpress.moneyhunters.pro.config;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import su.nexmedia.engine.api.config.JOption;
 import su.nexmedia.engine.api.config.JYML;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.hooks.external.VaultHook;
@@ -24,10 +26,17 @@ public class Config {
 
     public static boolean                             JOBS_COMMAND_AS_DEFAULT;
     public static Map<JobState, Map<String, Integer>> JOBS_STATE_MAX_AMOUNT_BY_RANK;
+    public static final JOption<Integer> JOBS_STATE_CHANGE_COOLDOWN = JOption.create("Jobs.State.Change_Cooldown", 3600,
+        "Sets the cooldown (in seconds) to change state of the same job.");
 
     public static Set<String> GEN_GLITCH_IGNORE_SPAWN_REASONS;
     public static Set<String> GEN_GLITCH_IGNORE_GAME_MODES;
     public static Set<String> GEN_GLITCH_IGNORE_BLOCK_GENERATORS;
+
+    public static final JOption<Set<String>> GLITCH_IGNORE_BLOCK_FERTILIZE = JOption.create("Generic.Glitches.Ignore_Block_Fertilize",
+        Set.of(Material.WHEAT.name(), Material.CARROTS.name(), Material.POTATOES.name(), Material.BEETROOTS.name()),
+        "A list of blocks that will drop no money if been fertilized by bone meal.");
+
     public static Set<String> GEN_DISABLED_WORLDS;
     public static boolean     GEN_HOOKS_DISABLED_ON_MOB_ARENA;
     public static Set<String> GEN_HOOKS_DISABLED_WG_REGIONS;

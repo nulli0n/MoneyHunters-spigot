@@ -1,6 +1,7 @@
 package su.nightexpress.moneyhunters.pro.config;
 
 import su.nexmedia.engine.api.lang.LangKey;
+import su.nightexpress.moneyhunters.pro.Placeholders;
 
 public class Lang {
 
@@ -139,6 +140,7 @@ public class Lang {
     public static final LangKey CURRENCY_ERROR_INVALID = new LangKey("Currency.Error.Invalid", "&cInvalid currency!");
 
     public static final LangKey JOBS_STATE_CHANGE_ERROR_NOTHING = new LangKey("Jobs.State.Change.Error.Nothing", "{message: ~sound: ENTITY_VILLAGER_NO;}&cState of this job can not be changed!");
+    public static final LangKey JOBS_STATE_CHANGE_ERROR_COOLDOWN = new LangKey("Jobs.State.Change.Error.Cooldown", "{message: ~sound: ENTITY_VILLAGER_NO;}&cYou can change job state again in " + Placeholders.GENERIC_TIME + "!");
     public static final LangKey JOBS_STATE_CHANGE_ERROR_LIMIT = new LangKey("Jobs.State.Change.Error.Limit", """
         {message: ~type: TITLES; ~fadeIn: 10; ~stay: 60; ~fadeOut: 20; ~sound: BLOCK_ANVIL_PLACE;}
         &c&lState Not Changed!

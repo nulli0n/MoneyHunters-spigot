@@ -12,12 +12,13 @@ import su.nexmedia.engine.api.menu.MenuItem;
 import su.nexmedia.engine.api.menu.MenuItemType;
 import su.nexmedia.engine.lang.EngineLang;
 import su.nexmedia.engine.lang.LangManager;
+import su.nexmedia.engine.utils.Colorizer;
 import su.nexmedia.engine.utils.ItemUtil;
-import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Placeholders;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
 import su.nightexpress.moneyhunters.pro.api.job.JobState;
+import su.nightexpress.moneyhunters.pro.config.Config;
 import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
 import su.nightexpress.moneyhunters.pro.data.object.UserJobData;
@@ -37,8 +38,8 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
 
     public JobStateMenu(@NotNull MoneyHunters plugin) {
         super(plugin, JYML.loadOrExtract(plugin, "/menu/job.state.yml"), "");
-        this.formatAvailable = StringUtil.color(cfg.getStringList("Format.Available"));
-        this.formatUnavailable = StringUtil.color(cfg.getStringList("Format.Unavailable"));
+        this.formatAvailable = Colorizer.apply(cfg.getStringList("Format.Available"));
+        this.formatUnavailable = Colorizer.apply(cfg.getStringList("Format.Unavailable"));
         this.cache = new WeakHashMap<>();
 
         MenuClick click = (player, type, e) -> {
@@ -85,6 +86,11 @@ public class JobStateMenu extends AbstractMenu<MoneyHunters> {
 
                 data.setState(state);
                 data.update();
+
+                int cooldown = Config.JOBS_STATE_CHANGE_COOLDOWN.get();
+                if (cooldown > 0) {
+                    plugin.getUserManager().getUserData(player).setJobStateCooldown(job, System.currentTimeMillis() + cooldown * 1000L);
+                }
 
                 plugin.getMessage(Lang.JOBS_STATE_CHANGE_SUCCESS)
                     .replace(Placeholders.JOB_NAME, job.getName())

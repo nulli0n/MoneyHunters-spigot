@@ -7,6 +7,7 @@ public class Placeholders extends su.nexmedia.engine.utils.Placeholders {
     public static final String GENERIC_MONEY      = "%money%";
     public static final String GENERIC_EXP        = "%exp%";
     public static final String GENERIC_JOBS_LIMIT = "%jobs_limit%";
+    public static final String GENERIC_TIME = "%time%";
 
     public static final String CURRENCY_NAME = "%currency_name%";
 

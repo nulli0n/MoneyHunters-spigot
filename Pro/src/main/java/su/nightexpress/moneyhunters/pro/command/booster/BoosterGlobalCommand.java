@@ -86,7 +86,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
                 List<String> list = new ArrayList<>();
                 list.add("<jobId>");
                 list.add("<job1,job2>");
-                list.add(Placeholders.MASK_ANY);
+                list.add(Placeholders.WILDCARD);
                 list.addAll(plugin.getJobManager().getJobIds());
                 return list;
             }
@@ -113,7 +113,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
             String jobsRaw = args[4];
 
             Set<String> jobIds;
-            if (jobsRaw.equalsIgnoreCase(Placeholders.MASK_ANY)) {
+            if (jobsRaw.equalsIgnoreCase(Placeholders.WILDCARD)) {
                 jobIds = new HashSet<>(plugin.getJobManager().getJobIds());
             }
             else {
@@ -178,7 +178,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
         public List<String> getTab(@NotNull Player player, int arg, @NotNull String[] args) {
             if (arg == 3) {
                 List<String> list = new ArrayList<>();
-                list.add(Placeholders.MASK_ANY);
+                list.add(Placeholders.WILDCARD);
                 list.addAll(plugin.getBoosterManager().getBoostersGlobal().stream().map(IBooster::getId).toList());
                 return list;
             }
@@ -194,7 +194,7 @@ public class BoosterGlobalCommand extends GeneralCommand<MoneyHunters> {
 
             String id = args[3];
 
-            boolean removed = plugin.getBoosterManager().getBoostersGlobal().removeIf(boosterHas -> boosterHas.getId().equalsIgnoreCase(id) || id.equalsIgnoreCase(Placeholders.MASK_ANY));
+            boolean removed = plugin.getBoosterManager().getBoostersGlobal().removeIf(boosterHas -> boosterHas.getId().equalsIgnoreCase(id) || id.equalsIgnoreCase(Placeholders.WILDCARD));
             LangMessage msgNotify = removed ? plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_REMOVE_DONE) : plugin.getMessage(Lang.COMMAND_BOOSTER_GLOBAL_REMOVE_ERROR_NOTHING);
             msgNotify.replace(Placeholders.BOOSTER_ID, id).send(sender);
 

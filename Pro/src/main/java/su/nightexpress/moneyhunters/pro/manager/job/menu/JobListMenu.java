@@ -12,10 +12,12 @@ import su.nexmedia.engine.api.menu.MenuClick;
 import su.nexmedia.engine.api.menu.MenuItem;
 import su.nexmedia.engine.api.menu.MenuItemType;
 import su.nexmedia.engine.lang.EngineLang;
+import su.nexmedia.engine.utils.Colorizer;
 import su.nexmedia.engine.utils.ItemUtil;
-import su.nexmedia.engine.utils.StringUtil;
+import su.nexmedia.engine.utils.TimeUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
+import su.nightexpress.moneyhunters.pro.Placeholders;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
 import su.nightexpress.moneyhunters.pro.config.Lang;
 import su.nightexpress.moneyhunters.pro.data.object.MoneyUser;
@@ -36,10 +38,10 @@ public class JobListMenu extends AbstractMenuAuto<MoneyHunters, UserJobData> {
         super(plugin, JYML.loadOrExtract(plugin, "/menu/job.list.yml"), "");
 
         this.jobSlots = cfg.getIntArray("Job_Slots");
-        this.formatAvailableName = StringUtil.color(cfg.getString("Format.Available.Name", ""));
-        this.formatAvailableLore = StringUtil.color(cfg.getStringList("Format.Available.Lore"));
-        this.formatLockedPermName = StringUtil.color(cfg.getString("Format.Locked_Permission.Name", ""));
-        this.formatLockedPermLore = StringUtil.color(cfg.getStringList("Format.Locked_Permission.Lore"));
+        this.formatAvailableName = Colorizer.apply(cfg.getString("Format.Available.Name", ""));
+        this.formatAvailableLore = Colorizer.apply(cfg.getStringList("Format.Available.Lore"));
+        this.formatLockedPermName = Colorizer.apply(cfg.getString("Format.Locked_Permission.Name", ""));
+        this.formatLockedPermLore = Colorizer.apply(cfg.getStringList("Format.Locked_Permission.Lore"));
 
         MenuClick click = (player, type, e) -> {
             if (type instanceof MenuItemType type2) {
@@ -108,6 +110,16 @@ public class JobListMenu extends AbstractMenuAuto<MoneyHunters, UserJobData> {
                     plugin.getMessage(Lang.JOBS_STATE_CHANGE_ERROR_NOTHING).send(player1);
                     return;
                 }
+
+                MoneyUser user = plugin.getUserManager().getUserData(player1);
+                long cooldown = user.getJobStateCooldown(job);
+                if (cooldown != 0) {
+                    plugin.getMessage(Lang.JOBS_STATE_CHANGE_ERROR_COOLDOWN)
+                        .replace(Placeholders.GENERIC_TIME, TimeUtil.formatTimeLeft(cooldown))
+                        .send(player1);
+                    return;
+                }
+
                 plugin.getJobManager().getJobStateMenu().open(player1, data);
                 return;
             }

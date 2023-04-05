@@ -33,7 +33,7 @@ public class JobListenerGeneric extends AbstractListener<MoneyHunters> {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onJobFireworkDamage(EntityDamageByEntityEvent e) {
         if (!(e.getDamager() instanceof Firework firework)) return;
-        if (PDCUtil.getBooleanData(firework, Keys.JOB_FIREWORK)) {
+        if (PDCUtil.getBoolean(firework, Keys.JOB_FIREWORK).orElse(false)) {
             e.setCancelled(true);
         }
     }

@@ -4,9 +4,9 @@ import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.config.JYML;
+import su.nexmedia.engine.utils.Colorizer;
 import su.nexmedia.engine.utils.LocationUtil;
 import su.nexmedia.engine.utils.PDCUtil;
-import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.pro.Keys;
 import su.nightexpress.moneyhunters.pro.MoneyHuntersAPI;
 
@@ -34,8 +34,8 @@ public class LeaderboardConfig {
         signsFormat = new HashMap<>();
         hologramFormat = new HashMap<>();
         for (LeaderboardType type : LeaderboardType.values()) {
-            signsFormat.put(type, StringUtil.color(cfg.getStringList("Signs." + type.name() + ".Format")).toArray(new String[4]));
-            hologramFormat.put(type, StringUtil.color(cfg.getStringList("Holograms." + type.name() + ".Format")));
+            signsFormat.put(type, Colorizer.apply(cfg.getStringList("Signs." + type.name() + ".Format")).toArray(new String[4]));
+            hologramFormat.put(type, Colorizer.apply(cfg.getStringList("Holograms." + type.name() + ".Format")));
         }
     }
 
@@ -49,7 +49,7 @@ public class LeaderboardConfig {
         return LocationUtil.deserialize(cfg.getStringList("Signs." + type.name() + ".Locations")).stream()
             .map(Location::getBlock)
             .map(block -> block.getState() instanceof Sign sign ? sign : null)
-            .filter(sign -> sign != null && PDCUtil.getStringData(sign, Keys.LEADERBOARD_TYPE) != null)
+            .filter(sign -> sign != null && PDCUtil.getString(sign, Keys.LEADERBOARD_TYPE).isPresent())
             .collect(Collectors.toCollection(HashSet::new));
     }
 

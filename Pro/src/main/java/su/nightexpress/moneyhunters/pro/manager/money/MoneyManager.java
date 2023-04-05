@@ -74,7 +74,7 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
     }
 
     public static boolean isMoneyItem(@NotNull ItemStack item) {
-        return PDCUtil.getDoubleData(item, Keys.MONEY_AMOUNT) != 0D;
+        return PDCUtil.getDouble(item, Keys.MONEY_AMOUNT).isPresent();
     }
 
     public static boolean isMoneyOwner(@NotNull ItemStack item, @NotNull Player player) {
@@ -84,18 +84,18 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
 
     @Nullable
     public static String getMoneyOwner(@NotNull ItemStack item) {
-        return PDCUtil.getStringData(item, Keys.MONEY_OWNER);
+        return PDCUtil.getString(item, Keys.MONEY_OWNER).orElse(null);
     }
 
     @Nullable
     public static IJob<?> getMoneyJob(@NotNull ItemStack item) {
-        String jobId = PDCUtil.getStringData(item, Keys.MONEY_JOB);
+        String jobId = PDCUtil.getString(item, Keys.MONEY_JOB).orElse(null);
         return jobId == null ? null : MoneyHuntersAPI.getJobById(jobId);
     }
 
     @Nullable
     public static IMoneyObjective getMoneyObjective(@NotNull ItemStack item) {
-        String type = PDCUtil.getStringData(item, Keys.MONEY_OBJECTIVE);
+        String type = PDCUtil.getString(item, Keys.MONEY_OBJECTIVE).orElse(null);
         if (type == null) return null;
 
         IJob<?> job = getMoneyJob(item);
@@ -104,20 +104,20 @@ public class MoneyManager extends AbstractManager<MoneyHunters> {
 
     @Nullable
     public static ICurrency getMoneyCurrency(@NotNull ItemStack item) {
-        String currencyId = PDCUtil.getStringData(item, Keys.MONEY_CURRENCY);
+        String currencyId = PDCUtil.getString(item, Keys.MONEY_CURRENCY).orElse(null);
         return currencyId == null ? null : MoneyHuntersAPI.getCurrency(currencyId);
     }
 
     public static double getMoneyAmount(@NotNull ItemStack item) {
-        return PDCUtil.getDoubleData(item, Keys.MONEY_AMOUNT);
+        return PDCUtil.getDouble(item, Keys.MONEY_AMOUNT).orElse(0D);
     }
 
     public static void devastateEntity(@NotNull Entity entity) {
-        PDCUtil.setData(entity, Keys.MONEY_NO_DROP, true);
+        PDCUtil.set(entity, Keys.MONEY_NO_DROP, true);
     }
 
     public static boolean isDevastated(@NotNull Entity entity) {
-        return PDCUtil.getBooleanData(entity, Keys.MONEY_NO_DROP);
+        return PDCUtil.getBoolean(entity, Keys.MONEY_NO_DROP).isPresent();
     }
 
     public boolean pickupMoney(@NotNull Player player, @NotNull ItemStack item) {

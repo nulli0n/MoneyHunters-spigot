@@ -7,7 +7,7 @@ import su.nexmedia.engine.api.command.AbstractCommand;
 import su.nexmedia.engine.api.command.GeneralCommand;
 import su.nexmedia.engine.api.lang.LangMessage;
 import su.nexmedia.engine.command.list.HelpSubCommand;
-import su.nexmedia.engine.utils.PlayerUtil;
+import su.nexmedia.engine.utils.CollectionsUtil;
 import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.Perms;
@@ -89,7 +89,7 @@ public class LevelCommand extends GeneralCommand<MoneyHunters> {
         @NotNull
         public List<String> getTab(@NotNull Player player, int arg, @NotNull String[] args) {
             if (arg == 2) {
-                return PlayerUtil.getPlayerNames();
+                return CollectionsUtil.playerNames(player);
             }
             if (arg == 3) {
                 return plugin.getJobManager().getJobIds();

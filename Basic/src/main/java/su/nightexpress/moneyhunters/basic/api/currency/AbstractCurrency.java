@@ -6,7 +6,6 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import su.nexmedia.engine.api.config.JYML;
@@ -61,8 +60,8 @@ public abstract class AbstractCurrency implements ICurrency {
         // ------------- END UPDATE ------------- //
 
         this.id = cfg.getFile().getName().replace(".yml", "");
-        this.name = StringUtil.color(cfg.getString("Name", id));
-        this.formatDisplay = StringUtil.color(cfg.getString("Format_Display", Placeholders.CURRENCY_NAME + Placeholders.GENERIC_AMOUNT));
+        this.name = Colorizer.apply(cfg.getString("Name", id));
+        this.formatDisplay = Colorizer.apply(cfg.getString("Format_Display", Placeholders.CURRENCY_NAME + Placeholders.GENERIC_AMOUNT));
         this.formatAmount = new DecimalFormat(cfg.getString("Format_Amount", "###,###.##"), new DecimalFormatSymbols(Locale.ENGLISH));
         this.isDirectToBalance = cfg.getBoolean("Direct_To_Balance");
         this.isIntegerOnly = cfg.getBoolean("Integer_Only");
@@ -111,8 +110,8 @@ public abstract class AbstractCurrency implements ICurrency {
 
         @NotNull TreeMap<Integer, ItemStack> itemStyle) {
         this.id = id.toLowerCase();
-        this.name = StringUtil.color(name);
-        this.formatDisplay = StringUtil.color(formatDisplay);
+        this.name = Colorizer.apply(name);
+        this.formatDisplay = Colorizer.apply(formatDisplay);
         this.formatAmount = formatAmount;
         this.isDirectToBalance = isDirectToBalance;
         this.isIntegerOnly = isIntegerOnly;
@@ -256,25 +255,24 @@ public abstract class AbstractCurrency implements ICurrency {
         ItemStack item = this.getMoneyItem(money);
 
         // Set money and job (if present) tags.
-        PDCUtil.setData(item, Keys.MONEY_AMOUNT, money);
-        PDCUtil.setData(item, Keys.MONEY_CURRENCY, this.getId());
-        PDCUtil.setData(item, Keys.MONEY_ID, UUID.randomUUID().toString());
-        if (job != null) PDCUtil.setData(item, Keys.MONEY_JOB, job.getId());
-        if (objective != null) PDCUtil.setData(item, Keys.MONEY_OBJECTIVE, objective.getType());
+        double finalMoney = money;
+        ItemUtil.mapMeta(item, meta -> {
+            PDCUtil.set(meta, Keys.MONEY_AMOUNT, finalMoney);
+            PDCUtil.set(meta, Keys.MONEY_CURRENCY, this.getId());
+            PDCUtil.set(meta, Keys.MONEY_ID, UUID.randomUUID().toString());
+            if (job != null) PDCUtil.set(meta, Keys.MONEY_JOB, job.getId());
+            if (objective != null) PDCUtil.set(meta, Keys.MONEY_OBJECTIVE, objective.getType());
 
-        // Add owner protection for money item.
-        if (Config.MONEY_OWNER_PROTECTION_ENABLED && owner != null) {
-            PDCUtil.setData(item, Keys.MONEY_OWNER, owner.getName());
-        }
+            // Add owner protection for money item.
+            if (Config.MONEY_OWNER_PROTECTION_ENABLED && owner != null) {
+                PDCUtil.set(meta, Keys.MONEY_OWNER, owner.getName());
+            }
 
-        // And now replace visuals.
-        ItemMeta meta = item.getItemMeta();
-        if (meta != null && meta.hasDisplayName()) {
-            String name = StringUtil.color(meta.getDisplayName().replace(Placeholders.GENERIC_MONEY, this.format(money)));
-            meta.setDisplayName(name);
-        }
-        item.setItemMeta(meta);
-
+            if (meta.hasDisplayName()) {
+                String name = Colorizer.apply(meta.getDisplayName().replace(Placeholders.GENERIC_MONEY, this.format(finalMoney)));
+                meta.setDisplayName(name);
+            }
+        });
         return item;
     }
 }

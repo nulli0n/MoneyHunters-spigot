@@ -96,7 +96,7 @@ public class LeaderboardHologramCommand extends GeneralCommand<MoneyHunters> {
 
             LeaderboardType boardType = CollectionsUtil.getEnum(args[3], LeaderboardType.class);
             if (boardType == null) {
-                this.errorType(sender, LeaderboardType.class);
+                this.printUsage(sender);
                 return;
             }
 

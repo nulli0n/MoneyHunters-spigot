@@ -217,7 +217,7 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
                 plugin.getMessage(Lang.JOBS_LEVELING_LEVEL_UP).replace(jobData.replacePlaceholders()).send(player);
                 if (Config.LEVELING_LEVEUP_FIREWORK) {
                     Firework firework = EntityUtil.spawnRandomFirework(player.getLocation());
-                    PDCUtil.setData(firework, Keys.JOB_FIREWORK, true);
+                    PDCUtil.set(firework, Keys.JOB_FIREWORK, true);
                 }
             }
         }

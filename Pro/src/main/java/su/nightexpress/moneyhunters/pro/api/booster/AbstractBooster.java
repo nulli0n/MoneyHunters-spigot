@@ -33,7 +33,7 @@ public abstract class AbstractBooster implements IBooster {
     @NotNull
     public UnaryOperator<String> replacePlaceholders() {
         Collection<String> jobs = this.getJobs();
-        if (jobs.contains(Placeholders.MASK_ANY)) {
+        if (jobs.contains(Placeholders.WILDCARD)) {
             jobs.clear();
             jobs.addAll(MoneyHuntersAPI.getJobManager().getJobIds());
         }

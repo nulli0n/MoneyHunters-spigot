@@ -4,7 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
-import su.nexmedia.engine.utils.PlayerUtil;
+import su.nexmedia.engine.utils.CollectionsUtil;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.Perms;
 import su.nightexpress.moneyhunters.basic.api.job.IJob;
@@ -40,7 +40,7 @@ public class ResetCommand extends AbstractCommand<MoneyHunters> {
             return plugin.getJobManager().getJobIds();
         }
         if (arg == 2 && player.hasPermission(Perms.COMMAND_RESET_OTHERS)) {
-            return PlayerUtil.getPlayerNames();
+            return CollectionsUtil.playerNames(player);
         }
         return super.getTab(player, arg, args);
     }

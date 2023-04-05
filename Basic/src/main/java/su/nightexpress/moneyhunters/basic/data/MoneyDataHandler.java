@@ -4,7 +4,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.data.AbstractUserDataHandler;
-import su.nexmedia.engine.api.data.DataTypes;
+import su.nexmedia.engine.api.data.sql.SQLColumn;
+import su.nexmedia.engine.api.data.sql.SQLValue;
+import su.nexmedia.engine.api.data.sql.column.ColumnType;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.api.booster.BoosterType;
 import su.nightexpress.moneyhunters.basic.api.booster.IBooster;
@@ -22,6 +24,9 @@ import java.util.function.Function;
 
 public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, MoneyUser> {
 
+    private static final SQLColumn COLUMN_PROGRESS = SQLColumn.of("progress", ColumnType.STRING);
+    private static final SQLColumn COLUMN_BOOSTERS = SQLColumn.of("boosters", ColumnType.STRING);
+
     private static MoneyDataHandler               instance;
     private final  Function<ResultSet, MoneyUser> userFunction;
 
@@ -30,18 +35,18 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
 
         this.userFunction = (resultSet) -> {
             try {
-                UUID uuid = UUID.fromString(resultSet.getString(COL_USER_UUID));
-                String name = resultSet.getString(COL_USER_NAME);
-                long dateCreated = resultSet.getLong(COL_USER_DATE_CREATED);
-                long lastOnline = resultSet.getLong(COL_USER_LAST_ONLINE);
+                UUID uuid = UUID.fromString(resultSet.getString(COLUMN_USER_ID.getName()));
+                String name = resultSet.getString(COLUMN_USER_NAME.getName());
+                long dateCreated = resultSet.getLong(COLUMN_USER_DATE_CREATED.getName());
+                long lastOnline = resultSet.getLong(COLUMN_USER_LAST_ONLINE.getName());
 
                 Map<String, UserJobData> jobData = new HashMap<>();
                 if (Config.LEVELING_ENABLED) {
-                    jobData = this.gson.fromJson(resultSet.getString("progress"), new TypeToken<Map<String, UserJobData>>() {
+                    jobData = this.gson.fromJson(resultSet.getString(COLUMN_PROGRESS.getName()), new TypeToken<Map<String, UserJobData>>() {
                     }.getType());
                 }
 
-                Set<IBooster> boosters = this.gson.fromJson(resultSet.getString("boosters"), new TypeToken<Set<PersonalBooster>>() {
+                Set<IBooster> boosters = this.gson.fromJson(resultSet.getString(COLUMN_BOOSTERS.getName()), new TypeToken<Set<PersonalBooster>>() {
                 }.getType());
 
                 return new MoneyUser(plugin, uuid, name, dateCreated, lastOnline, jobData, boosters);
@@ -80,29 +85,19 @@ public class MoneyDataHandler extends AbstractUserDataHandler<MoneyHunters, Mone
     }
 
     @Override
-    protected void onTableCreate() {
-        this.addColumn(this.tableUsers, "boosters", DataTypes.STRING.build(this.getDataType()), "[]");
-
-        super.onTableCreate();
+    @NotNull
+    protected List<SQLColumn> getExtraColumns() {
+        return Arrays.asList(COLUMN_PROGRESS, COLUMN_BOOSTERS);
     }
 
     @Override
     @NotNull
-    protected LinkedHashMap<String, String> getColumnsToCreate() {
-        LinkedHashMap<String, String> map = new LinkedHashMap<>();
-        map.put("progress", DataTypes.STRING.build(this.getDataType()));
-        map.put("boosters", DataTypes.STRING.build(this.getDataType()));
-        return map;
-    }
-
-    @Override
-    @NotNull
-    protected LinkedHashMap<String, String> getColumnsToSave(@NotNull MoneyUser user) {
-        LinkedHashMap<String, String> map = new LinkedHashMap<>();
-        map.put("progress", this.gson.toJson(user.getJobData()));
-        map.put("boosters", this.gson.toJson(user.getBoosters().stream()
-            .filter(booster -> booster.getType() == BoosterType.PERSONAL && !booster.isExpired()).toList()));
-        return map;
+    protected List<SQLValue> getSaveColumns(@NotNull MoneyUser user) {
+        return Arrays.asList(
+            COLUMN_PROGRESS.toValue(this.gson.toJson(user.getJobData())),
+            COLUMN_BOOSTERS.toValue(this.gson.toJson(user.getBoosters().stream()
+                .filter(booster -> booster.getType() == BoosterType.PERSONAL && !booster.isExpired()).toList()))
+        );
     }
 
     @Override

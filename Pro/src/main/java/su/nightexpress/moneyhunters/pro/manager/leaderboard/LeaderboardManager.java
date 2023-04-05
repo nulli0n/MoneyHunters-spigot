@@ -226,22 +226,23 @@ public class LeaderboardManager extends AbstractManager<MoneyHunters> {
     }
 
     public void addSign(@NotNull Sign sign, @NotNull LeaderboardType type, @NotNull IJob<?> job, int position) {
-        PDCUtil.setData(sign, Keys.LEADERBOARD_JOB_ID, job.getId());
-        PDCUtil.setData(sign, Keys.LEADERBOARD_POSITION, position);
-        PDCUtil.setData(sign, Keys.LEADERBOARD_TYPE, type.name());
+        PDCUtil.set(sign, Keys.LEADERBOARD_JOB_ID, job.getId());
+        PDCUtil.set(sign, Keys.LEADERBOARD_POSITION, position);
+        PDCUtil.set(sign, Keys.LEADERBOARD_TYPE, type.name());
+        sign.update();
         this.getSigns(type).add(sign);
     }
 
     @SuppressWarnings("deprecation")
     public void updateSign(@NotNull Sign sign) {
-        int pos = PDCUtil.getIntData(sign, Keys.LEADERBOARD_POSITION);
-        String jobId = PDCUtil.getStringData(sign, Keys.LEADERBOARD_JOB_ID);
+        int pos = PDCUtil.getInt(sign, Keys.LEADERBOARD_POSITION).orElse(0);
+        String jobId = PDCUtil.getString(sign, Keys.LEADERBOARD_JOB_ID).orElse(null);
         if (jobId == null) return;
 
         IJob<?> job = plugin.getJobManager().getJobById(jobId);
         if (job == null) return;
 
-        String type = PDCUtil.getStringData(sign, Keys.LEADERBOARD_TYPE);
+        String type = PDCUtil.getString(sign, Keys.LEADERBOARD_TYPE).orElse(null);
         if (type == null) return;
 
         LeaderboardType boardType = CollectionsUtil.getEnum(type, LeaderboardType.class);

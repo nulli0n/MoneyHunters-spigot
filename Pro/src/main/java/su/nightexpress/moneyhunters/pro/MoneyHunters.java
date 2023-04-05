@@ -71,12 +71,18 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
             this.leaderboardManager = new LeaderboardManager(this);
             this.leaderboardManager.setup();
         }
+        if (Hooks.hasPlaceholderAPI()) {
+            PlaceholderHook.setup();
+        }
 
         this.info("Thank you for using the Pro version <3 !");
     }
 
     @Override
     public void disable() {
+        if (Hooks.hasPlaceholderAPI()) {
+            PlaceholderHook.shutdown();
+        }
         PlayerBlockTracker.shutdown();
         if (this.boosterManager != null) {
             this.boosterManager.shutdown();
@@ -103,6 +109,7 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
     @Override
     public void loadConfig() {
         Config.load(this);
+        this.getConfig().initializeOptions(Config.class);
     }
 
     @Override
@@ -136,9 +143,7 @@ public class MoneyHunters extends NexPlugin<MoneyHunters> implements UserDataHol
 
     @Override
     public void registerHooks() {
-        if (Hooks.hasPlaceholderAPI()) {
-            PlaceholderHook.setup();
-        }
+
     }
 
     @Override

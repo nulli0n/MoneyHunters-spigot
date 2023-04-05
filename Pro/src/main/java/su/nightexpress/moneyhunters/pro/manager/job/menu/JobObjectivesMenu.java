@@ -15,8 +15,8 @@ import su.nexmedia.engine.api.menu.MenuItemType;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nexmedia.engine.hooks.external.MythicMobsHook;
 import su.nexmedia.engine.utils.CollectionsUtil;
+import su.nexmedia.engine.utils.Colorizer;
 import su.nexmedia.engine.utils.ItemUtil;
-import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.pro.MoneyHunters;
 import su.nightexpress.moneyhunters.pro.api.currency.ICurrency;
 import su.nightexpress.moneyhunters.pro.api.job.IJob;
@@ -44,7 +44,7 @@ public class JobObjectivesMenu extends AbstractMenuAuto<MoneyHunters, IMoneyObje
         super(plugin, JYML.loadOrExtract(plugin, "/menu/job.objectives.yml"), "");
 
         this.job = job;
-        this.objLimits = StringUtil.color(cfg.getStringList("Objectives.Format.Limits"));
+        this.objLimits = Colorizer.apply(cfg.getStringList("Objectives.Format.Limits"));
         this.objLocked = cfg.getItem("Objectives.Format.Locked");
         this.objUnlocked = cfg.getItem("Objectives.Format.Unlocked");
         this.objSlots = cfg.getIntArray("Objectives.Slots");

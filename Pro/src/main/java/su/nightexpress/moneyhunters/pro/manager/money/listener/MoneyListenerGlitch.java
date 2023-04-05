@@ -2,6 +2,7 @@ package su.nightexpress.moneyhunters.pro.manager.money.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.block.BlockFertilizeEvent;
 import org.bukkit.event.block.BlockFormEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
@@ -33,6 +34,13 @@ public class MoneyListenerGlitch extends AbstractListener<MoneyHunters> {
         if (MoneyManager.isDevastated(e.getEntity())) {
             e.getTransformedEntities().forEach(MoneyManager::devastateEntity);
             MoneyManager.devastateEntity(e.getTransformedEntity());
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onGlitchBlockFertilize(BlockFertilizeEvent e) {
+        if (Config.GLITCH_IGNORE_BLOCK_FERTILIZE.get().contains(e.getBlock().getType().name())) {
+            PlayerBlockTracker.trackForce(e.getBlock());
         }
     }
 

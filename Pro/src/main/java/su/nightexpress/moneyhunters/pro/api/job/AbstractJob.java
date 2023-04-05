@@ -73,14 +73,14 @@ public abstract class AbstractJob<E extends Event> extends AbstractLoadableItem<
         // ----------------- END UPDATE CONFIGURATION ----------------- //
 
         this.type = jobType;
-        this.name = StringUtil.color(cfg.getString("Name", this.getId()));
+        this.name = Colorizer.apply(cfg.getString("Name", this.getId()));
         this.currency = plugin.getCurrencyManager().getCurrency(cfg.getString("Currency", CurrencyId.VAULT));
         if (this.currency == null) {
             throw new IllegalArgumentException("Invalid currency provided!");
         }
 
         this.isPermissionRequired = cfg.getBoolean("Permission_Required");
-        this.description = StringUtil.color(cfg.getStringList("Description"));
+        this.description = Colorizer.apply(cfg.getStringList("Description"));
         this.icon = cfg.getItem("Icon");
         ItemUtil.replace(this.icon, this.replacePlaceholders());
 

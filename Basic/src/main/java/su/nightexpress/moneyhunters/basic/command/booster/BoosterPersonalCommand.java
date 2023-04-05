@@ -7,7 +7,7 @@ import su.nexmedia.engine.api.command.AbstractCommand;
 import su.nexmedia.engine.api.command.GeneralCommand;
 import su.nexmedia.engine.api.lang.LangMessage;
 import su.nexmedia.engine.command.list.HelpSubCommand;
-import su.nexmedia.engine.utils.PlayerUtil;
+import su.nexmedia.engine.utils.CollectionsUtil;
 import su.nexmedia.engine.utils.StringUtil;
 import su.nightexpress.moneyhunters.basic.MoneyHunters;
 import su.nightexpress.moneyhunters.basic.Perms;
@@ -56,7 +56,7 @@ public class BoosterPersonalCommand extends GeneralCommand<MoneyHunters> {
     @NotNull
     private Set<MoneyUser> parseUsers(@NotNull String userName) {
         Set<MoneyUser> users = new HashSet<>();
-        if (userName.equalsIgnoreCase(Placeholders.MASK_ANY)) {
+        if (userName.equalsIgnoreCase(Placeholders.WILDCARD)) {
             users.addAll(plugin.getServer().getOnlinePlayers().stream()
                 .map(player -> plugin.getUserManager().getUserData(player))
                 .collect(Collectors.toSet()));
@@ -98,8 +98,8 @@ public class BoosterPersonalCommand extends GeneralCommand<MoneyHunters> {
         public List<String> getTab(@NotNull Player player, int arg, @NotNull String[] args) {
             if (arg == 3) {
                 List<String> list = new ArrayList<>();
-                list.add(Placeholders.MASK_ANY);
-                list.addAll(PlayerUtil.getPlayerNames());
+                list.add(Placeholders.WILDCARD);
+                list.addAll(CollectionsUtil.playerNames(player));
                 return list;
             }
             if (arg == 4) {
@@ -118,7 +118,7 @@ public class BoosterPersonalCommand extends GeneralCommand<MoneyHunters> {
                 List<String> list = new ArrayList<>();
                 list.add("<jobId>");
                 list.add("<job1,job2>");
-                list.add(Placeholders.MASK_ANY);
+                list.add(Placeholders.WILDCARD);
                 list.addAll(plugin.getJobManager().getJobIds());
                 return list;
             }
@@ -145,7 +145,7 @@ public class BoosterPersonalCommand extends GeneralCommand<MoneyHunters> {
             String jobsRaw = args[5];
 
             Set<String> jobIds;
-            if (jobsRaw.equalsIgnoreCase(Placeholders.MASK_ANY)) {
+            if (jobsRaw.equalsIgnoreCase(Placeholders.WILDCARD)) {
                 jobIds = new HashSet<>(plugin.getJobManager().getJobIds());
             }
             else {
@@ -226,14 +226,14 @@ public class BoosterPersonalCommand extends GeneralCommand<MoneyHunters> {
         public List<String> getTab(@NotNull Player player, int arg, @NotNull String[] args) {
             if (arg == 3) {
                 List<String> list = new ArrayList<>();
-                list.add(Placeholders.MASK_ANY);
-                list.addAll(PlayerUtil.getPlayerNames());
+                list.add(Placeholders.WILDCARD);
+                list.addAll(CollectionsUtil.playerNames(player));
                 return list;
             }
             if (arg == 4) {
                 List<String> list = new ArrayList<>();
                 list.add("<booster_id>");
-                list.add(Placeholders.MASK_ANY);
+                list.add(Placeholders.WILDCARD);
 
                 MoneyUser user = plugin.getUserManager().getUserData(args[3]);
                 if (user != null) {
@@ -263,7 +263,7 @@ public class BoosterPersonalCommand extends GeneralCommand<MoneyHunters> {
             }
 
             users.forEach(user -> {
-                boolean removed = user.getBoosters().removeIf(boosterHas -> boosterHas.getId().equalsIgnoreCase(id) || id.equalsIgnoreCase(Placeholders.MASK_ANY));
+                boolean removed = user.getBoosters().removeIf(boosterHas -> boosterHas.getId().equalsIgnoreCase(id) || id.equalsIgnoreCase(Placeholders.WILDCARD));
                 LangMessage msgNotify = removed ? plugin.getMessage(Lang.COMMAND_BOOSTER_PERSONAL_REMOVE_DONE) : plugin.getMessage(Lang.COMMAND_BOOSTER_PERSONAL_REMOVE_ERROR_NOTHING);
 
                 msgNotify

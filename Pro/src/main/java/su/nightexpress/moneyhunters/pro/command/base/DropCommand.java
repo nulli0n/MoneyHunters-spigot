@@ -8,7 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.command.AbstractCommand;
 import su.nexmedia.engine.lang.EngineLang;
-import su.nexmedia.engine.utils.LocationUtil;
+import su.nexmedia.engine.lang.LangManager;
+import su.nexmedia.engine.utils.CollectionsUtil;
 import su.nexmedia.engine.utils.NumberUtil;
 import su.nexmedia.engine.utils.StringUtil;
 import su.nexmedia.engine.utils.random.Rnd;
@@ -55,7 +56,7 @@ public class DropCommand extends AbstractCommand<MoneyHunters> {
             return Arrays.asList("10", "100", "100:500");
         }
         if (arg == 3) {
-            return LocationUtil.getWorldNames();
+            return CollectionsUtil.worldNames();
         }
         if (arg == 4) {
             return Arrays.asList("<x>", NumberUtil.format(player.getLocation().getX()));
@@ -109,7 +110,7 @@ public class DropCommand extends AbstractCommand<MoneyHunters> {
             .replace("%x%", NumberUtil.format(x))
             .replace("%y%", NumberUtil.format(y))
             .replace("%z%", NumberUtil.format(z))
-            .replace("%world%", LocationUtil.getWorldName(world))
+            .replace("%world%", LangManager.getWorld(world))
             .send(sender);
     }
 }

@@ -14,7 +14,7 @@ public interface IBooster extends IPlaceholder {
     @NotNull Set<String> getJobs();
 
     default boolean isApplicable(@NotNull IJob<?> job) {
-        return this.getJobs().contains(job.getId()) || this.getJobs().contains(Placeholders.MASK_ANY);
+        return this.getJobs().contains(job.getId()) || this.getJobs().contains(Placeholders.WILDCARD);
     }
 
     double getMoneyModifier();

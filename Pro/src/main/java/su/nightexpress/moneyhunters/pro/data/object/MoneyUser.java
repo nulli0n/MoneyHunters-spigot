@@ -30,12 +30,14 @@ import java.util.stream.Collectors;
 public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholder {
 
     private final Map<String, UserJobData> jobData;
+    private final Map<String, Long> jobStateCooldown;
     private final Set<IBooster>            boosters;
     private final UserSettings settings;
 
     public MoneyUser(@NotNull MoneyHunters plugin, @NotNull UUID uuid, @NotNull String name) {
         this(plugin, uuid, name, System.currentTimeMillis(), System.currentTimeMillis(),
             new HashMap<>(), // Job Data
+            new HashMap<>(), // Job State Cooldown
             ConcurrentHashMap.newKeySet(), // Personal Boosters
             new UserSettings()
         );
@@ -48,11 +50,13 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
         long lastOnline,
         long dateCreated,
         @NotNull Map<String, UserJobData> jobData,
+        @NotNull Map<String, Long> jobStateCooldown,
         @NotNull Set<IBooster> boosters,
         @NotNull UserSettings settings
     ) {
         super(plugin, uuid, name, dateCreated, lastOnline);
         this.jobData = jobData;
+        this.jobStateCooldown = jobStateCooldown;
         this.boosters = ConcurrentHashMap.newKeySet();
         this.boosters.addAll(boosters);
         this.settings = settings;
@@ -98,6 +102,24 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
 
     public int getJobsAmount(@NotNull JobState state) {
         return this.getJobs(state).size();
+    }
+
+    @NotNull
+    public Map<String, Long> getJobStateCooldowns() {
+        this.jobStateCooldown.values().removeIf(date -> System.currentTimeMillis() >= date);
+        return jobStateCooldown;
+    }
+
+    public long getJobStateCooldown(@NotNull IJob<?> job) {
+        return this.getJobStateCooldown(job.getId());
+    }
+
+    public long getJobStateCooldown(@NotNull String id) {
+        return this.getJobStateCooldowns().getOrDefault(id.toLowerCase(), 0L);
+    }
+
+    public void setJobStateCooldown(@NotNull IJob<?> job, long cooldown) {
+        this.getJobStateCooldowns().put(job.getId(), cooldown);
     }
 
     /**
@@ -229,7 +251,7 @@ public class MoneyUser extends AbstractUser<MoneyHunters> implements IPlaceholde
                 plugin.getMessage(Lang.JOBS_LEVELING_LEVEL_UP).replace(jobData.replacePlaceholders()).send(player);
                 if (Config.LEVELING_LEVEUP_FIREWORK) {
                     Firework firework = EntityUtil.spawnRandomFirework(player.getLocation());
-                    PDCUtil.setData(firework, Keys.JOB_FIREWORK, true);
+                    PDCUtil.set(firework, Keys.JOB_FIREWORK, true);
                 }
             }
         }
