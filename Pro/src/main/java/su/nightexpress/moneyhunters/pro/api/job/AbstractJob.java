@@ -99,11 +99,18 @@ public abstract class AbstractJob<E extends Event> extends AbstractLoadableItem<
 
         if (Config.LEVELING_ENABLED) {
             String expFormula = cfg.getString("Leveling.Exp_Formula", "");
-            for (int level = this.getLevelStart(); level < (this.getLevelMax(JobState.PRIMARY) + 1); level++) {
-                int expPrev = this.levelExpMap.getOrDefault(level - 1, this.getLevelExpStart());
-                String toCalc = expFormula.replace("%exp%", String.valueOf(expPrev));
+            boolean containsExp = expFormula.contains("%exp%");
 
-                int expToLevel = level == this.getLevelStart() ? expPrev : (int) Evaluator.evaluate(toCalc);
+            for (int level = this.getLevelStart(); level < (this.getLevelMax(JobState.PRIMARY) + 1); level++) {
+                String toCalc = expFormula.replace("%level%", String.valueOf(level));
+                int expToLevel;
+                if (containsExp) {
+                    int expPrev = this.levelExpMap.getOrDefault(level - 1, this.getLevelExpStart());
+                    toCalc = toCalc.replace("%exp%", String.valueOf(expPrev));
+                    expToLevel = level == this.getLevelStart() ? expPrev : (int) Evaluator.evaluate(toCalc);
+                } else {
+                    expToLevel = (int) Evaluator.evaluate(toCalc);
+                }
                 this.levelExpMap.put(level, expToLevel);
             }
 
